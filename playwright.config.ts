@@ -2,10 +2,17 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests/browser",
   fullyParallel: true,
-  use: { baseURL: "http://127.0.0.1:3000", trace: "retain-on-failure" },
+  use: { baseURL: "http://127.0.0.1:3100", trace: "retain-on-failure" },
   projects: [
     { name: "tablet", use: { viewport: { width: 820, height: 1180 } } },
-    { name: "small-phone", use: { viewport: { width: 320, height: 740 }, isMobile: true, hasTouch: true } },
+    {
+      name: "small-phone",
+      use: {
+        viewport: { width: 320, height: 740 },
+        isMobile: true,
+        hasTouch: true,
+      },
+    },
     {
       name: "desktop",
       use: {
@@ -19,9 +26,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "npm start",
-    url: "http://127.0.0.1:3000",
-    reuseExistingServer: !process.env.CI,
+    command: "npm start -- --port 3100",
+    url: "http://127.0.0.1:3100",
+    reuseExistingServer: false,
     timeout: 60000,
   },
 });

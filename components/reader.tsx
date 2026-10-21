@@ -15,6 +15,7 @@ import {
 import { type Story, levels } from "@/lib/stories";
 import { align, tokenize, type Alignment } from "@/lib/alignment";
 import { demoProvider, demoText } from "@/lib/transcription";
+import { useJourney } from "./use-journey";
 type Phase = "ready" | "reading" | "processing" | "result";
 const statusLabels = {
   correct: "Im Transkript erkannt",
@@ -22,6 +23,7 @@ const statusLabels = {
   different: "Anders erkannt",
 };
 export function Reader({ story }: { story: Story }) {
+  const { completeStory } = useJourney();
   const [phase, setPhase] = useState<Phase>("ready");
   const [size, setSize] = useState(26),
     [progress, setProgress] = useState(0);
@@ -61,6 +63,7 @@ export function Reader({ story }: { story: Story }) {
           ).text;
       if (request.signal.aborted) return;
       setResult(align(story.text, text));
+      if (!manual) completeStory(story.id);
       setTranscript(text);
       setSource(manual ? "manual" : "demo");
       setProgress(total);
@@ -238,7 +241,7 @@ export function Reader({ story }: { story: Story }) {
           <div className="reward" aria-hidden="true">
             ✦ ★ ✦
           </div>
-          <span className="eyebrow">DEIN DEMO-LESESTERN</span>
+          <span className="eyebrow">DEIN DEMO-ABENTEUER</span>
           <h2 ref={resultHeading} tabIndex={-1}>
             Ein Abenteuer geschafft!
           </h2>
@@ -282,6 +285,18 @@ export function Reader({ story }: { story: Story }) {
             <div className="word-review">
               <h3>Zusätzlich im Transkript</h3>
               <p>{result.extras.join(" · ")}</p>
+            </div>
+          )}
+          {source === "demo" && (
+            <div className="stamp-earned">
+              <Sparkles size={22} />
+              <div>
+                <strong>Ein Reisestempel für dein Album!</strong>
+                <p>Dieser Stempel feiert dein Demo-Abenteuer.</p>
+              </div>
+              <Link href="/album">
+                Im Album ansehen <ArrowRight size={17} />
+              </Link>
             </div>
           )}
           <Link className="button" href="/geschichten">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import "./adventure.css";
 import { Header } from "@/components/header";
 export const metadata: Metadata = {
   title: "LeseHelferlein · Kleine Worte, große Abenteuer",
@@ -23,7 +24,7 @@ export default function RootLayout({
             Lese<span>Helferlein</span>
             <span className="tiny-star">✦</span>
           </Link>
-          <p>Mit jedem Wort wächst ein kleines bisschen Mut.</p>
+          <p>Ein Wort. Eine Welt. Dein Abenteuer.</p>
           <Link href="/eltern">Für Eltern & Datenschutz</Link>
           <span className="footer-note">
             Mit Fantasie gemacht. Zum Lesen gedacht.

@@ -2,44 +2,62 @@ import { test, expect } from "@playwright/test";
 test("home is responsive and original mascot loads", async ({ page }, info) => {
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: /In jedem Kind/ }),
+    page.getByRole("heading", { name: /Einmal umblättern/ }),
   ).toBeVisible();
   await expect(
-    page.getByRole("img", { name: /Deine freundliche/ }),
+    page.getByRole("img", { name: /Deine Lesefee begleitet/ }),
   ).toBeVisible();
   await expect
     .poll(() =>
       page
-        .getByRole("img", { name: /Deine freundliche/ })
+        .getByRole("img", { name: /Deine Lesefee begleitet/ })
         .evaluate((img: HTMLImageElement) => img.naturalWidth),
     )
     .toBeGreaterThan(0);
   expect(
     await page.evaluate(
-      () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,
+      () =>
+        document.documentElement.scrollWidth <=
+        document.documentElement.clientWidth,
     ),
   ).toBe(true);
   await page.screenshot({
     path: `test-results/home-${info.project.name}.png`,
     fullPage: true,
   });
-  await page.getByRole("link", { name: "Mein Leseabenteuer starten" }).click();
-  await expect(page.getByRole("heading", { name: /Eine Welt/ })).toBeVisible();
+  await page.getByRole("link", { name: "Ab in den Geschichtenwald" }).click();
+  await expect(
+    page.getByRole("heading", { name: /Hier wohnen/ }),
+  ).toBeVisible();
 });
-test("library search, filters and empty recovery", async ({ page }) => {
+test("library search, filters and empty recovery", async ({ page }, info) => {
   await page.goto("/geschichten");
+  await expect(page.locator(".map-location")).toHaveCount(6);
+  await page.screenshot({
+    path: `test-results/library-${info.project.name}.png`,
+    fullPage: true,
+  });
+  expect(
+    await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth <=
+        document.documentElement.clientWidth,
+    ),
+  ).toBe(true);
+  await page.getByRole("button", { name: "Bücher", exact: true }).click();
   await expect(page.locator(".story-card")).toHaveCount(6);
+  await page.getByRole("button", { name: "Karte", exact: true }).click();
   await page.getByRole("button", { name: "Lesestart", exact: true }).click();
-  await expect(page.locator(".story-card")).toHaveCount(2);
+  await expect(page.locator(".map-location")).toHaveCount(2);
   await page
     .getByRole("textbox", { name: "Geschichten suchen" })
     .fill("unauffindbar");
-  await expect(page.locator(".story-card")).toHaveCount(0);
+  await expect(page.locator(".map-location")).toHaveCount(0);
   await page.getByRole("button", { name: "Alle Geschichten zeigen" }).click();
-  await expect(page.locator(".story-card")).toHaveCount(6);
+  await expect(page.locator(".map-location")).toHaveCount(6);
   await page.getByRole("textbox", { name: "Geschichten suchen" }).fill("Fuchs");
-  await expect(page.locator(".story-card")).toHaveCount(1);
-  await page.locator(".story-card").click();
+  await expect(page.locator(".map-location")).toHaveCount(1);
+  await page.locator(".map-location").click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Der kleine Fuchs und der Mond",
   );
@@ -68,7 +86,9 @@ test("demo cancel, complete, manual alignment and repeat", async ({
   await expect(page.locator(".word.different")).toHaveCount(1);
   expect(
     await page.evaluate(
-      () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,
+      () =>
+        document.documentElement.scrollWidth <=
+        document.documentElement.clientWidth,
     ),
   ).toBe(true);
   await page.screenshot({

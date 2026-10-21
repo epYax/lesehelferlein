@@ -1576,23 +1576,63 @@ progress::-webkit-progress-value {
 }
 /* Keep the reading invitation inside narrow viewports, including 320px phones. */
 @media (max-width: 700px) {
-  .hero { grid-template-columns: minmax(0, 1fr); }
-  .hero h1 { font-size: clamp(40px, 12vw, 62px); }
-  .hero h1 br:nth-of-type(2) { display: initial; }
-  .title-spark { right: 4px; bottom: 3px; font-size: 30px; }
-  .art-orbit { width: min(310px, 90%); }
-  .mascot { width: 100%; height: auto; aspect-ratio: 1; }
-  .hero-art { min-width: 0; }
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hero h1 {
+    font-size: clamp(40px, 12vw, 62px);
+  }
+  .hero h1 br:nth-of-type(2) {
+    display: initial;
+  }
+  .title-spark {
+    right: 4px;
+    bottom: 3px;
+    font-size: 30px;
+  }
+  .art-orbit {
+    width: min(310px, 90%);
+  }
+  .mascot {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+  .hero-art {
+    min-width: 0;
+  }
 }
 @media (max-width: 700px) {
-  .art-orbit { width: min(280px, 82%); height: 300px; }
-  .art-orbit::after { inset: -12px; }
+  .art-orbit {
+    width: min(280px, 82%);
+    height: 300px;
+  }
+  .art-orbit::after {
+    inset: -12px;
+  }
 }
 @media (min-width: 701px) and (max-width: 1000px) {
-  .hero { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .hero h1 { font-size: clamp(44px, 6vw, 60px); letter-spacing: -2.5px; }
-  .hero-art { min-width: 0; }
-  .mascot { width: 100%; height: auto; }
-  .art-orbit { width: min(300px, 80%); height: 330px; }
-  .title-spark { right: 0; bottom: 0; font-size: 32px; }
+  .hero {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .hero h1 {
+    font-size: clamp(44px, 6vw, 60px);
+    letter-spacing: -2.5px;
+  }
+  .hero-art {
+    min-width: 0;
+  }
+  .mascot {
+    width: 100%;
+    height: auto;
+  }
+  .art-orbit {
+    width: min(300px, 80%);
+    height: 330px;
+  }
+  .title-spark {
+    right: 0;
+    bottom: 0;
+    font-size: 32px;
+  }
 }

@@ -1,7 +1,33 @@
 import Link from "next/link";
-import { ArrowUpRight, Clock3 } from "lucide-react";
+import {
+  ArrowUpRight,
+  Clock3,
+  MoonStar,
+  Flower2,
+  CloudSun,
+  Trees,
+  Telescope,
+  Flame,
+} from "lucide-react";
 import { levels, type Story } from "@/lib/stories";
+export const sceneIcons = {
+  fox: MoonStar,
+  garden: Flower2,
+  cloud: CloudSun,
+  forest: Trees,
+  stars: Telescope,
+  dragon: Flame,
+};
+export const placeNames: Record<string, string> = {
+  fox: "Mondlichtwiese",
+  garden: "Wundergarten",
+  cloud: "Wolkenhafen",
+  forest: "Flüsterwald",
+  stars: "Sternenwarte",
+  dragon: "Drachenhügel",
+};
 export function Scene({ kind }: { kind: string }) {
+  const Icon = sceneIcons[kind as keyof typeof sceneIcons] ?? MoonStar;
   return (
     <div aria-hidden="true" className={`scene scene-${kind}`}>
       <span className="scene-star s1">✦</span>
@@ -10,20 +36,9 @@ export function Scene({ kind }: { kind: string }) {
       <div className="hill hill-one" />
       <div className="hill hill-two" />
       <span className="scene-character">
-        {
-          {
-            fox: "🦊",
-            garden: "🌻",
-            cloud: "☁️",
-            forest: "🌳",
-            stars: "🌙",
-            dragon: "🐉",
-          }[kind]
-        }
+        <Icon size={72} strokeWidth={1.4} />
       </span>
-      <span className="scene-detail">
-        {kind === "garden" ? "🌱" : kind === "cloud" ? "☁" : "✦"}
-      </span>
+      <span className="scene-detail">✦</span>
     </div>
   );
 }
@@ -32,7 +47,7 @@ export function StoryCard({ story }: { story: Story }) {
     <Link href={`/lesen/${story.id}`} className="story-card">
       <div className="cover">
         <Scene kind={story.scene} />
-        <span className="cover-tag">{story.theme}</span>
+        <span className="cover-tag">{placeNames[story.scene]}</span>
       </div>
       <div className="card-body">
         <div className="card-meta">

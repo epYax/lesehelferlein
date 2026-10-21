@@ -2,11 +2,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, BookOpen } from "lucide-react";
+import { Map, BookHeart, TreePine, ShieldCheck } from "lucide-react";
 export function Header() {
   const path = usePathname();
   return (
-    <header className="header">
+    <header
+      className={`header world-header ${path.startsWith("/lesen") ? "quiet-header" : ""}`}
+    >
       <Link href="/" className="brand" aria-label="LeseHelferlein Startseite">
         <Image src="/child-reading.png" alt="" width={48} height={48} />
         <span className="wordmark">
@@ -16,24 +18,27 @@ export function Header() {
       </Link>
       <nav aria-label="Hauptnavigation">
         <Link href="/" aria-current={path === "/" ? "page" : undefined}>
-          Startseite
+          <TreePine size={17} />
+          <span>Meine Lichtung</span>
         </Link>
         <Link
           href="/geschichten"
-          aria-current={path.startsWith("/geschichten") ? "page" : undefined}
+          aria-current={path === "/geschichten" ? "page" : undefined}
         >
-          Geschichten
+          <Map size={17} />
+          <span>Abenteuerkarte</span>
         </Link>
         <Link
-          href="/eltern"
-          aria-current={path === "/eltern" ? "page" : undefined}
+          href="/album"
+          aria-current={path === "/album" ? "page" : undefined}
         >
-          Für Eltern <ArrowUpRight size={14} />
+          <BookHeart size={17} />
+          <span>Reisealbum</span>
         </Link>
       </nav>
-      <Link className="button small" href="/geschichten">
-        <BookOpen size={17} />
-        <span>Loslesen</span>
+      <Link className="parent-entry" href="/eltern" aria-label="Für Eltern">
+        <ShieldCheck size={17} />
+        <span>Für Eltern</span>
       </Link>
     </header>
   );

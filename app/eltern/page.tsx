@@ -29,10 +29,14 @@ export default function Parents() {
           Diese Version greift nicht auf das Mikrofon zu und sendet keine
           Audiodaten an einen Spracherkennungsdienst. Eingetippte
           Beispieltranskripte werden ausschließlich im Browser ausgewertet und
-          nicht dauerhaft gespeichert. Bitte verwenden Sie keine persönlichen
-          Angaben. Es gibt keine Analyse-Tracker, Cookies für Werbung oder
-          extern geladenen Schriftarten. Der lokale Webserver erhält beim Laden
-          technisch notwendige HTTP-Anfragen.
+          nicht dauerhaft gespeichert. Das Reisealbum speichert lokal im Browser
+          nur die Kennungen abgeschlossener Demo-Geschichten und gefundener
+          Lichtfunken. Diese Entdeckungen bewerten keine Lesefähigkeit. Im
+          Reisealbum können Sie den Speicher jederzeit zurücksetzen. Bitte
+          verwenden Sie keine persönlichen Angaben. Es gibt keine
+          Analyse-Tracker, Cookies für Werbung oder extern geladenen
+          Schriftarten. Der lokale Webserver erhält beim Laden technisch
+          notwendige HTTP-Anfragen.
         </p>
         <h2>Erkennung ist keine Gewissheit</h2>
         <p>
@@ -43,9 +47,10 @@ export default function Parents() {
         </p>
         <h2>Was als Nächstes kommt</h2>
         <p>
-          Echte Spracherkennung und gespeicherter Lernfortschritt sind noch
-          nicht aktiviert. Dafür sind ein Datenschutzkonzept, eine ausdrückliche
-          Freigabe der Dienste und eine geeignete Elternverwaltung vorgesehen.
+          Echte Spracherkennung und geräteübergreifender Lernfortschritt sind
+          noch nicht aktiviert. Dafür sind ein Datenschutzkonzept, eine
+          ausdrückliche Freigabe der Dienste und eine geeignete Elternverwaltung
+          vorgesehen.
         </p>
       </section>
       <Link className="button" href="/geschichten">
