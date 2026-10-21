@@ -7,3 +7,7 @@
 - Nur innerhalb dieses Projekts schreiben. Keine echten Kinderaufnahmen für Tests.
 - Bei Änderungen an Alignment Tests ergänzen; vor Abschluss test, typecheck, lint und build ausführen.
 - Fortschritt und Einschränkungen in docs/PROGRESS.md dokumentieren.
+- Design-Tags niemals verschieben; vor größeren Gestaltungsänderungen bisherigen Stand committen/taggen und Vergleichsscreenshots archivieren.
+- GitHub ausschließlich privat. Erster Push erfordert ausdrückliche Nutzerfreigabe; bestehendes Remote-main niemals überschreiben. Kein Token in Dateien, Git-URLs oder Commits.
+- Reisealbum darf nur validierte bekannte Geschichten-/Funken-IDs speichern; keine Transkripte, Audio- oder Leistungsdaten. Belohnungen müssen Demo-Teilnahme/Entdeckung ausdrücken.
+- Browserprüfungen verwenden Produktionsserver auf Port 3100; laufende Nutzervorschau auf 3000 nicht beenden.

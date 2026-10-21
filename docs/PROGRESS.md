@@ -1,5 +1,37 @@
 # Entwicklungsfortschritt
 
+## 2026-10-21 — Design v2: Geschichtenwald
+
+### Umsetzung
+- Vor Designänderungen Git initialisiert, kompletten vorhandenen Stand inklusive Screenshots committed und mit `design-v1` markiert. Redesign auf `feature/magisches-redesign`.
+- Marketing-Startseite durch eine eigene interaktive SVG-Waldlichtung ersetzt: Buchhaus, Wege, Pflanzen, Lichtfunken und unveränderte Original-LeseFee.
+- Lesefee mit vier wechselnden Tipps, drei einmalig sammelbare Funken, Entdeckerabzeichen und Überraschungsauswahl mit echtem Geschichtenlink.
+- Sechs Abenteuerorte auf einer zusammenhängenden Karte; Bücheransicht, Suche und Schwierigkeitsfilter weiterhin nutzbar.
+- Reisealbum als aufgeschlagenes Buch mit sechs Stempelplätzen. Ein Stempel je abgeschlossenem Demo-Abenteuer, Wiederholung ohne Duplikate; manuelle Textauswertung vergibt keine Reisestempel.
+- Lokaler Speicher mit Whitelist-Validierung, Deduplizierung, browserübergreifender Tab-Aktualisierung über Storage-Events und Speicherfehler-Fallback für den laufenden Besuch. Keine Namen, Audios, Transkripte, Zeitstempel oder Leistungsdaten gespeichert. Album-Zurücksetzen erfordert explizite Bestätigung.
+- Ruhige Leseansicht und bestehendes Alignment erhalten. Elterninformationen und README an den lokalen Albumspeicher angepasst.
+- Unterschiedliche Layouts für Desktop, Tablet und kleine Smartphones; Reduced Motion, Tastaturbedienung und Statusmeldungen. Lesbarkeit über Landschaft mit heller Lichtung verbessert.
+
+### Verifiziert
+- 13 Logiktests erfolgreich (10 bestehende + 3 Tests für sichere und idempotente Belohnungen).
+- 32 Browserprüfungen erfolgreich gegen separaten **Produktionsserver auf Port 3100**, vier Größen: 320, 390, 820, 1440 px.
+- Tests umfassen ursprünglichen Demo-Fluss, Filter, Suche, Ansichtwechsel, Schriftgröße, Abbruch, Wiederholung, 404, Tipps, Sammeln, Persistenz, Bestätigung beim Zurücksetzen, Stempel-Deduplizierung, manuelle Auswertung ohne Stempel, Überraschung, Reduced Motion und blockierten Browser-Speicher.
+- Typecheck, ESLint, Produktionsbuild und `git diff --check` erfolgreich.
+- Produktions-Abhängigkeiten: `npm audit --omit=dev` meldet 0 bekannte Schwachstellen. Bereits dokumentierte Entwicklungsabhängigkeitsmeldungen bleiben offen.
+- Screenshots visuell geprüft; dauerhafte Vergleichsbilder in `docs/design-versions/design-v2/`. Browserprüfung in Chromium mit simulierten Größen; keine Behauptung einer Prüfung auf echten Geräten oder eines vollständigen Accessibility-Audits.
+- Vorhandener Nutzer-Entwicklungsserver auf Port 3000 nicht beendet. Separater Testserver automatisch beendet.
+
+### GitHub und Versionen
+- Vorhandene Git-Credential-Anmeldung erfolgreich geprüft. Ziel `epYax/lesehelferlein` ist privat, origin ohne eingebettete Zugangsdaten eingerichtet.
+- Remote-main enthält eine eigene Historie mit `fee.png`; diese bleibt unverändert. Nur lesendes Fetch ausgeführt.
+- Der im Chat eingefügte Token wurde weder verwendet noch gespeichert.
+- Lokale Abschlussversion: `design-v2`. Alle Quelländerungen und Vergleichsbilder committed.
+- **Erster Push wartet auf Nutzerfreigabe.** Geplant: ausschließlich `feature/magisches-redesign`, `design-v1`, `design-v2`; kein Remote-main-Update, keine Repository-Erstellung, kein Deployment.
+- Wiederherstellung/Parallelstart mit sicheren Worktrees: `docs/VERSION_CONTROL.md`.
+
+### Weiterhin bewusst offen
+Echte Spracherkennung, Konten und geräteübergreifender Lernfortschritt gehören weiterhin zur nächsten Produktphase. Das Reisealbum zeigt Entdeckungen und Demo-Teilnahme, keine Leseleistung. Separates Bildlogo nicht vorhanden; Branding nutzt Original-LeseFee und typografischen Namen.
+
 ## 2026-10-21 — Funktionales MVP
 
 ### Umgesetzt

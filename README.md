@@ -1,43 +1,49 @@
-# LeseHelferlein
-Lokales, deutschsprachiges Lese-MVP mit Original-Lesefee, sechs Geschichten, Bibliothek mit Suche/Filtern, anpassbarer Leseansicht und wortgenauem Demo-Textvergleich.
+# LeseHelferlein — Der Geschichtenwald
+Eine magische Lese-Erlebniswelt für Grundschulkinder. Die Original-LeseFee begleitet Kinder von der Waldlichtung durch sechs Geschichten bis ins eigene Reisealbum.
 
-## Start
+## Lokal starten
 Node.js 20.9+ (entwickelt mit Node 24), npm.
 
 ```sh
 npm ci
 npm run dev
 ```
-Öffnen: http://127.0.0.1:3000
+http://127.0.0.1:3000 öffnen.
 
+## Was es zu entdecken gibt
+- **Lichtung:** eigene SVG-Waldlandschaft, interaktive Lesefee, drei sammelbare Lichtfunken und eine Überraschungsgeschichte.
+- **Abenteuerkarte:** sechs frei zugängliche Geschichtenorte, Suche, Schwierigkeitsfilter und alternative Bücheransicht.
+- **Lesetraining:** ruhiger Text, anpassbare Schriftgröße, transparenter Demo-Lesefluss und wortgenaues Alignment.
+- **Reisealbum:** einmalige Demo-Reisestempel und Lichtfunken-Abzeichen; lokal gespeichert, ohne Konto oder Leistungsbewertung.
+- **Elternbereich:** transparente Hinweise zu Demo, Datenverarbeitung und künftiger Spracherkennung.
+
+**Kein Mikrofon, keine echte Spracherkennung.** Fortschritt und Transkript der Demo sind simuliert; der Textvergleich ist real. Transkripte werden nicht gespeichert. Das Album speichert nur bekannte Geschichten-IDs und Funken-IDs im lokalen Browser (`lesehelferlein.journey.v2`). Zurücksetzen ist im Album mit Bestätigung möglich. Blockierter Speicher fällt auf den laufenden Besuch zurück; Neuladen kann diese temporären Daten verlieren. Keine Konten, Telemetrie, Audioübertragung oder externen Fonts. Ein separates Bildlogo liegt lokal nicht vor; Originalfigur und typografischer Name bilden die Marke.
+
+## Prüfung
 ```sh
 npm test
-npm run typecheck
 npm run lint
 npm run build
-npm start
-```
-
-## Ablauf
-Geschichte wählen → Demo starten → im eigenen Tempo mitlesen → Demo auswerten → Wortmarkierungen und Demo-Stern ansehen. Abbrechen und Wiederholen sind jederzeit möglich. Unter „Für Neugierige“ lässt sich das Transkript bearbeiten, auch vollständig leeren, um eigene Vergleichsfälle auszuprobieren.
-
-**Kein Mikrofon, keine echte Spracherkennung.** Fortschritt und Transkript der Demo sind simuliert; die Textauswertung ist real. Es gibt keine Konten, Speicherung, Telemetrie, externen Fonts oder Audioübertragung. Beim Neuladen werden Eingaben verworfen. Das separate Logo fehlt; der Name wird typografisch neben der Originalfigur dargestellt.
-
-## Architektur
-- `app/`: App-Router-Seiten, Layout und Design-Tokens/CSS.
-- `components/`: Bibliothek, Story-Karten, Header, zustandsbasiertes Training.
-- `lib/alignment.ts`: Levenshtein-Alignment, deutsche Unicode-Normalisierung, ß/ss, Zahlen 0–12; Grenzwert 1000 Tokens je Eingabe.
-- `lib/transcription.ts`: austauschbarer Provider mit Abbruchsignal; aktuell nur lokale Demo.
-- `lib/stories.ts`: sechs selbst verfasste Beispielgeschichten.
-- `docs/`: Architektur, Akzeptanzkriterien, Testergebnisse und nächste Schritte.
-
-Alignment bewertet die Übereinstimmung eines Transkripts, nicht die Lesefähigkeit. Dialekte, Komposita, ausgeschriebene Zahlen über 12 und Selbstkorrekturen benötigen künftig erweiterte Verarbeitung. Gleichwertige Alignments werden deterministisch aufgelöst; einzelne Zuordnungen bleiben mehrdeutig.
-
-Individuelles CSS statt Tailwind hält die kleine Oberfläche übersichtlich. Keine produktiven Integrationen oder Deployments. Architektur gemäß [Next.js App Router Dokumentation](https://nextjs.org/docs/app/getting-started/installation).
-
-## Browserprüfungen
-```sh
+npm run typecheck
 PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright npx playwright install chromium
 PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright npm run test:e2e
 ```
-Alle Browserdateien bleiben im Projekt. Screenshots werden in `test-results/` erzeugt.
+
+Browserprüfungen starten einen eigenen Produktionsserver auf **Port 3100**. Vorher `npm run build` ausführen. Port 3000 bleibt für die Entwicklung frei. Chromium läuft in vier Größen (320, 390, 820, 1440 px). Temporäre Screenshots landen in `test-results/`; archivierte Vergleichsbilder liegen in `docs/design-versions/`.
+
+## Architektur
+- `app/`: Routen und Styling; `globals.css` enthält Basis/Lesetraining, `adventure.css` die neue Erlebniswelt.
+- `components/adventure-home.tsx`, `world-art.tsx`: interaktive Waldlichtung und originale SVG-Szenerie.
+- `components/library.tsx`, `journey-album.tsx`: Karte/Bücheransicht und Reisealbum.
+- `components/reader.tsx`: abbruchfähiger Demo-Lesefluss, Wortauswertung und einmaliger Reisestempel.
+- `components/use-journey.ts`, `lib/journey.ts`: lokale Speicherung, Validierung, Deduplizierung und Fehlertoleranz.
+- `lib/alignment.ts`: Levenshtein-Alignment mit deutscher Normalisierung; maximal 1000 Tokens pro Eingabe.
+- `lib/transcription.ts`: austauschbarer Provider mit AbortSignal; aktuell lokale Demo.
+- `lib/stories.ts`: sechs eigene deutsche Geschichten.
+
+Alignment bewertet Transkript-Übereinstimmung, keine Lesefähigkeit. Dialekte, Selbstkorrekturen, Komposita und größere ausgeschriebene Zahlen benötigen künftig erweiterte Verarbeitung. Keine produktiven Integrationen oder Deployments.
+
+## Designhistorie
+`design-v1` bewahrt die ursprüngliche App, `design-v2` den Geschichtenwald. Entwicklung: `feature/magisches-redesign`.
+
+**[Versionen parallel starten und GitHub-Sicherung](docs/VERSION_CONTROL.md)** · [Designkonzept](docs/REDESIGN.md) · [Fortschritt / Prüfungen](docs/PROGRESS.md)
