@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.cache/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.env*
+
+.DS_Store
+*.log
+*.pem
+*.key
