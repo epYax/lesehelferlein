@@ -1,3 +1,4 @@
+import { artworkScreenshot } from "./screenshot";
 import { test, expect } from "@playwright/test";
 test("fairy tips, collecting sparks, album persistence and explicit reset", async ({
   page,
@@ -26,10 +27,7 @@ test("fairy tips, collecting sparks, album persistence and explicit reset", asyn
         document.documentElement.clientWidth,
     ),
   ).toBe(true);
-  await page.screenshot({
-    path: `test-results/album-${info.project.name}.png`,
-    fullPage: true,
-  });
+  await artworkScreenshot(page, `test-results/album-${info.project.name}.png`);
   await page.getByText("Für Eltern: Album-Speicher verwalten").click();
   await page
     .getByRole("button", { name: "Album zurücksetzen", exact: true })

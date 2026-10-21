@@ -1,0 +1,766 @@
+/* Design v3 — original LeseHelferlein picture-book artwork. */
+.brand-art {
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.ink-icon {
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.story-art {
+  display: block;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.25s ease;
+}
+.painted-world {
+  overflow: hidden;
+  background: #e9eedc;
+}
+.painted-world > img {
+  object-fit: cover;
+  object-position: center 60%;
+}
+.forest-stage {
+  min-height: 800px;
+}
+.forest-stage:after {
+  height: 23px;
+  background: var(--cream);
+  clip-path: polygon(
+    0 65%,
+    8% 45%,
+    17% 65%,
+    29% 45%,
+    43% 66%,
+    54% 45%,
+    68% 60%,
+    81% 42%,
+    92% 65%,
+    100% 45%,
+    100% 100%,
+    0 100%
+  );
+}
+.welcome-copy::before {
+  display: none;
+}
+.welcome-copy {
+  margin-top: 105px;
+}
+.welcome-copy h1 {
+  text-shadow: 0 2px 10px #fff8e8c0;
+}
+.welcome-copy > p {
+  color: #415f41;
+  text-shadow: 0 1px 5px #fff9ec;
+}
+.welcome-footnote {
+  color: #425c39;
+}
+.fairy-guide {
+  top: 165px;
+  right: max(90px, calc((100vw - 1200px) / 2));
+}
+.fairy-speech {
+  box-shadow: 4px 5px 0 #5e67331f;
+  border-color: #d7cfab;
+  background: #fffbed;
+}
+.fairy-guide > img {
+  filter: drop-shadow(0 8px 12px #4c622b18);
+}
+.world-topline > span {
+  background: #fffbefed;
+}
+.forest-sign {
+  background: #fcf2d9eb;
+  bottom: 155px;
+}
+.collect-spark {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  width: 64px;
+  height: 64px;
+  animation: painted-spark-float 4s ease-in-out infinite;
+}
+.collect-spark .brand-art {
+  width: 62px;
+  height: 62px;
+  filter: drop-shadow(0 0 9px #ffedac);
+}
+.collect-spark.collected {
+  background: #fff6dbe8;
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  box-shadow: 0 2px 7px #5d703332;
+}
+.spark-1 {
+  top: 105px;
+  left: 48%;
+}
+.spark-2 {
+  top: 440px;
+  right: 5%;
+}
+.spark-3 {
+  bottom: 140px;
+  left: 26%;
+}
+.mission-icon {
+  background: transparent;
+}
+.little-pouch > .brand-art {
+  width: 24px;
+  height: 24px;
+}
+.path-choices {
+  gap: 23px;
+}
+.path-choice {
+  padding: 20px 17px;
+  background: #f5f1e4;
+  border-color: #dfdbc5;
+  box-shadow: 0 4px 0 #dcd8c1;
+  gap: 10px;
+}
+.choice-art {
+  width: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.choice-art > .brand-art {
+  width: 76px;
+  height: 76px;
+  transform: rotate(-5deg);
+  filter: drop-shadow(0 3px 3px #77653217);
+}
+.path-choice h3 {
+  font-size: 19px;
+}
+.path-choice > div {
+  min-width: 0;
+}
+.path-surprise {
+  background: #f5edf0;
+  border-color: #e2d5d9;
+  box-shadow: 0 4px 0 #e2d5d9;
+}
+.path-album {
+  background: #f7efd7;
+  border-color: #e5d9b8;
+  box-shadow: 0 4px 0 #e5d9b8;
+}
+.path-surprise button > .brand-art {
+  width: 30px;
+  height: 30px;
+}
+.button > .brand-art {
+  width: 27px;
+  height: 27px;
+}
+.world-header nav a {
+  gap: 7px;
+  padding: 8px 14px;
+}
+.world-header nav a > .brand-art {
+  width: 29px;
+  height: 29px;
+}
+.map-compass .brand-art {
+  width: 53px;
+  height: 53px;
+}
+.adventure-map {
+  background: #f0edda;
+  border-color: #fcf6e5;
+  border-radius: 26px 20px 28px 20px;
+  padding: 22px 32px 70px;
+}
+.adventure-map:before {
+  background: repeating-linear-gradient(
+    65deg,
+    #a48c4a05 0px,
+    #a48c4a05 1px,
+    transparent 1px,
+    transparent 5px
+  );
+}
+.map-paths {
+  opacity: 0.7;
+}
+.map-locations {
+  column-gap: 34px;
+  row-gap: 28px;
+}
+.location-island {
+  width: 100%;
+  height: 220px;
+  max-width: 300px;
+  isolation: auto;
+  color: inherit;
+}
+.location-island > .story-art {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 4px #68643913);
+}
+.map-location:hover .story-art {
+  transform: translateY(-5px) rotate(-1deg);
+}
+.map-location:nth-child(2) {
+  padding-top: 24px;
+}
+.map-location:nth-child(5) {
+  padding-top: 17px;
+}
+.location-sign {
+  max-width: 285px;
+  margin-top: 3px;
+  background: #fff9e9f2;
+  box-shadow: 0 3px 0 #c5bb9850;
+}
+.location-sign h2 {
+  font-size: 20px;
+}
+.location-stamp {
+  right: 6px;
+  bottom: 5px;
+  background: #fff4cc;
+  border: 1px solid #e3cc8e;
+  width: 38px;
+  height: 38px;
+}
+.location-stamp > .brand-art {
+  width: 31px;
+  height: 31px;
+}
+.map-caption {
+  font-size: 11px;
+}
+.map-decoration,
+.map-water {
+  display: none;
+}
+.map-fairy p {
+  background: #edf0de;
+}
+.view-switch .brand-art {
+  width: 25px;
+  height: 25px;
+}
+.map-bottom-note > .brand-art {
+  width: 35px;
+  height: 35px;
+}
+.illustrated-scene {
+  background: #eff0df !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 35px 0;
+}
+.illustrated-scene .story-art {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.scene-fox {
+  background: #e7e9e3 !important;
+}
+.scene-cloud {
+  background: #edf0e7 !important;
+}
+.scene-stars {
+  background: #e8e4ed !important;
+}
+.scene-dragon {
+  background: #efeadb !important;
+}
+.cover {
+  height: 230px;
+}
+.cover-tag {
+  font-size: 9px;
+  left: 12px;
+  top: 12px;
+  box-shadow: 0 2px 4px #695a2915;
+}
+.story-card:hover .story-art {
+  transform: scale(1.04);
+}
+.album-stamp {
+  padding: 13px 9px;
+}
+.stamp-illustration {
+  width: 100%;
+  height: 106px;
+  display: block;
+  margin: 0 0 10px;
+}
+.stamp-illustration > .story-art {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(0.65);
+  opacity: 0.55;
+}
+.album-stamp.earned .story-art {
+  filter: none;
+  opacity: 1;
+}
+.stamp-illustration > .stamp-star {
+  position: absolute;
+  right: 7px;
+  bottom: 0;
+  width: 28px;
+  height: 28px;
+}
+.album-stamp.earned {
+  background: #eef0dc;
+}
+.album-stamp strong {
+  font-size: 12px;
+}
+.explorer-badge > .brand-art {
+  width: 56px;
+  height: 56px;
+}
+.explorer-badge {
+  min-height: 155px;
+}
+.album-right {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.stamp-grid {
+  gap: 15px;
+}
+.explorer-badge:not(.earned) > .brand-art {
+  filter: grayscale(0.6);
+  opacity: 0.55;
+}
+.stamp-earned > .brand-art {
+  width: 38px;
+  height: 38px;
+}
+.reading-companion {
+  background: none;
+}
+.result-panel .reward {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.reward .brand-art {
+  width: 66px;
+  height: 66px;
+}
+.reward .brand-art:nth-child(2) {
+  width: 84px;
+  height: 84px;
+}
+@keyframes painted-spark-float {
+  50% {
+    transform: translateY(-5px) rotate(6deg);
+  }
+}
+@media (max-width: 1150px) {
+  .path-choice {
+    padding: 17px 13px;
+    gap: 7px;
+  }
+  .choice-art,
+  .choice-art > .brand-art {
+    width: 58px;
+    height: 64px;
+  }
+  .path-choice h3 {
+    font-size: 17px;
+  }
+  .fairy-guide {
+    right: 28px;
+  }
+  .location-island {
+    height: 190px;
+  }
+  .location-sign h2 {
+    font-size: 18px;
+  }
+  .map-locations {
+    column-gap: 25px;
+  }
+  .adventure-map {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .cover {
+    height: 210px;
+  }
+}
+@media (max-width: 900px) {
+  .forest-stage {
+    min-height: 760px;
+  }
+  .welcome-copy {
+    margin-top: 105px;
+  }
+  .fairy-guide {
+    top: 175px;
+    right: 20px;
+  }
+  .path-choice {
+    padding: 19px 25px;
+    gap: 22px;
+  }
+  .path-choice h3 {
+    font-size: 24px;
+  }
+  .choice-art,
+  .choice-art > .brand-art {
+    width: 78px;
+    height: 82px;
+  }
+  .map-locations {
+    column-gap: 16px;
+    row-gap: 20px;
+  }
+  .location-island {
+    height: 155px;
+  }
+  .location-sign h2 {
+    font-size: 16px;
+  }
+  .adventure-map {
+    padding-left: 19px;
+    padding-right: 19px;
+  }
+  .world-header nav a {
+    padding: 8px 17px;
+  }
+  .album-right {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .stamp-illustration {
+    height: 100px;
+  }
+  .stamp-grid {
+    gap: 12px;
+  }
+  .cover {
+    height: 190px;
+  }
+  .illustrated-scene {
+    padding: 12px 15px 0;
+  }
+}
+@media (max-width: 650px) {
+  .forest-stage {
+    min-height: 990px;
+  }
+  .painted-world > img {
+    object-position: 51% bottom;
+    object-fit: cover;
+  }
+  .painted-world:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      #fbf8e280 0%,
+      #fbf8e2a8 37%,
+      #fbf8e220 59%,
+      transparent 75%
+    );
+  }
+  .world-topline {
+    padding: 0 14px;
+    gap: 5px;
+  }
+  .world-topline > span {
+    font-size: 7px;
+    letter-spacing: 0.9px;
+    padding: 8px;
+  }
+  .little-pouch {
+    font-size: 8px;
+    gap: 4px;
+    padding: 6px 8px;
+  }
+  .little-pouch > .brand-art {
+    width: 21px;
+    height: 21px;
+  }
+  .welcome-copy {
+    margin-top: 40px;
+    padding: 0 22px;
+  }
+  .welcome-copy > p {
+    color: #395736;
+  }
+  .welcome-footnote {
+    color: #45603a;
+  }
+  .fairy-guide {
+    top: 480px;
+    right: 50%;
+  }
+  .fairy-speech {
+    background: #fffbedf5;
+  }
+  .forest-sign {
+    right: 6%;
+    bottom: 135px;
+  }
+  .spark-1 {
+    top: 410px;
+    left: 7%;
+    width: 58px;
+    height: 58px;
+  }
+  .spark-2 {
+    top: 590px;
+    right: 3%;
+    width: 58px;
+    height: 58px;
+  }
+  .spark-3 {
+    left: 7%;
+    bottom: 155px;
+    width: 58px;
+    height: 58px;
+  }
+  .collect-spark .brand-art {
+    width: 56px;
+    height: 56px;
+  }
+  .collect-spark.collected {
+    width: 42px;
+    height: 42px;
+  }
+  .mission-icon > .brand-art {
+    width: 34px;
+    height: 34px;
+  }
+  .mission-slip {
+    bottom: 35px;
+    background: #fff8e9f5;
+  }
+  .path-choice {
+    padding: 17px 15px;
+    gap: 13px;
+  }
+  .choice-art,
+  .choice-art > .brand-art {
+    width: 65px;
+    height: 73px;
+  }
+  .path-choice h3 {
+    font-size: 20px;
+  }
+  .path-choice p {
+    font-size: 11px;
+  }
+  .path-surprise button {
+    width: 35px;
+    height: 35px;
+  }
+  .choice-kicker {
+    font-size: 6px;
+  }
+  .world-header nav a {
+    gap: 4px;
+    padding: 7px 6px;
+    font-size: 10px;
+  }
+  .world-header nav a > .brand-art {
+    width: 26px;
+    height: 26px;
+  }
+  .adventure-map {
+    padding: 12px 10px 60px;
+    border-width: 5px;
+  }
+  .map-locations {
+    gap: 22px 12px;
+  }
+  .location-island {
+    height: 145px;
+    width: 100%;
+  }
+  .location-sign {
+    padding: 10px 7px;
+    min-height: 120px;
+    margin-top: 0;
+  }
+  .location-sign h2 {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+  .map-location:nth-child(2),
+  .map-location:nth-child(5) {
+    padding-top: 0;
+  }
+  .map-location:nth-child(even) {
+    padding-top: 30px;
+  }
+  .location-stamp {
+    width: 28px;
+    height: 28px;
+    right: 0;
+    bottom: 0;
+  }
+  .location-stamp > .brand-art {
+    width: 24px;
+    height: 24px;
+  }
+  .map-location:hover .story-art {
+    transform: none;
+  }
+  .view-switch .brand-art {
+    width: 23px;
+    height: 23px;
+  }
+  .map-toolbar .result-count {
+    max-width: 150px;
+  }
+  .map-caption {
+    font-size: 7px;
+  }
+  .map-compass .brand-art {
+    width: 36px;
+    height: 36px;
+  }
+  .cover {
+    height: 250px;
+  }
+  .illustrated-scene {
+    padding: 12px 45px 0;
+  }
+  .stamp-illustration {
+    height: 115px;
+  }
+  .album-right {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .stamp-grid {
+    gap: 12px;
+  }
+  .album-stamp strong {
+    font-size: 11px;
+  }
+  .stamp-illustration > .stamp-star {
+    width: 24px;
+    height: 24px;
+  }
+  .explorer-badge > .brand-art {
+    width: 47px;
+    height: 47px;
+  }
+  .explorer-badge {
+    min-height: 130px;
+  }
+  .reward .brand-art {
+    width: 49px;
+    height: 49px;
+  }
+  .reward .brand-art:nth-child(2) {
+    width: 66px;
+    height: 66px;
+  }
+}
+@media (max-width: 360px) {
+  .world-header nav a {
+    font-size: 9px;
+    gap: 3px;
+    padding: 6px 4px;
+  }
+  .world-header nav a > .brand-art {
+    width: 22px;
+    height: 22px;
+  }
+  .welcome-copy {
+    padding: 0 16px;
+  }
+  .welcome-copy .button {
+    gap: 6px;
+    font-size: 11px;
+  }
+  .button > .brand-art {
+    width: 24px;
+    height: 24px;
+  }
+  .path-choice {
+    padding: 15px 10px;
+    gap: 10px;
+  }
+  .path-choice h3 {
+    font-size: 18px;
+  }
+  .choice-art,
+  .choice-art > .brand-art {
+    width: 52px;
+    height: 63px;
+  }
+  .location-island {
+    height: 115px;
+  }
+  .location-sign h2 {
+    font-size: 12px;
+  }
+  .location-sign {
+    min-height: 124px;
+    padding: 9px 5px;
+  }
+  .map-locations {
+    gap: 19px 9px;
+  }
+  .stamp-illustration {
+    height: 95px;
+  }
+  .illustrated-scene {
+    padding: 12px 30px 0;
+  }
+  .mission-slip {
+    max-width: calc(100% - 24px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+/* Keep hit targets still while their painted contents gently float. */
+.collect-spark {
+  animation: none;
+}
+.collect-spark:not(.collected) > .brand-art {
+  animation: painted-spark-float 4s ease-in-out infinite;
+}
+@media (max-width: 650px) {
+  .welcome-footnote {
+    display: none;
+  }
+  .spark-1 {
+    top: 415px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .collect-spark:not(.collected) > .brand-art {
+    animation: none;
+  }
+}

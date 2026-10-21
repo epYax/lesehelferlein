@@ -2,7 +2,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Map, BookHeart, TreePine, ShieldCheck } from "lucide-react";
+import {
+  Map,
+  BookHeart,
+  TreePine,
+  ShieldCheck,
+} from "@/components/reading-icons";
 export function Header() {
   const path = usePathname();
   return (
@@ -18,21 +23,21 @@ export function Header() {
       </Link>
       <nav aria-label="Hauptnavigation">
         <Link href="/" aria-current={path === "/" ? "page" : undefined}>
-          <TreePine size={17} />
+          <TreePine size={29} />
           <span>Meine Lichtung</span>
         </Link>
         <Link
           href="/geschichten"
           aria-current={path === "/geschichten" ? "page" : undefined}
         >
-          <Map size={17} />
+          <Map size={29} />
           <span>Abenteuerkarte</span>
         </Link>
         <Link
           href="/album"
           aria-current={path === "/album" ? "page" : undefined}
         >
-          <BookHeart size={17} />
+          <BookHeart size={29} />
           <span>Reisealbum</span>
         </Link>
       </nav>

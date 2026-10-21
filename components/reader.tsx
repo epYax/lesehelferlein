@@ -11,7 +11,7 @@ import {
   Sparkles,
   Type,
   LoaderCircle,
-} from "lucide-react";
+} from "@/components/reading-icons";
 import { type Story, levels } from "@/lib/stories";
 import { align, tokenize, type Alignment } from "@/lib/alignment";
 import { demoProvider, demoText } from "@/lib/transcription";
@@ -239,7 +239,9 @@ export function Reader({ story }: { story: Story }) {
       {result && (
         <section className="result-panel">
           <div className="reward" aria-hidden="true">
-            ✦ ★ ✦
+            <Sparkles size={66} />
+            <Sparkles size={84} />
+            <Sparkles size={66} />
           </div>
           <span className="eyebrow">DEIN DEMO-ABENTEUER</span>
           <h2 ref={resultHeading} tabIndex={-1}>

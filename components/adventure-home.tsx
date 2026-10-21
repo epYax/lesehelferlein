@@ -10,7 +10,7 @@ import {
   Compass,
   Star,
   Check,
-} from "lucide-react";
+} from "@/components/reading-icons";
 import { WorldArt } from "./world-art";
 import { useJourney } from "./use-journey";
 import { stories } from "@/lib/stories";
@@ -107,7 +107,7 @@ export function AdventureHome() {
               {journey.sparks.includes(id) ? (
                 <Check size={20} />
               ) : (
-                <span>✦</span>
+                <Star size={48} />
               )}
             </button>
           ))}
@@ -122,7 +122,7 @@ export function AdventureHome() {
         </div>
         <div className="mission-slip">
           <div className="mission-icon">
-            <Sparkles size={23} />
+            <Sparkles size={35} />
           </div>
           <div>
             <span>DEINE KLEINE ENTDECKERMISSION</span>
@@ -167,8 +167,7 @@ export function AdventureHome() {
         <div className="path-choices">
           <Link className="path-choice path-map" href="/geschichten">
             <span className="choice-art">
-              <Map size={40} />
-              <span>✦</span>
+              <Map size={76} />
             </span>
             <div>
               <span className="choice-kicker">IMMER DER NEUGIER NACH</span>
@@ -179,8 +178,7 @@ export function AdventureHome() {
           </Link>
           <div className="path-choice path-surprise">
             <span className="choice-art">
-              <Compass size={40} />
-              <span>?</span>
+              <Compass size={76} />
             </span>
             <div>
               <span className="choice-kicker">FÜR MUTIGE ENTDECKER</span>
@@ -214,8 +212,7 @@ export function AdventureHome() {
           </div>
           <Link className="path-choice path-album" href="/album">
             <span className="choice-art">
-              <BookOpen size={40} />
-              <span>★</span>
+              <BookOpen size={76} />
             </span>
             <div>
               <span className="choice-kicker">

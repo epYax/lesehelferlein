@@ -1,3 +1,4 @@
+import { artworkScreenshot } from "./screenshot";
 import { test, expect } from "@playwright/test";
 test("home is responsive and original mascot loads", async ({ page }, info) => {
   await page.goto("/");
@@ -21,10 +22,7 @@ test("home is responsive and original mascot loads", async ({ page }, info) => {
         document.documentElement.clientWidth,
     ),
   ).toBe(true);
-  await page.screenshot({
-    path: `test-results/home-${info.project.name}.png`,
-    fullPage: true,
-  });
+  await artworkScreenshot(page, `test-results/home-${info.project.name}.png`);
   await page.getByRole("link", { name: "Ab in den Geschichtenwald" }).click();
   await expect(
     page.getByRole("heading", { name: /Hier wohnen/ }),
@@ -33,10 +31,10 @@ test("home is responsive and original mascot loads", async ({ page }, info) => {
 test("library search, filters and empty recovery", async ({ page }, info) => {
   await page.goto("/geschichten");
   await expect(page.locator(".map-location")).toHaveCount(6);
-  await page.screenshot({
-    path: `test-results/library-${info.project.name}.png`,
-    fullPage: true,
-  });
+  await artworkScreenshot(
+    page,
+    `test-results/library-${info.project.name}.png`,
+  );
   expect(
     await page.evaluate(
       () =>
@@ -91,10 +89,7 @@ test("demo cancel, complete, manual alignment and repeat", async ({
         document.documentElement.clientWidth,
     ),
   ).toBe(true);
-  await page.screenshot({
-    path: `test-results/reader-${info.project.name}.png`,
-    fullPage: true,
-  });
+  await artworkScreenshot(page, `test-results/reader-${info.project.name}.png`);
   await page
     .getByText("Für Neugierige: Beispieltranskript selbst ausprobieren")
     .click();

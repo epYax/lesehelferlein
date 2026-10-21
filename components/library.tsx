@@ -2,9 +2,17 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, BookOpen, Map, ArrowRight, Star, Compass } from "lucide-react";
+import {
+  Search,
+  BookOpen,
+  Map,
+  ArrowRight,
+  Star,
+  Compass,
+} from "@/components/reading-icons";
 import { stories, levels } from "@/lib/stories";
-import { StoryCard, sceneIcons, placeNames } from "./story-card";
+import { StoryCard, placeNames } from "./story-card";
+import { StoryArt } from "./brand-art";
 import { useJourney } from "./use-journey";
 export function Library() {
   const [level, setLevel] = useState(0),
@@ -101,7 +109,6 @@ export function Library() {
           </div>
         ) : (
           <div className="adventure-map">
-            <div className="map-water" aria-hidden="true" />
             <svg
               className="map-paths"
               viewBox="0 0 1100 700"
@@ -122,15 +129,6 @@ export function Library() {
                 strokeDasharray="7 10"
               />
             </svg>
-            <span className="map-decoration map-tree tree-a" aria-hidden="true">
-              ♠
-            </span>
-            <span className="map-decoration map-tree tree-b" aria-hidden="true">
-              ♠
-            </span>
-            <span className="map-decoration map-tree tree-c" aria-hidden="true">
-              ♠
-            </span>
             <div className="map-compass" aria-hidden="true">
               <span>N</span>
               <Compass size={48} />
@@ -138,7 +136,6 @@ export function Library() {
             </div>
             <div className="map-locations">
               {filtered.map((story) => {
-                const Icon = sceneIcons[story.scene as keyof typeof sceneIcons];
                 const completed = journey.stories.includes(story.id);
                 return (
                   <Link
@@ -147,9 +144,7 @@ export function Library() {
                     className={`map-location location-${story.scene}`}
                   >
                     <div className="location-island">
-                      <span className="island-aura" />
-                      <Icon size={64} strokeWidth={1.5} />
-                      <span className="location-spark">✦</span>
+                      <StoryArt kind={story.scene} />
                       {completed && (
                         <span
                           className="location-stamp"

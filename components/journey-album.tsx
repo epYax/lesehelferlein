@@ -2,10 +2,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Sparkles, Star, Leaf } from "lucide-react";
+import { ArrowRight, Sparkles, Star, Leaf } from "@/components/reading-icons";
+import { StoryArt } from "./brand-art";
 import { useJourney } from "./use-journey";
 import { stories } from "@/lib/stories";
-import { sceneIcons, placeNames } from "./story-card";
+import { placeNames } from "./story-card";
 export function JourneyAlbum() {
   const { journey, resetJourney, temporary } = useJourney();
   const [confirm, setConfirm] = useState(false);
@@ -65,7 +66,6 @@ export function JourneyAlbum() {
           </div>
           <div className="stamp-grid">
             {stories.map((s) => {
-              const Icon = sceneIcons[s.scene as keyof typeof sceneIcons];
               const earned = journey.stories.includes(s.id);
               return (
                 <Link
@@ -75,7 +75,7 @@ export function JourneyAlbum() {
                   aria-label={`${placeNames[s.scene]}: ${earned ? "Demo-Stempel gesammelt, erneut lesen" : "noch entdecken"}`}
                 >
                   <span className="stamp-illustration">
-                    <Icon size={39} />
+                    <StoryArt kind={s.scene} />
                     {earned && (
                       <Star
                         className="stamp-star"

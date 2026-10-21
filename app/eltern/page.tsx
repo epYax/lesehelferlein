@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ShieldCheck } from "lucide-react";
+import { ShieldCheck } from "@/components/reading-icons";
 export default function Parents() {
   return (
     <main id="main" className="shell parent-page">
