@@ -18,7 +18,7 @@ test("bespoke art loads in the clearing, atlas, books and album", async ({
       background.evaluate((img: HTMLImageElement) => img.naturalWidth),
     )
     .toBeGreaterThan(0);
-  await expect(page.locator(".collect-spark .brand-icon")).toHaveCount(3);
+  await expect(page.locator(".adventure-path .story-art")).toHaveCount(6);
   await page.goto("/geschichten");
   await expect(page.locator(".location-island .story-art")).toHaveCount(6);
   for (const art of await page.locator(".location-island .story-art").all()) {

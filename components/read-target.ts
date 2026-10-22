@@ -9,7 +9,7 @@ const ignored =
   '[data-read-controls],input,textarea,select,option,[contenteditable]:not([contenteditable="false"]),[aria-hidden="true"],.sr-only,.skip,script,style,svg,[hidden]';
 export function findReadTarget(origin: Element): ReadTarget | null {
   // An icon inside a button is the same hit target as its label.
-  const svg = origin.closest("svg");
+  const svg = origin.closest("svg,img");
   if (svg) {
     const control = svg.closest("button,a,summary,[role='button']");
     if (!control) return null;
@@ -47,7 +47,7 @@ export function findReadTarget(origin: Element): ReadTarget | null {
       continue;
     const value = (node.textContent || "").replace(/\s/g, " ");
     if (!value.trim()) continue;
-    if (text) text += " ";
+    if (text && !/\s$/.test(text) && !/^\s/.test(value)) text += " ";
     nodes.push({
       node: node as Text,
       start: text.length,

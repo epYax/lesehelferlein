@@ -32,8 +32,10 @@ export function BrandArt({
 export function StoryArt({
   kind,
   className = "",
+  sizes = "(max-width:650px) 44vw, (max-width:1000px) 28vw, 340px",
 }: {
   kind: string;
+  sizes?: string;
   className?: string;
 }) {
   return (
@@ -43,7 +45,7 @@ export function StoryArt({
       aria-hidden="true"
       width={360}
       height={300}
-      sizes="(max-width:650px) 44vw, (max-width:1000px) 28vw, 340px"
+      sizes={sizes}
       className={`story-art ${className}`}
     />
   );

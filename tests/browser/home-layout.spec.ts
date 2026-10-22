@@ -27,18 +27,16 @@ test("fairy and every tip stay in view without covering their text", async ({
       .getByRole("button", { name: "Nächster Tipp der Lesefee" })
       .click();
   }
-  for (const n of [1, 2, 3]) {
-    await page
-      .getByRole("button", { name: `Lichtfunke ${n} sammeln`, exact: true })
-      .click();
+  const choices = page.locator(".adventure-path button");
+  await expect(choices).toHaveCount(6);
+  for (let i = 0; i < 6; i++) {
+    await choices.nth(i).click();
+    await expect(choices.nth(i)).toHaveAttribute("aria-pressed", "true");
+    await expect(page.locator(".portal-caption h2")).toHaveText(
+      (await choices.nth(i).getAttribute("aria-label"))!,
+    );
   }
-  await expect(
-    page.getByRole("heading", { name: "Der Wald leuchtet!" }),
-  ).toBeVisible();
-  await page
-    .getByRole("link", { name: "Abzeichen ansehen", exact: true })
-    .click();
-  await expect(page.locator(".explorer-badge.earned")).toBeVisible();
+  await expect(page.locator(".collect-spark, .play-mission")).toHaveCount(0);
 });
 
 test("entire front screen fits the viewport with every game action visible", async ({
@@ -55,13 +53,48 @@ test("entire front screen fits the viewport with every game action visible", asy
   for (const selector of [
     ".play-welcome",
     ".fairy-guide",
-    ".play-mission",
-    ".play-dock",
+    ".story-portal",
+    ".forest-actions",
+    ".adventure-path",
   ]) {
     const rect = (await page.locator(selector).boundingBox())!;
     expect(rect.y).toBeGreaterThanOrEqual(0);
     expect(rect.y + rect.height).toBeLessThanOrEqual(
       page.viewportSize()!.height + 1,
     );
+  }
+});
+
+test("compact viewports keep the portal action and fairy inside the screen", async ({
+  page,
+}, info) => {
+  test.skip(info.project.name !== "desktop", "Explicit viewport matrix");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  for (const [width, height] of [
+    [320, 568],
+    [844, 390],
+    [1366, 768],
+    [768, 1024],
+  ]) {
+    await page.setViewportSize({ width, height });
+    await page.goto("/");
+    await expect
+      .poll(() =>
+        page.evaluate(
+          () => document.documentElement.scrollHeight - innerHeight,
+        ),
+      )
+      .toBeLessThanOrEqual(1);
+    for (const selector of [
+      ".portal-enter",
+      ".fairy-speech",
+      ".fairy-guide > img",
+      ".adventure-path",
+    ]) {
+      const r = (await page.locator(selector).boundingBox())!;
+      expect(r.x).toBeGreaterThanOrEqual(0);
+      expect(r.x + r.width).toBeLessThanOrEqual(width);
+      expect(r.y + r.height).toBeLessThanOrEqual(height);
+    }
   }
 });

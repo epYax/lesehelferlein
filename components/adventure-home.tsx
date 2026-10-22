@@ -2,214 +2,128 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import {
-  ArrowRight,
-  Map,
-  Sparkles,
-  BookHeart,
-  Compass,
-  Star,
-  Check,
-} from "@/components/reading-icons";
+import { ArrowRight, ArrowLeft, Sparkles, Compass, Map } from "./reading-icons";
 import { WorldArt } from "./world-art";
-import { useJourney } from "./use-journey";
+import { StoryArt } from "./brand-art";
 import { stories } from "@/lib/stories";
 const hints = [
-  "Hallo, ich bin deine LeseFee! Welche Geschichte entdecken wir heute?",
-  "Siehst du die drei goldenen Lichtfunken? Tippe sie an und bring den Wald zum Leuchten!",
-  "Hier gibt es kein Wettrennen. Such dir eine Geschichte aus und lies in deinem Tempo.",
-  "Jedes Demo-Abenteuer schenkt dir einen Stempel fürs Reisealbum. Wir nehmen dabei nichts auf.",
+  "Hallo, ich bin deine LeseFee! Welches Abenteuer ruft nach dir?",
+  "Tippe auf ein kleines Bild. Schon öffnet sich ein Fenster in eine andere Welt!",
+  "Hier gibt es kein Wettrennen. Wir lesen in deinem Tempo.",
+  "Mit dem Kompass suche ich dir ein Abenteuer aus. Kommst du mit?",
 ];
 export function AdventureHome() {
-  const { journey, collectSpark } = useJourney();
   const [hint, setHint] = useState(0);
-  const [announcement, setAnnouncement] = useState("");
-  const [surprise, setSurprise] = useState(0);
-  const complete = journey.sparks.length === 3;
-  function collect(id: number) {
-    collectSpark(id);
-    setAnnouncement(
-      journey.sparks.length === 2
-        ? "Alle drei Lichtfunken gefunden! Dein Entdeckerabzeichen wartet im Reisealbum."
-        : "Ein Lichtfunke für deinen Zauber!",
-    );
+  const [selected, setSelected] = useState(0);
+  const story = stories[selected];
+  function step(direction: number) {
+    setSelected((s) => (s + direction + stories.length) % stories.length);
   }
   return (
     <main id="main" className="play-home">
-      <section
-        className={`play-stage ${complete ? "forest-awake" : ""}`}
-        aria-label="Deine magische Waldlichtung"
-      >
+      <section className="play-stage" aria-label="Deine magische Waldlichtung">
         <WorldArt />
-        <div className="play-hud">
-          <span className="place-label">
-            <Map size={24} /> Deine Lichtung
-          </span>
-          <Link href="/album" className="stamp-pocket">
-            <BookHeart size={26} />
-            <span>
-              <strong>{journey.stories.length} / 6</strong> Reisestempel
-            </span>
-          </Link>
+        <div className="forest-fireflies" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+          <i />
+          <i />
         </div>
-        <div className="play-welcome">
-          <span className="welcome-ribbon">Mach dich bereit …</span>
+        <header className="play-welcome">
+          <span>Wohin reisen wir heute?</span>
           <h1>
-            Dein
-            <br />
-            <em>Geschichtenwald</em>
+            Dein <em>Geschichtenwald</em>
           </h1>
-          <p>
-            Sechs Abenteuer warten auf dich.
-            <br />
-            Du entscheidest, wo es losgeht!
-          </p>
-          <Link className="button play-start" href="/geschichten">
-            <Map size={28} />
-            <span>Ab in den Geschichtenwald</span>
-            <ArrowRight size={24} />
-          </Link>
-          <span className="play-demo-note">
-            Lese-Demo · Ohne Mikrofon · In deinem Tempo
-          </span>
-        </div>
-        <div className="fairy-guide">
-          <div className="fairy-speech" aria-live="polite">
-            <span>DEINE LESEFEE</span>
-            <p>{hints[hint]}</p>
-            <button
-              onClick={() => setHint((h) => (h + 1) % hints.length)}
-              aria-label="Nächster Tipp der Lesefee"
-            >
-              {hint === 0 ? "Zeig mir den Zauber" : "Noch ein Tipp"}
-              <Sparkles size={23} />
-            </button>
-          </div>
-          <Image
-            src="/child-reading.png"
-            alt="Deine Lesefee begleitet dich im Geschichtenwald"
-            width={480}
-            height={480}
-            priority
-          />
-          <div
-            className="spark-hunt play-sparks"
-            aria-label="Lichtfunken sammeln"
-          >
-            {[1, 2, 3].map((id) => (
-              <button
-                key={id}
-                className={`collect-spark spark-${id} ${journey.sparks.includes(id) ? "collected" : ""}`}
-                aria-label={
-                  journey.sparks.includes(id)
-                    ? `Lichtfunke ${id} gefunden`
-                    : `Lichtfunke ${id} sammeln`
-                }
-                disabled={journey.sparks.includes(id)}
-                onClick={() => collect(id)}
-              >
-                {journey.sparks.includes(id) ? (
-                  <Check size={30} />
-                ) : (
-                  <Star size={56} />
-                )}
-              </button>
-            ))}
-          </div>
-        </div>
-        <aside
-          className={`play-mission ${complete ? "mission-complete" : ""}`}
-          aria-label="Deine Funkenmission"
-        >
-          <div className="mission-title">
-            <Sparkles size={32} />
-            <span>
-              {complete ? "Geschafft, Entdecker!" : "Eine kleine Nebenmission"}
-            </span>
-          </div>
-          <h2>{complete ? "Der Wald leuchtet!" : "Finde die 3 Lichtfunken"}</h2>
-          <p>
-            {complete
-              ? "Dein Abzeichen wartet im Reisealbum."
-              : "Entdeckst du die goldenen Sterne? Tippe sie an!"}
-          </p>
-          <div
-            className="mission-progress"
-            aria-label={`${journey.sparks.length} von 3 Lichtfunken gefunden`}
-          >
-            <div className="mission-stars" aria-hidden="true">
-              {[1, 2, 3].map((id) => (
-                <span
-                  key={id}
-                  className={journey.sparks.includes(id) ? "found" : ""}
-                >
-                  <Star size={29} />
-                </span>
-              ))}
-            </div>
-            <strong>{journey.sparks.length} von 3 gefunden</strong>
-          </div>
-          {complete && (
-            <Link href="/album" className="mission-reward">
-              Abzeichen ansehen <ArrowRight size={20} />
-            </Link>
-          )}
-        </aside>
-        <div className="play-dock" aria-label="Deine Abenteuer-Ausrüstung">
-          <section className="surprise-station">
-            <Compass size={58} />
-            <div>
-              <h2>Wohin weht der Wind?</h2>
-              <p>
-                {surprise
-                  ? stories[(surprise - 1) % stories.length].title
-                  : "Lass eine Geschichte zu dir finden."}
-              </p>
-              {surprise > 0 && (
+        </header>
+        <div className="adventure-scene">
+          <section className="story-portal" aria-label="Wähle dein Abenteuer">
+            <div className="portal-window" key={story.id}>
+              <StoryArt
+                kind={story.scene}
+                sizes="(max-width:650px) 80vw, 560px"
+              />
+              <div className="portal-caption">
+                <span>Dein nächstes Abenteuer · {story.minutes} Min.</span>
+                <h2>{story.title}</h2>
                 <Link
-                  className="surprise-link"
-                  href={`/lesen/${stories[(surprise - 1) % stories.length].id}`}
+                  className="portal-enter"
+                  href={`/lesen/${story.id}`}
+                  aria-label={`Dieses Abenteuer öffnen: ${story.title}`}
                 >
-                  Dieses Abenteuer öffnen <ArrowRight size={20} />
+                  Loslesen <ArrowRight size={24} />
                 </Link>
-              )}
+              </div>
             </div>
             <button
-              className="surprise-draw"
-              aria-label="Überraschungsgeschichte ziehen"
-              onClick={() =>
-                setSurprise((s) =>
-                  s
-                    ? (s % stories.length) + 1
-                    : Math.floor(Math.random() * stories.length) + 1,
-                )
-              }
+              className="portal-arrow portal-prev"
+              aria-label="Vorherige Geschichte"
+              onClick={() => step(-1)}
             >
-              <Sparkles size={25} />
-              <span>{surprise ? "Noch einmal" : "Überrasch mich!"}</span>
+              <ArrowLeft size={26} />
+            </button>
+            <button
+              className="portal-arrow portal-next"
+              aria-label="Nächste Geschichte"
+              onClick={() => step(1)}
+            >
+              <ArrowRight size={26} />
             </button>
           </section>
-          <Link className="album-station" href="/album">
-            <BookHeart size={58} />
-            <div>
-              <h2>Mein Reisealbum</h2>
-              <p>
-                {journey.stories.length
-                  ? `${journey.stories.length} Demo-Abenteuer entdeckt`
-                  : "Hier wohnen deine Entdeckungen."}
-              </p>
+          <div className="fairy-guide">
+            <div className="fairy-speech" aria-live="polite">
+              <span>DEINE LESEFEE</span>
+              <p>{hints[hint]}</p>
+              <button
+                onClick={() => setHint((h) => (h + 1) % hints.length)}
+                aria-label="Nächster Tipp der Lesefee"
+              >
+                Noch ein Tipp <Sparkles size={20} />
+              </button>
             </div>
-            <ArrowRight size={26} />
-          </Link>
+            <Image
+              src="/child-reading.png"
+              alt="Deine Lesefee begleitet dich im Geschichtenwald"
+              width={480}
+              height={480}
+              priority
+            />
+          </div>
         </div>
-        <p role="status" className="sr-only">
-          {announcement}
+        <nav className="adventure-path" aria-label="Sechs Geschichtenwelten">
+          {stories.map((s, index) => (
+            <button
+              key={s.id}
+              aria-label={s.title}
+              aria-pressed={selected === index}
+              onClick={() => setSelected(index)}
+            >
+              <StoryArt kind={s.scene} />
+              <span>{index + 1}</span>
+            </button>
+          ))}
+        </nav>
+        <div className="forest-actions">
+          <Link href="/geschichten" aria-label="Ab in den Geschichtenwald">
+            <Map size={23} /> Alle Geschichten
+          </Link>
+          <button
+            aria-label="Überraschungsgeschichte ziehen"
+            onClick={() =>
+              setSelected(
+                (s) =>
+                  (s + 1 + Math.floor(Math.random() * (stories.length - 1))) %
+                  stories.length,
+              )
+            }
+          >
+            <Compass size={25} /> Überrasch mich!
+          </button>
+        </div>
+        <p className="play-demo-note">
+          Lese-Demo · Ohne Mikrofon · In deinem Tempo
         </p>
       </section>
-      <p className="play-kindness">
-        Jeder kleine Schritt ist ein Abenteuer.{" "}
-        <strong>Schön, dass du da bist!</strong>
-      </p>
     </main>
   );
 }

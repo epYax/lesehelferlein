@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Sparkles, Star, Leaf } from "@/components/reading-icons";
+import { ArrowRight, Star, Leaf } from "@/components/reading-icons";
 import { StoryArt } from "./brand-art";
 import { useJourney } from "./use-journey";
 import { stories } from "@/lib/stories";
@@ -39,22 +39,6 @@ export function JourneyAlbum() {
               ? "Alle sechs Orte entdeckt! Und jede Geschichte freut sich auf ein Wiedersehen."
               : "Für jedes abgeschlossene Demo-Abenteuer bekommst du einen Reisestempel. Ganz ohne Noten. Versprochen."}
           </p>
-          <div
-            className={`explorer-badge ${journey.sparks.length === 3 ? "earned" : ""}`}
-          >
-            <Sparkles size={30} />
-            <strong>Lichtfunken-Entdecker</strong>
-            <span>
-              {journey.sparks.length === 3
-                ? "Alle drei Funken gefunden!"
-                : `${journey.sparks.length} von 3 Lichtfunken gefunden`}
-            </span>
-          </div>
-          {journey.sparks.length < 3 && (
-            <Link className="text-link" href="/">
-              Auf der Lichtung suchen <ArrowRight size={16} />
-            </Link>
-          )}
           <span className="album-signature">Deine LeseFee ♡</span>
         </div>
         <div className="album-right">
