@@ -255,3 +255,12 @@ export function Leaf(p: IconProps) {
     </Glyph>
   );
 }
+export function Voice(p: IconProps) {
+  return (
+    <Glyph {...p}>
+      <path d="M3 12h6l7-7v22l-7-7H3Z" fill={paper} />
+      <path d="M21 11c3 3 3 7 0 10M25 7c6 5 6 13 0 18" stroke={purple} />
+      <path d="M8 8C4 7 4 4 5 2c4 1 6 3 3 6Z" fill={mint} />
+    </Glyph>
+  );
+}

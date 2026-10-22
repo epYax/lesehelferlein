@@ -8,6 +8,7 @@ import {
   TreePine,
   ShieldCheck,
 } from "@/components/reading-icons";
+import { ReadAloudToggle } from "./read-aloud";
 export function Header() {
   const path = usePathname();
   return (
@@ -41,6 +42,7 @@ export function Header() {
           <span>Reisealbum</span>
         </Link>
       </nav>
+      <ReadAloudToggle />
       <Link className="parent-entry" href="/eltern" aria-label="Für Eltern">
         <ShieldCheck size={17} />
         <span>Für Eltern</span>

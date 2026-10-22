@@ -1,15 +1,30 @@
-/* Design v4: a playable clearing. All rules are scoped to the home screen. */
+/* v5: use available viewport space, not a scaled bitmap of the interface. */
+body:has(.play-home) > footer {
+  display: none;
+}
+body:has(.play-home) footer {
+  display: none;
+}
 .play-home {
-  background: #f8f2df;
+  height: calc(
+    100dvh - var(--header-height, 88px) - var(--readbar-height, 0px)
+  );
+  min-height: 0;
+  background: #e5eed8;
   color: #284b37;
 }
 .play-stage {
   position: relative;
   isolation: isolate;
+  height: 100%;
   max-width: 1800px;
-  min-height: 950px;
   margin: auto;
-  padding: 24px 0 28px;
+  padding: clamp(10px, 2vh, 24px) max(22px, calc((100% - 1220px) / 2));
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  grid-template-rows: 44px minmax(0, 1fr) auto auto;
+  grid-template-areas: "hud hud" "welcome fairy" "mission fairy" "dock dock";
+  gap: clamp(10px, 2vh, 22px) clamp(24px, 5vw, 80px);
   overflow: hidden;
 }
 .play-stage .world-art {
@@ -24,183 +39,170 @@
   display: none;
 }
 .play-hud {
+  grid-area: hud;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  max-width: 1250px;
-  margin: 0 auto;
-  padding: 0 28px;
-  position: relative;
   z-index: 5;
 }
 .place-label,
 .stamp-pocket {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   background: #fff9e7;
   border: 2px solid #56714e;
-  border-radius: 18px;
-  padding: 10px 16px;
+  border-radius: 14px;
+  padding: 8px 13px;
   box-shadow: 0 3px 0 #56714e;
   font-weight: 800;
-  font-size: 14px;
-}
-.stamp-pocket {
   font-size: 13px;
 }
 .stamp-pocket strong {
   margin-right: 5px;
 }
 .play-welcome {
-  position: relative;
+  grid-area: welcome;
+  align-self: center;
+  min-width: 0;
   z-index: 5;
-  width: 530px;
-  margin: 52px 0 0 max(65px, calc((100% - 1160px) / 2));
-  padding: 30px 34px 26px;
+  padding: clamp(16px, 2.5vh, 30px);
   background: #fff9e8;
   border: 3px solid #53704b;
-  border-radius: 32px 55px 34px 28px;
-  box-shadow:
-    0 7px 0 #53704b,
-    0 13px 0 #46683a15;
+  border-radius: 28px 40px 28px 24px;
+  box-shadow: 0 5px 0 #53704b;
 }
 .welcome-ribbon {
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 750;
   color: #71502b;
   background: #ffe09b;
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 9px;
   transform: rotate(-2deg);
 }
 .play-welcome h1 {
-  margin: 20px 0 16px;
-  font-size: 57px;
-  letter-spacing: -2px;
-  line-height: 1.04;
+  margin: 12px 0;
+  font-size: clamp(28px, 4.7vh, 50px);
+  letter-spacing: -1.5px;
+  line-height: 1.05;
   color: #284e38;
 }
 .play-welcome h1 em {
-  font-size: 49px;
   color: #426e42;
   font-style: normal;
+  font-size: 0.88em;
 }
 .play-welcome p {
-  font-size: 18px;
-  line-height: 1.55;
-  margin: 0 0 22px;
+  font-size: 16px;
+  line-height: 1.45;
+  margin: 0 0 16px;
   color: #3d563e;
 }
 .play-start {
   display: flex;
   width: 100%;
-  min-height: 66px;
+  min-height: 54px;
   border: 2px solid #63411c;
-  border-radius: 19px;
+  border-radius: 17px;
   color: #3e351c;
   background: #ffd66b;
-  box-shadow: 0 6px 0 #92602c;
-  padding: 14px 13px;
+  box-shadow: 0 4px 0 #92602c;
+  padding: 10px;
   gap: 8px;
-  font-size: 16px;
+  font-size: 15px;
 }
 .play-start:hover:not(:disabled) {
   background: #ffe290;
-  box-shadow: 0 8px 0 #92602c;
-}
-.play-start:active {
-  transform: translateY(3px);
-  box-shadow: 0 2px 0 #92602c;
+  box-shadow: 0 5px 0 #92602c;
 }
 .play-demo-note {
   display: block;
-  margin-top: 18px;
-  font-size: 12px;
+  margin-top: 13px;
+  font-size: 11px;
   color: #536047;
   text-align: center;
 }
-/* Fairy sits above every scene overlay. Its transparent canvas never blocks controls. */
+/* The original fairy is the frontmost scene layer. Speech and image have separate grid cells. */
 .play-stage .fairy-guide {
-  position: absolute;
-  top: 115px;
-  right: max(55px, calc((100% - 1190px) / 2));
-  width: 460px;
-  height: 590px;
+  grid-area: fairy;
+  position: relative;
+  inset: auto;
+  transform: none;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
   z-index: 30;
   pointer-events: none;
-}
-.play-stage .fairy-guide > img {
-  width: 440px;
-  height: 440px;
-  right: -25px;
-  bottom: -4px;
-  z-index: 3;
-  filter: drop-shadow(0 9px 0 #44603520);
-  pointer-events: none;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
 }
 .play-stage .fairy-speech {
-  top: 0;
-  left: 0;
-  width: 335px;
-  min-height: 150px;
-  padding: 18px 23px 12px;
+  position: relative;
+  inset: auto;
+  transform: none;
+  width: 90%;
+  max-width: 360px;
+  padding: 14px 18px 8px;
   border: 2px solid #6e7d50;
-  border-radius: 26px 30px 8px 28px;
+  border-radius: 24px 28px 8px 24px;
   background: #fffdf0;
-  box-shadow: 0 5px 0 #6e7d5035;
-  transform: rotate(0);
-  z-index: 1;
+  box-shadow: 0 4px 0 #6e7d5035;
+  z-index: 4;
   pointer-events: auto;
 }
-.play-stage .fairy-speech:after {
-  content: "";
-  position: absolute;
-  right: 30px;
-  top: 100%;
-  border: 12px solid transparent;
-  border-top-color: #6e7d50;
-  border-left-color: #6e7d50;
-}
 .play-stage .fairy-speech > span {
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 1px;
   color: #65552e;
 }
 .play-stage .fairy-speech p {
-  font-size: 17px;
-  line-height: 1.45;
-  margin: 9px 0;
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 7px 0;
 }
 .play-stage .fairy-speech button {
-  font-size: 14px;
+  font-size: 13px;
   min-height: 44px;
   color: #684174;
-  padding: 8px 0 0;
+  padding: 6px 0;
+}
+.play-stage .fairy-guide > img {
+  grid-row: 2;
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: 440px;
+  object-fit: contain;
+  align-self: end;
+  z-index: 3;
+  animation: none;
+  filter: drop-shadow(0 7px 0 #44603520);
+  pointer-events: none;
 }
 .play-sparks {
   position: absolute;
-  inset: 0;
-  z-index: 10;
+  inset: 48% 0 0;
+  z-index: 2;
   pointer-events: none;
 }
 .play-stage .collect-spark {
   pointer-events: auto;
-  width: 68px;
-  height: 68px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: #fff7d4;
   border: 2px solid #a47a2d;
-  box-shadow:
-    0 4px 0 #8c682b,
-    0 0 0 8px #ffeb9b50;
+  box-shadow: 0 3px 0 #8c682b;
   color: #35603c;
 }
 .play-stage .collect-spark .brand-art {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
 }
 .play-stage .collect-spark.collected {
   opacity: 1;
@@ -209,64 +211,62 @@
   box-shadow: 0 3px 0 #5e7944;
 }
 .play-stage .collect-spark.collected .brand-art {
-  width: 33px;
-  height: 33px;
+  width: 28px;
+  height: 28px;
 }
 .play-stage .spark-1 {
-  top: 96px;
-  left: 49%;
+  top: 5%;
+  left: 0;
 }
 .play-stage .spark-2 {
-  top: 620px;
-  right: 9%;
+  top: 40%;
+  right: 0;
 }
 .play-stage .spark-3 {
-  top: 660px;
-  left: 43%;
-  bottom: auto;
+  top: auto;
+  bottom: 0;
+  left: 8%;
 }
 .play-mission {
-  position: relative;
+  grid-area: mission;
   z-index: 5;
-  margin: 35px 0 0 max(65px, calc((100% - 1160px) / 2));
-  padding: 19px 24px;
-  width: 385px;
+  padding: 14px 20px;
   background: #fff8dc;
   border: 2px solid #a88443;
-  border-radius: 6px 22px 8px 20px;
-  box-shadow: 0 5px 0 #a88443;
+  border-radius: 6px 20px 8px 20px;
+  box-shadow: 0 4px 0 #a88443;
 }
 .mission-title {
   display: flex;
-  gap: 8px;
+  gap: 7px;
   align-items: center;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 750;
   color: #685027;
 }
 .play-mission h2 {
-  font-size: 22px;
-  margin: 7px 0;
+  font-size: 21px;
+  margin: 5px 0;
   letter-spacing: -0.5px;
 }
 .play-mission p {
   margin: 0;
-  font-size: 15px;
-  line-height: 1.45;
+  font-size: 14px;
+  line-height: 1.4;
   color: #4d5638;
 }
 .mission-progress {
   display: flex;
   align-items: center;
-  gap: 13px;
-  margin-top: 13px;
+  gap: 12px;
+  margin-top: 9px;
 }
 .mission-progress strong {
-  font-size: 13px;
+  font-size: 12px;
 }
 .mission-stars {
   display: flex;
-  gap: 4px;
+  gap: 3px;
 }
 .mission-stars > span {
   filter: grayscale(1);
@@ -278,52 +278,49 @@
 }
 .mission-reward {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
-  margin-top: 14px;
-  min-height: 36px;
+  margin-top: 5px;
+  min-height: 40px;
   color: #5d3772;
   font-weight: 800;
 }
 .mission-complete {
   background: #f0f7db;
   border-color: #5e7944;
-  box-shadow: 0 5px 0 #5e7944;
+  box-shadow: 0 4px 0 #5e7944;
 }
 .play-dock {
-  position: relative;
+  grid-area: dock;
   z-index: 8;
-  max-width: 1190px;
-  margin: 55px auto 0;
-  padding: 0 28px;
   display: grid;
   grid-template-columns: 1.25fr 1fr;
-  gap: 25px;
+  gap: 22px;
 }
 .surprise-station,
 .album-station {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 20px;
+  gap: 14px;
+  padding: 14px 18px;
   background: #fff6dc;
-  border: 3px solid #836542;
-  border-radius: 20px 9px 20px 10px;
-  box-shadow: 0 6px 0 #836542;
+  border: 2px solid #836542;
+  border-radius: 18px 8px 18px 10px;
+  box-shadow: 0 4px 0 #836542;
 }
 .surprise-station {
   background: #f5eef9;
   border-color: #80618d;
-  box-shadow: 0 6px 0 #80618d;
+  box-shadow: 0 4px 0 #80618d;
 }
 .play-dock h2 {
-  font-size: 19px;
-  line-height: 1.25;
-  margin: 0 0 6px;
+  font-size: 18px;
+  line-height: 1.2;
+  margin: 0 0 5px;
 }
 .play-dock p {
-  font-size: 14px;
-  line-height: 1.45;
+  font-size: 13px;
+  line-height: 1.4;
   color: #47583e;
   margin: 0;
 }
@@ -331,22 +328,25 @@
   min-width: 0;
   flex: 1;
 }
+.play-dock > * > .brand-icon {
+  width: 48px;
+  height: 48px;
+}
 .surprise-draw {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 6px;
   flex-shrink: 0;
-  min-width: 120px;
-  min-height: 72px;
+  min-height: 44px;
   border: 2px solid #71507e;
   background: #fffaf1;
   color: #5f3f6c;
-  border-radius: 14px;
+  border-radius: 12px;
   box-shadow: 0 3px 0 #71507e;
   font-size: 12px;
   font-weight: 800;
+  padding: 8px;
 }
 .surprise-draw:hover {
   background: #f1dfed;
@@ -354,295 +354,453 @@
 .play-dock .surprise-link {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   color: #5f3f6c;
-  font-size: 14px;
-  min-height: 44px;
-  margin-top: 8px;
+  font-size: 13px;
+  min-height: 40px;
+  margin-top: 4px;
   font-weight: 800;
 }
 .album-station:hover {
   background: #ffedbc;
 }
 .play-kindness {
-  text-align: center;
-  margin: 0;
-  padding: 28px 20px;
-  color: #46603e;
-  font-size: 15px;
+  display: none;
 }
-.play-kindness strong {
-  display: block;
-  margin-top: 4px;
-}
-@media (max-width: 1200px) and (min-width: 801px) {
-  .play-welcome {
-    margin-left: 35px;
-    width: 440px;
-    padding: 28px;
-  }
-  .play-welcome h1 {
-    font-size: 49px;
-  }
-  .play-welcome h1 em {
-    font-size: 41px;
-  }
-  .play-stage .fairy-guide {
-    right: 15px;
-    width: 340px;
-    top: 130px;
-  }
-  .play-stage .fairy-guide > img {
-    width: 355px;
-    height: 355px;
-    bottom: 35px;
-    right: -10px;
-  }
-  .play-stage .fairy-speech {
-    width: 280px;
-    left: 35px;
-  }
-  .play-mission {
-    margin-left: 35px;
-    width: 350px;
-  }
-  .play-stage .spark-1 {
-    left: 53%;
-    top: 74px;
-  }
-  .play-stage .spark-2 {
-    right: 6%;
-    top: 660px;
-  }
-  .play-stage .spark-3 {
-    left: 50%;
-    top: 645px;
-  }
-  .play-dock {
-    gap: 15px;
-    padding: 0 25px;
-  }
-  .play-dock > * {
-    gap: 10px;
-    padding: 16px;
-  }
-  .play-dock > * > .brand-icon {
-    width: 42px;
-    height: 42px;
-  }
-  .surprise-station {
-    flex-wrap: wrap;
-  }
-  .surprise-draw {
-    flex-direction: row;
-    width: 100%;
-    min-height: 45px;
-  }
-}
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   .play-stage {
-    padding-top: 18px;
-    min-height: 0;
-  }
-  .play-stage .painted-world > img {
-    object-position: 64% center;
-  }
-  .play-hud {
-    padding: 0 16px;
-    gap: 8px;
-  }
-  .place-label,
-  .stamp-pocket {
-    font-size: 11px;
-    padding: 8px 10px;
-    gap: 5px;
-    border-radius: 14px;
-  }
-  .place-label .brand-icon,
-  .stamp-pocket .brand-icon {
-    width: 23px;
-    height: 23px;
-  }
-  .stamp-pocket span {
-    display: flex;
-    flex-direction: column;
+    padding: 12px 18px;
+    column-gap: 24px;
   }
   .play-welcome {
-    width: auto;
-    margin: 30px 18px 0;
-    padding: 23px 20px;
-    border-radius: 26px 36px 25px 25px;
-  }
-  .welcome-ribbon {
-    font-size: 13px;
+    padding: 18px;
   }
   .play-welcome h1 {
-    font-size: 43px;
-    margin: 16px 0 13px;
-    letter-spacing: -1.5px;
-  }
-  .play-welcome h1 em {
-    font-size: clamp(29px, 8.8vw, 48px);
+    font-size: 35px;
   }
   .play-welcome p {
-    font-size: 16px;
-    margin-bottom: 18px;
+    font-size: 14px;
   }
   .play-start {
     font-size: 13px;
-    padding: 12px 8px;
-    min-height: 60px;
-    gap: 6px;
-  }
-  .play-start .brand-art {
-    width: 24px;
-    height: 24px;
-  }
-  .play-start > span {
-    flex: 1;
-    text-align: center;
-  }
-  .play-demo-note {
-    font-size: 10px;
-    margin-top: 16px;
-  }
-  .play-stage .fairy-guide {
-    position: relative;
-    top: auto;
-    right: auto;
-    width: 100%;
-    height: 495px;
-    margin: 30px 0 0;
-  }
-  .play-stage .fairy-speech {
-    top: 0;
-    left: 24px;
-    width: calc(100% - 80px);
-    max-width: 335px;
-    padding: 15px 18px 10px;
-    min-height: 0;
-  }
-  .play-stage .fairy-speech p {
-    font-size: 16px;
-  }
-  .play-stage .fairy-speech > span {
-    font-size: 11px;
-  }
-  .play-stage .fairy-speech button {
-    font-size: 13px;
-  }
-  .play-stage .fairy-guide > img {
-    width: 320px;
-    height: 320px;
-    right: calc(50% - 160px);
-    bottom: -5px;
-  }
-  .play-sparks {
-    top: 0;
-  }
-  .play-stage .collect-spark {
-    width: 56px;
-    height: 56px;
-  }
-  .play-stage .collect-spark .brand-art {
-    width: 44px;
-    height: 44px;
-  }
-  .play-stage .spark-1 {
-    top: 760px;
-    left: auto;
-    right: 13px;
-  }
-  .play-stage .spark-2 {
-    top: 770px;
-    right: 16px;
-  }
-  .play-stage .spark-3 {
-    top: 850px;
-    left: 14px;
-  }
-  .play-mission {
-    width: auto;
-    margin: 14px 20px 0;
-    padding: 18px 20px;
-  }
-  .play-mission h2 {
-    font-size: 22px;
-  }
-  .play-mission p {
-    font-size: 15px;
   }
   .play-dock {
-    grid-template-columns: 1fr;
-    padding: 0 20px;
-    margin-top: 32px;
-    gap: 20px;
+    gap: 15px;
   }
-  .surprise-station,
-  .album-station {
-    padding: 18px 16px;
-    gap: 13px;
+  .play-dock > * {
+    padding: 12px;
+    gap: 9px;
   }
   .play-dock h2 {
-    font-size: 18px;
-  }
-  .play-dock p {
-    font-size: 14px;
+    font-size: 16px;
   }
   .play-dock > * > .brand-icon {
-    width: 44px;
-    height: 44px;
+    width: 32px;
+    height: 32px;
   }
   .surprise-station {
     flex-wrap: wrap;
   }
   .surprise-draw {
-    flex-direction: row;
-    min-height: 48px;
     width: 100%;
-    font-size: 14px;
-  }
-  .play-kindness {
-    font-size: 14px;
-    padding: 24px 20px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .play-stage .fairy-guide > img,
-  .play-stage .collect-spark > .brand-art {
-    animation: none;
+@media (max-width: 650px) and (orientation: portrait) {
+  .play-stage {
+    grid-template-columns: 1fr;
+    grid-template-rows: 34px auto minmax(120px, 1fr) auto auto;
+    grid-template-areas: "hud" "welcome" "fairy" "mission" "dock";
+    padding: 8px 12px 12px;
+    gap: 9px;
+    overflow: auto;
   }
-}
-/* Explicitly reset the former mobile fairy translation; keep tips clear of her head. */
-.play-stage .fairy-guide {
-  transform: none;
-}
-.play-stage .fairy-guide > img {
-  top: 220px;
-  bottom: auto;
-}
-@media (min-width: 801px) and (max-width: 1200px) {
-  .play-stage .fairy-guide > img {
-    top: 245px;
+  .place-label,
+  .stamp-pocket {
+    font-size: 10px;
+    padding: 5px 8px;
+    gap: 5px;
+    border-radius: 10px;
   }
-}
-@media (max-width: 800px) {
+  .place-label .brand-icon,
+  .stamp-pocket .brand-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .play-welcome {
+    padding: 10px 14px 9px;
+    border-width: 2px;
+    border-radius: 17px 25px 17px 17px;
+  }
+  .welcome-ribbon {
+    display: none;
+  }
+  .play-welcome h1 {
+    font-size: 28px;
+    margin: 0 0 8px;
+    line-height: 1.05;
+    letter-spacing: -0.9px;
+  }
+  .play-welcome h1 br {
+    display: none;
+  }
+  .play-welcome h1 em:before {
+    content: " ";
+  }
+  .play-welcome h1 em {
+    font-size: 1em;
+  }
+  .play-welcome p {
+    display: none;
+  }
+  .play-start {
+    min-height: 44px;
+    padding: 7px;
+    font-size: 12px;
+    gap: 6px;
+  }
+  .play-start .brand-art {
+    width: 22px;
+    height: 22px;
+  }
+  .play-demo-note {
+    font-size: 10px;
+    margin-top: 9px;
+  }
   .play-stage .fairy-guide {
-    height: 570px;
+    grid-template-columns: 1.1fr 1fr;
+    grid-template-rows: minmax(0, 1fr);
+    gap: 3px;
   }
   .play-stage .fairy-speech {
-    min-height: 240px;
+    align-self: center;
+    width: 100%;
+    padding: 9px 10px 4px;
+    border-radius: 15px 17px 5px 15px;
+  }
+  .play-stage .fairy-speech > span {
+    font-size: 9px;
+  }
+  .play-stage .fairy-speech p {
+    font-size: 13px;
+    line-height: 1.3;
+    margin: 4px 0;
+  }
+  .play-stage .fairy-speech button {
+    min-height: 40px;
+    font-size: 11px;
+    gap: 3px;
+  }
+  .play-stage .fairy-speech button .brand-icon {
+    width: 18px;
+    height: 18px;
   }
   .play-stage .fairy-guide > img {
-    top: 250px;
-    bottom: auto;
+    grid-row: 1;
+    grid-column: 2;
+    max-height: 260px;
+  }
+  .play-sparks {
+    inset: 0 0 0 53%;
+  }
+  .play-stage .collect-spark {
+    width: 44px;
+    height: 44px;
+  }
+  .play-stage .collect-spark .brand-art {
+    width: 32px;
+    height: 32px;
+  }
+  .play-stage .spark-1 {
+    top: 0;
+    right: 0;
+    left: auto;
   }
   .play-stage .spark-2 {
-    top: 1020px;
-    right: 12px;
+    top: auto;
+    bottom: 0;
+    right: 0;
   }
   .play-stage .spark-3 {
-    top: 930px;
-    left: 12px;
+    top: auto;
+    bottom: 0;
+    left: 0;
+  }
+  .play-mission {
+    position: relative;
+    padding: 8px 11px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 6px;
+  }
+  .mission-title {
+    display: none;
+  }
+  .play-mission h2 {
+    font-size: 16px;
+    margin: 0 0 3px;
+  }
+  .play-mission p {
+    font-size: 12px;
+  }
+  .mission-progress {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-self: center;
+  }
+  .mission-progress strong {
+    font-size: 10px;
+  }
+  .mission-stars .brand-icon {
+    width: 21px;
+    height: 21px;
+  }
+  .mission-reward {
+    grid-column: 1 / -1;
+    font-size: 12px;
+    min-height: 34px;
+    margin: 0;
+  }
+  .play-dock {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .play-dock > * {
+    padding: 8px;
+    gap: 5px;
+    border-radius: 12px;
+  }
+  .play-dock > * > .brand-icon {
+    width: 26px;
+    height: 26px;
+  }
+  .play-dock h2 {
+    font-size: 13px;
+    margin: 0;
+  }
+  .play-dock p {
+    display: none;
+  }
+  .surprise-station {
+    gap: 4px;
+  }
+  .surprise-station > .brand-icon {
+    display: none;
+  }
+  .surprise-station h2 {
+    display: none;
+  }
+  .surprise-station > div:has(p:only-child) {
+    display: none;
+  }
+  .surprise-draw {
+    font-size: 11px;
+    min-height: 44px;
+    padding: 4px;
+    gap: 3px;
+  }
+  .surprise-draw .brand-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .play-dock .surprise-link {
+    font-size: 12px;
+    min-height: 36px;
+    margin: 0;
+  }
+  .album-station > .brand-icon:last-child {
+    display: none;
+  }
+}
+@media (max-height: 700px) and (min-width: 651px) {
+  .play-stage {
+    grid-template-rows: 34px minmax(0, 1fr) auto;
+    grid-template-areas: "hud hud" "welcome fairy" "dock mission";
+    gap: 9px 25px;
+    padding: 9px 22px 13px;
+  }
+  .play-welcome {
+    padding: 12px 16px;
+  }
+  .welcome-ribbon,
+  .play-welcome p,
+  .mission-title,
+  .play-dock p {
+    display: none;
+  }
+  .play-welcome h1 {
+    font-size: 33px;
+    margin: 0 0 10px;
+  }
+  .play-welcome h1 br {
+    display: none;
+  }
+  .play-welcome h1 em:before {
+    content: " ";
+  }
+  .play-start {
+    min-height: 44px;
+    padding: 6px;
+    font-size: 13px;
+  }
+  .play-demo-note {
+    font-size: 10px;
+    margin-top: 9px;
+  }
+  .play-stage .fairy-guide {
+    grid-template-columns: 1.1fr 1fr;
+    grid-template-rows: minmax(0, 1fr);
+  }
+  .play-stage .fairy-speech {
+    width: 100%;
+    padding: 8px 10px 4px;
+    align-self: center;
+  }
+  .play-stage .fairy-speech p {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+  .play-stage .fairy-speech > span {
+    font-size: 9px;
+  }
+  .play-stage .fairy-speech button {
+    font-size: 10px;
+    min-height: 36px;
+  }
+  .play-stage .fairy-guide > img {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .play-sparks {
+    inset: 0 0 0 52%;
+  }
+  .play-stage .collect-spark {
+    width: 40px;
+    height: 40px;
+  }
+  .play-stage .collect-spark .brand-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .play-stage .spark-1 {
+    top: 0;
+    left: 0;
+  }
+  .play-stage .spark-2 {
+    top: auto;
+    bottom: 0;
+    right: 0;
+  }
+  .play-stage .spark-3 {
+    top: auto;
+    bottom: 0;
+    left: 0;
+  }
+  .play-mission {
+    padding: 8px 12px;
+  }
+  .play-mission h2 {
+    font-size: 16px;
+    margin: 0 0 3px;
+  }
+  .play-mission p {
+    font-size: 12px;
+  }
+  .mission-progress {
+    margin-top: 3px;
+  }
+  .mission-stars .brand-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .play-dock {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .play-dock > * {
+    padding: 8px;
+    gap: 5px;
+  }
+  .play-dock h2 {
+    font-size: 13px;
+  }
+  .play-dock > * > .brand-icon {
+    width: 24px;
+    height: 24px;
+  }
+  .surprise-station h2,
+  .surprise-station > .brand-icon,
+  .album-station > .brand-icon:last-child {
+    display: none;
+  }
+  .surprise-station > div:has(p:only-child) {
+    display: none;
+  }
+  .surprise-draw {
+    padding: 5px;
+    font-size: 11px;
+  }
+}
+/* Accessibility fallback: enlarged text or exceptionally short windows can scroll rather than clip. */
+@media (max-height: 540px) and (max-width: 650px) {
+  .play-stage {
+    min-height: 440px;
+    overflow: visible;
+  }
+  .play-home {
+    height: auto;
+    min-height: calc(100dvh - var(--header-height, 88px));
+  }
+}
+@media (max-width: 650px) and (orientation: portrait) and (max-height: 700px) {
+  .play-stage {
+    grid-template-rows: auto minmax(120px, 1fr) auto auto;
+    grid-template-areas: "welcome" "fairy" "mission" "dock";
+    gap: 6px;
+    padding: 8px 12px;
+  }
+  .play-hud {
+    display: none;
+  }
+  .play-welcome {
+    padding: 8px 12px;
+  }
+  .play-welcome h1 {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .play-demo-note {
+    margin-top: 7px;
+  }
+  .play-mission p {
+    display: none;
+  }
+  .play-mission h2 {
+    font-size: 15px;
+    align-self: center;
+  }
+  .mission-progress {
+    grid-row: 1;
+  }
+  .play-dock > * {
+    padding: 5px;
+  }
+  .play-stage .fairy-speech {
+    padding: 7px 8px 3px;
+  }
+  .play-stage .fairy-speech p {
+    font-size: 12px;
+  }
+}
+@media (min-width: 651px) and (max-height: 480px) {
+  .play-stage {
+    grid-template-rows: minmax(0, 1fr) auto;
+    grid-template-areas: "welcome fairy" "dock mission";
+  }
+  .play-hud {
+    display: none;
   }
 }

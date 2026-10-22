@@ -92,30 +92,30 @@ export function AdventureHome() {
             height={480}
             priority
           />
-        </div>
-        <div
-          className="spark-hunt play-sparks"
-          aria-label="Lichtfunken sammeln"
-        >
-          {[1, 2, 3].map((id) => (
-            <button
-              key={id}
-              className={`collect-spark spark-${id} ${journey.sparks.includes(id) ? "collected" : ""}`}
-              aria-label={
-                journey.sparks.includes(id)
-                  ? `Lichtfunke ${id} gefunden`
-                  : `Lichtfunke ${id} sammeln`
-              }
-              disabled={journey.sparks.includes(id)}
-              onClick={() => collect(id)}
-            >
-              {journey.sparks.includes(id) ? (
-                <Check size={30} />
-              ) : (
-                <Star size={56} />
-              )}
-            </button>
-          ))}
+          <div
+            className="spark-hunt play-sparks"
+            aria-label="Lichtfunken sammeln"
+          >
+            {[1, 2, 3].map((id) => (
+              <button
+                key={id}
+                className={`collect-spark spark-${id} ${journey.sparks.includes(id) ? "collected" : ""}`}
+                aria-label={
+                  journey.sparks.includes(id)
+                    ? `Lichtfunke ${id} gefunden`
+                    : `Lichtfunke ${id} sammeln`
+                }
+                disabled={journey.sparks.includes(id)}
+                onClick={() => collect(id)}
+              >
+                {journey.sparks.includes(id) ? (
+                  <Check size={30} />
+                ) : (
+                  <Star size={56} />
+                )}
+              </button>
+            ))}
+          </div>
         </div>
         <aside
           className={`play-mission ${complete ? "mission-complete" : ""}`}

@@ -38,6 +38,21 @@ export default function Parents() {
           Schriftarten. Der lokale Webserver erhält beim Laden technisch
           notwendige HTTP-Anfragen.
         </p>
+        <h2>Texte vorlesen lassen</h2>
+        <p>
+          Der Schalter „Vorlesen“ im Kopfbereich aktiviert die Vorlesehilfe.
+          Danach liest ein Klick auf sichtbare Texte oder Menüeinträge diese
+          vor. Links und Knöpfe werden erst über „Öffnen“ beziehungsweise
+          „Ausführen“ in der Vorleseleiste aktiviert. Eingabefelder werden nicht
+          ausgelesen. Die App nutzt ausschließlich deutsche Stimmen, die der
+          Browser als lokal meldet. Es gibt keine eigene Cloud-Sprachausgabe,
+          keine Audioaufnahme und keinen zusätzlichen Speichereintrag.
+          Stimmenauswahl und Tempo gelten für den laufenden Besuch. Ist keine
+          lokale deutsche Stimme vorhanden, lässt sich eine in den
+          Spracheinstellungen des Geräts installieren. Die Wortmarkierung folgt
+          den Wortpositionen der Stimme; manche Browser liefern diese nicht.
+          Dann bleibt der gesamte gelesene Abschnitt hervorgehoben.
+        </p>
         <h2>Erkennung ist keine Gewissheit</h2>
         <p>
           Auch zukünftige echte Spracherkennung kann Wörter überhören oder

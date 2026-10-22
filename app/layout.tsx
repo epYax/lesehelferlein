@@ -4,6 +4,8 @@ import "./globals.css";
 import "./adventure.css";
 import "./illustrations.css";
 import "./play-home.css";
+import "./read-aloud.css";
+import { ReadAloudProvider } from "@/components/read-aloud";
 import { Header } from "@/components/header";
 export const metadata: Metadata = {
   title: "LeseHelferlein · Kleine Worte, große Abenteuer",
@@ -19,19 +21,21 @@ export default function RootLayout({
         <a className="skip" href="#main">
           Zum Inhalt
         </a>
-        <Header />
-        {children}
-        <footer>
-          <Link className="wordmark" href="/">
-            Lese<span>Helferlein</span>
-            <span className="tiny-star">✦</span>
-          </Link>
-          <p>Ein Wort. Eine Welt. Dein Abenteuer.</p>
-          <Link href="/eltern">Für Eltern & Datenschutz</Link>
-          <span className="footer-note">
-            Mit Fantasie gemacht. Zum Lesen gedacht.
-          </span>
-        </footer>
+        <ReadAloudProvider>
+          <Header />
+          {children}
+          <footer>
+            <Link className="wordmark" href="/">
+              Lese<span>Helferlein</span>
+              <span className="tiny-star">✦</span>
+            </Link>
+            <p>Ein Wort. Eine Welt. Dein Abenteuer.</p>
+            <Link href="/eltern">Für Eltern & Datenschutz</Link>
+            <span className="footer-note">
+              Mit Fantasie gemacht. Zum Lesen gedacht.
+            </span>
+          </footer>
+        </ReadAloudProvider>
       </body>
     </html>
   );

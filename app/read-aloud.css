@@ -1,0 +1,342 @@
+.read-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 10px;
+  min-height: 44px;
+  border: 2px solid #56714e;
+  border-radius: 18px;
+  background: #fff9e7;
+  color: #294e37;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.read-toggle[aria-checked="true"] {
+  background: #e4efd1;
+}
+.switch-track {
+  width: 30px;
+  height: 18px;
+  border: 1px solid #59764d;
+  border-radius: 12px;
+  padding: 2px;
+  background: #d5d9c5;
+}
+.switch-track i {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: #59764d;
+  border-radius: 50%;
+}
+[aria-checked="true"] .switch-track i {
+  transform: translateX(11px);
+  background: #fffdf0;
+}
+[aria-checked="true"] .switch-track {
+  background: #42694b;
+}
+.world-header {
+  gap: 14px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.read-bar {
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fffbed;
+  color: #284b37;
+  border-top: 3px solid #7a5981;
+  padding: 8px max(14px, calc((100vw - 1120px) / 2));
+  box-shadow: 0 -4px 16px #233e351c;
+  max-height: 45dvh;
+  overflow: auto;
+}
+.read-bar button {
+  min-height: 40px;
+  min-width: 40px;
+  border: 1px solid #8c9d79;
+  background: #f1f3e3;
+  border-radius: 10px;
+  color: #294e37;
+  font-weight: 750;
+  padding: 6px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.read-bar-top {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.read-bar-top > p {
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.read-follow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+.karaoke-line {
+  flex: 1;
+  font-size: 22px;
+  line-height: 1.7;
+  max-height: 76px;
+  overflow: auto;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background: #f2efd9;
+  white-space: pre-wrap;
+}
+.karaoke-line.is-speaking {
+  border-left: 4px solid #795181;
+}
+.spoken-now {
+  color: #273e28;
+  background: #ffda70;
+  border-radius: 4px;
+  box-shadow: 0 3px 0 #9b692a;
+}
+.read-follow-actions {
+  display: flex;
+  gap: 7px;
+}
+.read-bar .read-open {
+  background: #ffdc80;
+  border-color: #956d31;
+}
+.read-boundary-note {
+  display: block;
+  font-size: 11px;
+  margin-top: 4px;
+  color: #596547;
+}
+.read-settings {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 12px;
+}
+.read-settings label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  min-width: 0;
+}
+.read-settings select {
+  max-width: 290px;
+  min-height: 40px;
+  border: 1px solid #82926d;
+  border-radius: 8px;
+  background: white;
+  padding: 6px;
+}
+.read-settings p {
+  width: 100%;
+  font-size: 12px;
+}
+body[data-read-aloud="on"] {
+  padding-bottom: var(--readbar-height, 0px);
+}
+body[data-read-aloud="on"]
+  :is(main, header, footer)
+  :is(a, button, p, h1, h2, h3, label, li, [data-read-text]):not(
+    [data-read-controls]
+  ) {
+  cursor: help;
+}
+.read-target-active {
+  outline: 3px solid #9b74a3 !important;
+  outline-offset: 4px;
+  border-radius: 5px;
+}
+::highlight(spoken-word) {
+  background: #ffda70;
+  color: #263e2b;
+  text-decoration: underline;
+}
+@media (max-width: 1150px) {
+  .world-header {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .world-header nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+  .world-header .parent-entry {
+    margin-left: auto;
+  }
+  .world-header .read-toggle {
+    margin-left: auto;
+  }
+}
+@media (max-width: 650px) {
+  .world-header {
+    padding: 7px 12px;
+    gap: 5px;
+    min-height: 0;
+  }
+  .world-header .wordmark {
+    font-size: 19px;
+  }
+  .world-header .brand img {
+    width: 28px;
+    height: 32px;
+  }
+  .world-header .parent-entry {
+    display: none;
+  }
+  .world-header .read-toggle {
+    font-size: 11px;
+    padding: 5px 7px;
+    gap: 4px;
+    min-height: 40px;
+  }
+  .read-toggle > .brand-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .read-toggle .switch-track {
+    display: none;
+  }
+  .world-header nav {
+    padding: 2px;
+    gap: 3px;
+  }
+  .world-header nav a {
+    min-height: 40px;
+    padding: 5px;
+    flex: 1;
+    justify-content: center;
+    font-size: 10px;
+  }
+  .world-header nav a > .brand-art {
+    width: 22px;
+    height: 22px;
+  }
+  .read-bar {
+    padding: 6px 10px;
+  }
+  .read-bar-top {
+    gap: 5px;
+  }
+  .read-bar-top > .brand-icon {
+    display: none;
+  }
+  .read-bar-top > p {
+    font-size: 12px;
+  }
+  .read-bar button {
+    min-width: 36px;
+    min-height: 40px;
+    font-size: 12px;
+    padding: 5px 7px;
+  }
+  .karaoke-line {
+    font-size: 18px;
+    max-height: 65px;
+  }
+  .read-follow {
+    gap: 6px;
+  }
+  .read-follow-actions {
+    gap: 4px;
+  }
+  .read-follow-actions .brand-icon {
+    width: 18px;
+    height: 18px;
+  }
+  .read-boundary-note {
+    display: none;
+  }
+  .read-settings select {
+    max-width: 215px;
+  }
+}
+@media (min-width: 651px) and (max-height: 480px) {
+  .world-header {
+    flex-wrap: nowrap;
+    min-height: 58px;
+    padding: 6px 18px;
+    gap: 9px;
+  }
+  .world-header .wordmark {
+    font-size: 18px;
+  }
+  .world-header .brand img {
+    width: 28px;
+    height: 32px;
+  }
+  .world-header nav {
+    order: 0;
+    width: auto;
+    gap: 2px;
+    padding: 2px;
+  }
+  .world-header nav a {
+    font-size: 10px;
+    padding: 5px;
+    gap: 3px;
+  }
+  .world-header nav a > .brand-art {
+    width: 23px;
+    height: 23px;
+  }
+  .world-header .parent-entry {
+    display: none;
+  }
+  .world-header .read-toggle {
+    font-size: 11px;
+    padding: 5px;
+    gap: 4px;
+  }
+  .read-toggle .switch-track {
+    display: none;
+  }
+}
+/* Parents remain reachable even when the game screen omits its footer. */
+@media (max-width: 650px) {
+  .world-header .parent-entry {
+    display: flex;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 30px;
+    height: 36px;
+    justify-content: center;
+  }
+  .world-header .parent-entry span {
+    display: none;
+  }
+  .world-header nav {
+    padding-right: 34px;
+  }
+  .world-header nav a {
+    font-size: 9px;
+  }
+}
+@media (min-width: 651px) and (max-height: 480px) {
+  .world-header .parent-entry {
+    display: flex;
+    margin-left: 0;
+    min-width: 24px;
+    min-height: 40px;
+  }
+  .world-header .parent-entry span {
+    display: none;
+  }
+}
