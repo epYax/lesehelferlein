@@ -1,5 +1,12 @@
 # Entwicklungsfortschritt
 
+## 2026-10-22 — main-Integration vorbereitet
+
+- Auf ausdrücklichen Nutzerwunsch lokalen `main` auf Design v5 gebracht und die getrennte bestehende GitHub-main-Historie per normalem Merge eingebunden. Mergecommit: `2709035`. Die ursprüngliche `fee.png` bleibt unverändert erhalten; beide bisherigen Historien sind Vorfahren des neuen main.
+- App-Quellstand entspricht Design v5. 15 Logiktests, Produktionsbuild, Typecheck, ESLint und Diff-Prüfung erfolgreich; keine erneute Browserprüfung, da der Merge ausschließlich `fee.png` ergänzt.
+- GitHub meldet `epYax/lesehelferlein` jetzt als öffentlich (`private: false`). Wegen der bisherigen Vorgabe „GitHub ausschließlich privat“ kein Push ausgeführt und keine Sichtbarkeit geändert. Klärung erforderlich: privat stellen oder öffentliche Veröffentlichung ausdrücklich freigeben.
+- Alle Design-Tags unverändert; Arbeitsstand lokal committed. Kein Force-Push und kein Verlust der bestehenden Remote-Historie.
+
 ## 2026-10-22 — Design v5: Bildschirmfüllende Lichtung und Vorlesehilfe
 
 ### Umsetzung
