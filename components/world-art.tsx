@@ -1,11 +1,10 @@
 import Image from "next/image";
-import { artRoot } from "./brand-art";
 /** Bespoke painted woodland background; the original fairy is layered separately. */
 export function WorldArt() {
   return (
     <div className="world-art painted-world" aria-hidden="true">
       <Image
-        src={`${artRoot}/forest-clearing.webp`}
+        src="/art/lesehelferlein-v4/play-clearing.webp"
         alt=""
         fill
         priority

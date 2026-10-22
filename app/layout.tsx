@@ -3,6 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 import "./adventure.css";
 import "./illustrations.css";
+import "./play-home.css";
 import { Header } from "@/components/header";
 export const metadata: Metadata = {
   title: "LeseHelferlein · Kleine Worte, große Abenteuer",

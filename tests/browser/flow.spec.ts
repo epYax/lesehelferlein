@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test("home is responsive and original mascot loads", async ({ page }, info) => {
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: /Einmal umblättern/ }),
+    page.getByRole("heading", { name: /Geschichtenwald/ }),
   ).toBeVisible();
   await expect(
     page.getByRole("img", { name: /Deine Lesefee begleitet/ }),
