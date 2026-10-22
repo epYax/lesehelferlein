@@ -7,6 +7,7 @@ import {
   Map,
   Sparkles,
   BookOpen,
+  BookHeart,
   Compass,
   Star,
   Check,
@@ -212,7 +213,7 @@ export function AdventureHome() {
           </div>
           <Link className="path-choice path-album" href="/album">
             <span className="choice-art">
-              <BookOpen size={76} />
+              <BookHeart size={76} />
             </span>
             <div>
               <span className="choice-kicker">

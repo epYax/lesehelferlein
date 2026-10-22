@@ -9,6 +9,7 @@ import {
   RotateCcw,
   Square,
   Sparkles,
+  Star,
   Type,
   LoaderCircle,
 } from "@/components/reading-icons";
@@ -239,9 +240,9 @@ export function Reader({ story }: { story: Story }) {
       {result && (
         <section className="result-panel">
           <div className="reward" aria-hidden="true">
-            <Sparkles size={66} />
-            <Sparkles size={84} />
-            <Sparkles size={66} />
+            <Star size={66} />
+            <Star size={84} />
+            <Star size={66} />
           </div>
           <span className="eyebrow">DEIN DEMO-ABENTEUER</span>
           <h2 ref={resultHeading} tabIndex={-1}>
