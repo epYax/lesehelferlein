@@ -37,3 +37,12 @@ Neue Kulisse im Stil der LeseFee, Spielmenü und Funkenmission auf einer zusamme
 | [1440 px](design-v4/home-desktop.png) | [820 px](design-v4/home-tablet.png) | [390 px](design-v4/home-mobile.png) | [320 px](design-v4/home-small-phone.png) |
 
 Chromium, Produktionsbuild auf Port 3100. Die Geschichtenbibliothek und Leseansicht behalten die Gestaltung von v3.
+
+## Design v5: Ein Bildschirm und Vorlesehilfe
+
+| Ansicht | Desktop | Smartphone | Kleines Smartphone |
+| --- | --- | --- | --- |
+| Ganze Lichtung | [Bild](design-v5/home-desktop.png) | [Bild](design-v5/home-mobile.png) | [Bild](design-v5/home-small-phone.png) |
+| Mitleseleiste | [Bild](design-v5/read-aloud-desktop.png) | [Bild](design-v5/read-aloud-mobile.png) | [Bild](design-v5/read-aloud-small-phone.png) |
+
+Zusätzlich: [320×568](design-v5/home-320x568.png), [Querformat 844×390](design-v5/home-844x390.png), [1366×768](design-v5/home-1366x768.png), [Tablet 768×1024](design-v5/home-768x1024.png). Vorlese-Screenshots zeigen ausdrücklich im Test eingespeiste Sprachereignisse, keine Aufnahme und keinen Nachweis einer bestimmten nativen Stimme. Alle Screenshots stammen vom Produktionsserver auf Port 3100.

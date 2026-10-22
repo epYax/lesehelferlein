@@ -44,11 +44,18 @@ Browserprüfungen starten einen eigenen Produktionsserver auf **Port 3100**. Vor
 Alignment bewertet Transkript-Übereinstimmung, keine Lesefähigkeit. Dialekte, Selbstkorrekturen, Komposita und größere ausgeschriebene Zahlen benötigen künftig erweiterte Verarbeitung. Keine produktiven Integrationen oder Deployments.
 
 ## Designhistorie
-`design-v1` bewahrt die ursprüngliche App, `design-v2` den Geschichtenwald und `design-v3` die eigene Bildwelt mit 20 Lesezeichen-Icons. `design-v4` ergänzt die spielbare Lichtung im Stil der Original-LeseFee. Entwicklung: `feature/spielbare-lichtung`.
+`design-v1` bewahrt die ursprüngliche App, `design-v2` den Geschichtenwald und `design-v3` die eigene Bildwelt mit 20 Lesezeichen-Icons. `design-v4` ergänzt die spielbare Lichtung im Stil der Original-LeseFee. `design-v5` ergänzt die bildschirmfüllende Startansicht und lokale Vorlesehilfe. Entwicklung: `feature/vorlesen-und-bildschirm`.
 
 **[Versionen parallel starten und GitHub-Sicherung](docs/VERSION_CONTROL.md)** · [Designkonzept](docs/REDESIGN.md) · [Fortschritt / Prüfungen](docs/PROGRESS.md)
 
 ## Eigene Icons
-Die 20 SVG-Icons in `components/reading-icons.tsx` bilden das eigene Set **Lesezeichen**: Buchseiten, Blätter und Feensterne in Waldgrün, Creme, Gold und Beerenlila. Keine externe Icon-Bibliothek.
+Die 21 SVG-Icons in `components/reading-icons.tsx` bilden das eigene Set **Lesezeichen**: Buchseiten, Blätter und Feensterne in Waldgrün, Creme, Gold und Beerenlila. Keine externe Icon-Bibliothek.
 
 Mit `npm run icons:export` werden die einzelnen SVGs und ihre Größenvorschau in `public/icons/lesezeichen/` aktualisiert. Bei laufender App: [Icon-Galerie](http://127.0.0.1:3000/icons/lesezeichen/index.html). [Bildherkunft und Gestaltung](docs/art-direction/README.md).
+
+## Vorlesen und Bildschirmgröße
+Die Startseite nutzt den verfügbaren Bildschirm unter dem Header und berücksichtigt auch die eingeblendete Vorleseleiste. Auf kleinen Geräten werden Informationen kompakter angeordnet. Bei extrem kurzen Fenstern oder vergrößerter Schrift bleibt Scrollen als zugänglicher Ausweg möglich.
+
+**Vorlesen** im Header einschalten, dann sichtbaren Text anklicken. Bei Links und Knöpfen anschließend „Öffnen“/„Ausführen“ in der Leiste wählen. Unter „Stimme“ sind deutsche Gerätestimmen, Tempo und eine Hörprobe verfügbar. Nur als lokal gemeldete deutsche Stimmen; kein kostenpflichtiger Dienst, kein Cloud-Fallback, keine Aufnahme. Die Wortmarkierung folgt echten Wortereignissen, soweit die Stimme sie liefert.
+
+[Recherche, Quellen und UI-Entscheidung](docs/research/DEUTSCHE_VORLESEFUNKTION.md). Architektur: `components/read-aloud.tsx` (UI/Browseradapter), `components/read-target.ts` (sichtbare DOM-Texte und Markierung), `lib/read-aloud.ts` (Stimmfilter und Wortpositionen).

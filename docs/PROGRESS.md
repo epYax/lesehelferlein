@@ -1,5 +1,29 @@
 # Entwicklungsfortschritt
 
+## 2026-10-22 — Design v5: Bildschirmfüllende Lichtung und Vorlesehilfe
+
+### Umsetzung
+- Vor Änderungen war `design-v4` vollständig committed, getaggt und privat gesichert, inklusive Screenshots. Neuer Branch: `feature/vorlesen-und-bildschirm`.
+- Startbildschirm füllt den verfügbaren Viewport unter dem gemessenen Header. Dynamische Bildschirmhöhe und Vorleseleiste werden berücksichtigt; kompakte Anordnung für Hoch-/Querformat statt pauschaler Verkleinerung aller Texte. Hauptaktionen bleiben im Blick. Die LeseFee liegt weiterhin vor der Szene, Text und Figur belegen getrennte Bereiche.
+- Neue globale Vorlesehilfe mit eigenem Lautsprecher-Icon und Ein-/Aus-Schalter im Header. Opt-in, Hinweis beim Aktivieren, sichtbare Texte anklicken, Links/Knöpfe erst mit separater Aktion öffnen/ausführen. Icon- und Textklicks behandeln denselben Knopf gleich.
+- Browser-Sprachausgabe mit ausschließlich als lokal gemeldeten deutschen Stimmen, weibliche Stimmennamen bevorzugt; frei wählbare Stimme, Hörprobe und drei Tempi. Kein Cloud-Fallback, kein Mikrofon, kein TTS-Endpunkt und keine zusätzliche Persistenz.
+- Wortmarkierung über echte Wortgrenzen-Ereignisse in der Mitleseleiste und, mit CSS Highlight API, direkt im Ursprungstext. Kein geschätzter Worttimer. Abbruch, Wiederholung, Escape, Tab-Verbergen und Routenwechsel räumen laufende Sprachausgabe/Markierungen auf. Veraltete Ereignisse werden ignoriert.
+- Deutsche TTS-Alternativen mit Primärquellen recherchiert; Browser-API umgesetzt, Piper als möglicher späterer einheitlicher Stimmenanbieter dokumentiert. Elterninformationen und README aktualisiert. 21 eigene SVG-Icons inklusive Lautsprecher exportiert.
+
+### Verifiziert
+- 15 Logiktests, Typecheck, ESLint und Produktionsbuild erfolgreich.
+- 60 Browserprüfungen erfolgreich auf vier Größen (320/390/820/1440 px), Produktionsserver Port 3100. 16 davon prüfen den Sprachadapter mit bewusst simulierten Browser-Sprachereignissen: kein akustischer Qualitätstest, keine echte Aufnahme.
+- Tests prüfen unter anderem Opt-in, lokale Stimme statt Cloud, Stimmenwechsel, Tempo, Text-/Iconklick, separate Aktion, Wiederholung, Stoppen, fehlende und verspätet verfügbare Stimmen, fehlende Browser-Unterstützung, Synthesefehler, echte Wortpositionen und veraltete Callbacks.
+- Zusätzlich 320×568, 844×390, 1366×768 und 768×1024 geprüft: Dokument und Spieloberfläche ohne Höhenüberlauf, Hauptaktionen innerhalb des Bildschirms. Screenshots von Startbildschirm und aktivierter Mitleseleiste archiviert. Desktop, kleines Smartphone und Querformat visuell geprüft.
+- Nutzervorschau auf Port 3000 nicht beendet. Originalmaskottchen unverändert. Kein Deployment oder produktiver Sprachdienst aktiviert.
+
+### Grenzen und Dokumentation
+- Stimme, tatsächliche Klangqualität und Wortereignisse hängen von Browser/Betriebssystem ab. Weibliche Stimmennamen sind eine Präferenz, keine Garantie. Native Audioausgabe auf realen Endgeräten und subjektive Kinderfreundlichkeit der Stimmen sind nicht akustisch validiert.
+- Bei fehlenden Wortereignissen wird der ganze Abschnitt markiert. Ohne lokale deutsche Stimme bleibt die gewöhnliche Navigation erhalten und ein Installationshinweis erscheint.
+- Bei extrem kurzen Fenstern, großen Bedienhilfeschriften oder geöffneten Einstellungen hat Erreichbarkeit Vorrang: Scrollen bleibt möglich, statt Text abzuschneiden.
+- Recherche und UI-Entscheidung: `docs/research/DEUTSCHE_VORLESEFUNKTION.md`. Screenshots: `docs/design-versions/design-v5/`.
+- Abschluss-Tag: `design-v5`; private Sicherung im bereits freigegebenen Repository, ohne bestehende Tags oder Remote-main zu überschreiben.
+
 ## 2026-10-22 — Design v4: spielbare Startseite im Stil der LeseFee
 
 - Vor Änderungen stand der vollständige, geprüfte und privat gesicherte Stand als `design-v3` inklusive Vergleichsbildern fest. Neuer Branch: `feature/spielbare-lichtung`.
