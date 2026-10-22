@@ -12,9 +12,11 @@ export function localGermanVoices<T extends VoiceInfo>(voices: T[]): T[] {
     .sort((a, b) => {
       // The API has no gender field. Names are only a preference, never a guarantee.
       const rank = (v: T) =>
+        (/\banna\b/i.test(v.name) ? 100 : 0) +
         (/\b(anna|katja|hedda|helena|petra|vicki|klara|marlene)\b/i.test(v.name)
           ? 10
-          : 0) + (v.default ? 1 : 0);
+          : 0) +
+        (v.default ? 1 : 0);
       return rank(b) - rank(a) || a.name.localeCompare(b.name, "de");
     });
 }

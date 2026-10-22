@@ -6,9 +6,7 @@ body:has(.play-home) footer {
   display: none;
 }
 .play-home {
-  height: calc(
-    100dvh - var(--header-height, 88px) - var(--readbar-height, 0px)
-  );
+  height: calc(100dvh - var(--header-height, 88px));
   min-height: 0;
   background: #e5eed8;
   color: #284b37;

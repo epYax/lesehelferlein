@@ -40,98 +40,111 @@ declare global {
   }
 }
 
-test("opt-in reads links before opening, uses local voice, tracks real boundaries and cancels stale speech", async ({
+test("direct reading uses Anna without a panel or outline, tracks real words and opens on second activation", async ({
   page,
 }, info) => {
   await mockSpeech(page);
   await page.goto("/");
   expect(await page.evaluate(() => window.__speechTest.calls)).toHaveLength(0);
   await page.getByRole("switch", { name: "Vorlesen", exact: true }).click();
-  await expect(
-    page.getByRole("switch", { name: "Vorlesen", exact: true }),
-  ).toHaveAttribute("aria-checked", "true");
-  await page.getByRole("heading", { name: "Dein Geschichtenwald" }).click();
+  const heading = page.getByRole("heading", { name: "Dein Geschichtenwald" });
+  await heading.click();
   expect(
     (await page.evaluate(() => window.__speechTest.calls)).at(-1)?.voice,
   ).toBe("anna");
-  await expect(page.locator(".spoken-now")).toHaveCount(0);
+  await expect(
+    page.locator(".read-bar,.read-follow,.read-target-active"),
+  ).toHaveCount(0);
+  await expect(heading).toHaveCSS("outline-style", "none");
+  expect(await page.evaluate(() => CSS.highlights.has("spoken-word"))).toBe(
+    false,
+  );
   await page.evaluate(() => window.__speechTest.boundary(5));
-  await expect(page.locator(".spoken-now")).toHaveText("Geschichtenwald ");
-  await expect(page.locator("h1.read-target-active")).toHaveCount(1);
+  expect(await page.evaluate(() => CSS.highlights.has("spoken-word"))).toBe(
+    true,
+  );
   await page.evaluate(() => window.__speechTest.endPrevious());
-  await expect(page.locator(".spoken-now")).toHaveCount(1);
-  if (await page.evaluate(() => "highlights" in CSS)) {
-    expect(await page.evaluate(() => CSS.highlights.has("spoken-word"))).toBe(
-      true,
-    );
-  }
+  expect(await page.evaluate(() => CSS.highlights.has("spoken-word"))).toBe(
+    true,
+  );
   await artworkScreenshot(
     page,
     `test-results/read-aloud-${info.project.name}.png`,
   );
-  await page.getByRole("link", { name: "Abenteuerkarte", exact: true }).click();
+  const link = page.getByRole("link", { name: "Abenteuerkarte", exact: true });
+  await link.click();
   await expect(page).toHaveURL("/");
-  await page.getByRole("button", { name: "Öffnen", exact: true }).click();
+  await link.press("Enter");
   await expect(page).toHaveURL("/geschichten");
-  await expect(page.locator(".spoken-now")).toHaveCount(0);
+  expect(await page.evaluate(() => CSS.highlights.has("spoken-word"))).toBe(
+    false,
+  );
   await page.getByRole("switch", { name: "Vorlesen", exact: true }).click();
   await page.getByRole("link", { name: "Reisealbum", exact: true }).click();
   await expect(page).toHaveURL("/album");
 });
-test("mode reads ordinary text and exposes action, voice, rate, repeat and stop without recording", async ({
+test("buttons act on the second click, ordinary text repeats, Escape and toggle stop", async ({
   page,
 }) => {
   await mockSpeech(page);
   await page.goto("/");
   await page.getByRole("switch", { name: "Vorlesen", exact: true }).click();
-  await page.getByRole("button", { name: "Nächster Tipp der Lesefee" }).click();
+  const tip = page.getByRole("button", { name: "Nächster Tipp der Lesefee" });
+  await tip.locator("svg").click();
   await expect(page.locator(".fairy-speech")).toContainText("Hallo");
-  await page.getByRole("button", { name: "Ausführen", exact: true }).click();
+  await tip.click();
   await expect(page.locator(".fairy-speech")).toContainText("drei goldenen");
-  await page.getByRole("button", { name: "Stimme", exact: true }).click();
-  await expect(
-    page.getByLabel("Deutsche Gerätestimme").locator("option"),
-  ).toHaveCount(2);
-  await page.getByLabel("Deutsche Gerätestimme").selectOption("hans");
-  await page.getByLabel("Tempo", { exact: true }).selectOption("0.75");
-  await page.getByRole("button", { name: "Stimme anhören" }).click();
-  const last = (await page.evaluate(() => window.__speechTest.calls)).at(-1)!;
-  expect(last.voice).toBe("hans");
-  expect(last.rate).toBe(0.75);
-  await page.getByRole("button", { name: "Text noch einmal vorlesen" }).click();
+  const heading = page.getByRole("heading", { name: "Dein Geschichtenwald" });
+  await heading.click();
+  const count = await page.evaluate(() => window.__speechTest.calls.length);
+  await heading.click();
+  expect(await page.evaluate(() => window.__speechTest.calls.length)).toBe(
+    count + 1,
+  );
+  expect(
+    (await page.evaluate(() => window.__speechTest.calls)).at(-1)?.rate,
+  ).toBe(0.9);
+  await page.evaluate(() => window.__speechTest.boundary(5));
   await page.keyboard.press("Escape");
-  await expect(page.locator(".read-bar")).toContainText("Gestoppt");
-  await page.getByRole("button", { name: "Vorlesemodus ausschalten" }).click();
-  await expect(page.locator(".read-bar")).toHaveCount(0);
+  expect(await page.evaluate(() => CSS.highlights.has("spoken-word"))).toBe(
+    false,
+  );
+  await expect(page.locator("#read-help")).toContainText("Gestoppt");
+  await page.getByRole("switch", { name: "Vorlesen", exact: true }).click();
+  await expect(
+    page.getByRole("switch", { name: "Vorlesen", exact: true }),
+  ).toHaveAttribute("aria-checked", "false");
 });
-test("missing local voices does not hijack navigation, late voices load and synthesis errors are recoverable", async ({
+test("missing local voices preserve navigation, late voices load and errors allow retry on the text", async ({
   page,
 }) => {
   await mockSpeech(page, "empty");
   await page.goto("/");
   await page.getByRole("switch", { name: "Vorlesen", exact: true }).click();
-  await expect(page.locator(".read-bar")).toContainText(
-    "Keine deutsche Gerätestimme",
+  await expect(page.locator("#read-help")).toContainText(
+    "Keine lokale deutsche Stimme",
   );
   expect(await page.evaluate(() => window.__speechTest.calls)).toHaveLength(0);
   await page.getByRole("link", { name: "Abenteuerkarte", exact: true }).click();
   await expect(page).toHaveURL("/geschichten");
   await page.evaluate(() => window.__speechTest.load());
-  await page.getByRole("heading", { name: /Hier wohnen/ }).click();
+  const heading = page.getByRole("heading", { name: /Hier wohnen/ });
+  await heading.click();
   await page.evaluate(() => window.__speechTest.fail());
-  await expect(page.locator(".read-bar")).toContainText("nicht geklappt");
-  await page.getByRole("button", { name: "Text noch einmal vorlesen" }).click();
-  await expect(page.locator(".read-bar")).toContainText("Ich lese vor.");
+  await expect(page.locator("#read-help")).toContainText("nicht geklappt");
+  await heading.click();
+  await expect(page.locator("#read-help")).toContainText("Anna liest vor");
 });
-test("unsupported browsers retain normal controls and show an honest hint", async ({
+test("unsupported browsers retain ordinary actions without displaying a popup", async ({
   page,
 }) => {
   await mockSpeech(page, "unsupported");
   await page.goto("/");
   await page.getByRole("switch", { name: "Vorlesen", exact: true }).click();
-  await expect(page.locator(".read-bar")).toContainText(
+  await expect(page.locator("#read-help")).toContainText(
     "unterstützt das Vorlesen nicht",
   );
+  await expect(page.locator(".read-bar")).toHaveCount(0);
   await page.getByRole("link", { name: "Abenteuerkarte", exact: true }).click();
   await expect(page).toHaveURL("/geschichten");
 });

@@ -1,5 +1,14 @@
 # Entwicklungsfortschritt
 
+## 2026-10-22 — Design v6: Direktes Vorlesen ohne Zusatzoberfläche
+
+- Vorleseleiste und zugehörige Stimmeneinstellungen entfernt. Keine zusätzliche Umrahmung oder Abschnittsmarkierung am angeklickten Text; die gelbe Markierung folgt ausschließlich echten Wortereignissen im Originaltext.
+- Anna erhält Vorrang vor anderen weiblichen/default deutschen Gerätestimmen. Fehlt Anna, bleibt eine andere lokale deutsche Stimme als Fallback; keine Cloud-Ausgabe. Tempo fest auf ruhige 0,9 gesetzt.
+- Erster Klick auf Link/Knopf liest vor, ein weiterer Klick auf dasselbe unveränderte Element führt die native Aktion aus; gilt auch für SVG-Icons und Tastaturaktivierung. Normalen Text erneut anklicken wiederholt die Ausgabe. Escape, Ausschalten, Routenwechsel und Tab-Verbergen stoppen.
+- Die Startansicht benötigt keine Platzreserve für eine Vorleseleiste. Elterninformationen und Dokumentation aktualisiert.
+- Verifiziert: 16 Logiktests, 60 Browserprüfungen, Produktionsbuild, Typecheck und ESLint erfolgreich. Browser-Sprachereignisse sind Testsimulationen; keine neue akustische Qualitätsbehauptung. Screenshots unter `docs/design-versions/design-v6/`.
+- Ausgangsstand v5 und dessen Screenshots bleiben erhalten. Entwicklung auf `feature/direktes-vorlesen`; Abschluss-Tag `design-v6`. Öffentliche main-Pushes sind ausdrücklich freigegeben.
+
 ## 2026-10-22 — Öffentlicher main-Push freigegeben
 
 - Nutzer bestätigt die bewusst öffentliche Repository-Sichtbarkeit und gibt den öffentlichen Push auf main ausdrücklich frei. Diese Freigabe ersetzt die frühere Privat-Vorgabe; AGENTS.md aktualisiert.

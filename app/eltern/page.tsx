@@ -40,18 +40,17 @@ export default function Parents() {
         </p>
         <h2>Texte vorlesen lassen</h2>
         <p>
-          Der Schalter „Vorlesen“ im Kopfbereich aktiviert die Vorlesehilfe.
-          Danach liest ein Klick auf sichtbare Texte oder Menüeinträge diese
-          vor. Links und Knöpfe werden erst über „Öffnen“ beziehungsweise
-          „Ausführen“ in der Vorleseleiste aktiviert. Eingabefelder werden nicht
-          ausgelesen. Die App nutzt ausschließlich deutsche Stimmen, die der
-          Browser als lokal meldet. Es gibt keine eigene Cloud-Sprachausgabe,
-          keine Audioaufnahme und keinen zusätzlichen Speichereintrag.
-          Stimmenauswahl und Tempo gelten für den laufenden Besuch. Ist keine
-          lokale deutsche Stimme vorhanden, lässt sich eine in den
-          Spracheinstellungen des Geräts installieren. Die Wortmarkierung folgt
-          den Wortpositionen der Stimme; manche Browser liefern diese nicht.
-          Dann bleibt der gesamte gelesene Abschnitt hervorgehoben.
+          Der Schalter „Vorlesen“ aktiviert die direkte Vorlesehilfe. Ein Klick
+          liest sichtbare Texte vor. Bei Links und Knöpfen führt ein weiterer
+          Klick auf dasselbe Element die Aktion aus. Escape oder Ausschalten
+          stoppt die Stimme. Es gibt kein zusätzliches Fenster und keinen Rahmen
+          um Texte. Anna wird bevorzugt; fehlt sie, nutzt die App eine andere
+          lokale deutsche Stimme. Das Tempo ist ruhig eingestellt. Eingabefelder
+          werden nicht ausgelesen. Es werden ausschließlich Stimmen verwendet,
+          die der Browser als lokal meldet: keine eigene Cloud-Sprachausgabe,
+          keine Audioaufnahme und keine zusätzliche Speicherung. Eine gelbe
+          Wortmarkierung folgt den tatsächlichen Wortpositionen der Stimme,
+          sofern der Browser diese liefert. Andernfalls wird nur vorgelesen.
         </p>
         <h2>Erkennung ist keine Gewissheit</h2>
         <p>

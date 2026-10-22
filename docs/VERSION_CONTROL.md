@@ -9,6 +9,7 @@
 - `feature/eigene-bildwelt` / `design-v3`: eigene Illustrationen und 20 Lesezeichen-SVG-Icons; `design-v3-art-preview` bewahrt den Zwischenstand vor dem Icon-Set.
 - `feature/spielbare-lichtung` / `design-v4`: neue spielbare Startseite im Stil der Original-LeseFee, mit lesbaren Flächen und geprüften Maskottchenebenen.
 - `feature/vorlesen-und-bildschirm` / `design-v5`: Bildschirmfüllende Lichtung und lokale deutsche Vorlesehilfe mit Wortmarkierung.
+- `design-v6`: direktes Vorlesen ohne Leiste/Textrahmen, Anna bevorzugt; Implementierung auf `feature/direktes-vorlesen`, anschließend main.
 - Tags sind feste Vergleichspunkte und werden nicht verschoben. Weitere abgeschlossene Designs erhalten neue Tags.
 
 Der Ausgangsordner hatte kein Git-Repository. Sämtliche vorhandenen Quell-, Konfigurations-, Dokumentations- und Original-Assetdateien wurden zusammen gesichert. Build-Ausgaben und installierte Abhängigkeiten werden aus dem Lockfile reproduziert; lokale Caches und Betriebssystemdateien bleiben ausgeschlossen.
@@ -65,3 +66,5 @@ Vor künftigen Pushes Repository-Sichtbarkeit prüfen und Remote-Referenzen ansc
 Version 4 wird mit `git push --atomic origin feature/spielbare-lichtung refs/tags/design-v4` im bereits freigegebenen privaten Repository gesichert. Bestehende Tags und Remote-main werden nicht geändert.
 
 Version 5: `git push --atomic origin feature/vorlesen-und-bildschirm refs/tags/design-v5`. Bereits erteilte Push-Freigabe; private Sichtbarkeit vor Übertragung erneut prüfen und Remote-Referenzen anschließend verifizieren.
+
+Version 6 parallel ansehen: `git worktree add --detach .versions/design-v6 design-v6`; dort wie oben installieren/builden und auf Port 3006 starten.

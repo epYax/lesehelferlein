@@ -36,3 +36,12 @@ test("word offsets retain UTF-16 positions, punctuation and repeated whitespace"
   assert.equal(wordAtBoundary(words, 100), -1);
   assert.equal(words[3].start, 18);
 });
+
+test("Anna takes priority over other preferred female or default voices", () => {
+  const result = localGermanVoices([
+    { ...voice("Petra", "de-DE", true), default: true },
+    voice("Anna", "de-DE", true),
+    voice("Anna Cloud", "de-DE", false),
+  ]);
+  assert.equal(result[0].name, "Anna");
+});

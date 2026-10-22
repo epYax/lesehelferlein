@@ -54,8 +54,10 @@ Die 21 SVG-Icons in `components/reading-icons.tsx` bilden das eigene Set **Lesez
 Mit `npm run icons:export` werden die einzelnen SVGs und ihre Größenvorschau in `public/icons/lesezeichen/` aktualisiert. Bei laufender App: [Icon-Galerie](http://127.0.0.1:3000/icons/lesezeichen/index.html). [Bildherkunft und Gestaltung](docs/art-direction/README.md).
 
 ## Vorlesen und Bildschirmgröße
-Die Startseite nutzt den verfügbaren Bildschirm unter dem Header und berücksichtigt auch die eingeblendete Vorleseleiste. Auf kleinen Geräten werden Informationen kompakter angeordnet. Bei extrem kurzen Fenstern oder vergrößerter Schrift bleibt Scrollen als zugänglicher Ausweg möglich.
+Die Startseite nutzt den verfügbaren Bildschirm unter dem Header. Auf kleinen Geräten werden Informationen kompakter angeordnet. Bei extrem kurzen Fenstern oder vergrößerter Schrift bleibt Scrollen als zugänglicher Ausweg möglich.
 
-**Vorlesen** im Header einschalten, dann sichtbaren Text anklicken. Bei Links und Knöpfen anschließend „Öffnen“/„Ausführen“ in der Leiste wählen. Unter „Stimme“ sind deutsche Gerätestimmen, Tempo und eine Hörprobe verfügbar. Nur als lokal gemeldete deutsche Stimmen; kein kostenpflichtiger Dienst, kein Cloud-Fallback, keine Aufnahme. Die Wortmarkierung folgt echten Wortereignissen, soweit die Stimme sie liefert.
+**Vorlesen** im Header einschalten, dann sichtbaren Text anklicken. Bei Links und Knöpfen führt ein weiterer Klick auf dasselbe Element die Aktion aus. Ein erneuter Klick auf normalen Text liest ihn wieder vor; Escape oder Ausschalten stoppt. Keine Vorleseleiste, kein Dialog und keine zusätzliche Umrahmung am Text. Nur das tatsächlich gesprochene Wort wird gelb markiert, soweit die Stimme Wortpositionen liefert.
 
-[Recherche, Quellen und UI-Entscheidung](docs/research/DEUTSCHE_VORLESEFUNKTION.md). Architektur: `components/read-aloud.tsx` (UI/Browseradapter), `components/read-target.ts` (sichtbare DOM-Texte und Markierung), `lib/read-aloud.ts` (Stimmfilter und Wortpositionen).
+Anna ist die bevorzugte lokale deutsche Stimme, mit ruhigem Tempo 0,9. Falls Anna fehlt, wird eine andere lokale deutsche Stimme verwendet. Kein Cloud-Fallback, keine Aufnahme, keine zusätzliche Speicherung.
+
+[Recherche und UI-Entscheidung](docs/research/DEUTSCHE_VORLESEFUNKTION.md). Architektur: `components/read-aloud.tsx` (Browseradapter), `components/read-target.ts` (sichtbare DOM-Texte und Wortmarkierung), `lib/read-aloud.ts` (Stimmfilter und Wortpositionen). Aktueller Stand: `design-v6`, direktes Vorlesen ohne zusätzliche Oberfläche.

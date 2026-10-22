@@ -46,3 +46,7 @@ Chromium, Produktionsbuild auf Port 3100. Die Geschichtenbibliothek und Leseansi
 | Mitleseleiste | [Bild](design-v5/read-aloud-desktop.png) | [Bild](design-v5/read-aloud-mobile.png) | [Bild](design-v5/read-aloud-small-phone.png) |
 
 Zusätzlich: [320×568](design-v5/home-320x568.png), [Querformat 844×390](design-v5/home-844x390.png), [1366×768](design-v5/home-1366x768.png), [Tablet 768×1024](design-v5/home-768x1024.png). Vorlese-Screenshots zeigen ausdrücklich im Test eingespeiste Sprachereignisse, keine Aufnahme und keinen Nachweis einer bestimmten nativen Stimme. Alle Screenshots stammen vom Produktionsserver auf Port 3100.
+
+## Design v6: Direktes Vorlesen
+
+Keine Vorleseleiste und kein Rahmen, nur Wortmarkierung im angeklickten Text. Anna wird bevorzugt. Screenshots verwenden simulierte Wortereignisse im Browser-Test: [Desktop](design-v6/read-aloud-desktop.png), [Tablet](design-v6/read-aloud-tablet.png), [Smartphone](design-v6/read-aloud-mobile.png), [320 px](design-v6/read-aloud-small-phone.png).

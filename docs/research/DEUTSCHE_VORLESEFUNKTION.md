@@ -1,5 +1,7 @@
 # Deutsche Vorlesehilfe: Recherche und UI-Entscheidung
 
+**Aktualisierung für Design v6:** Auf Nutzerwunsch entfallen Vorleseleiste, Stimmeneinstellungen und Textrahmen. Anna wird bevorzugt (sonst andere lokale deutsche Stimme), Tempo 0,9. Text anklicken liest vor; derselbe Link/Knopf wird beim nächsten Klick aktiviert. Escape oder Ausschalten stoppt. Wortmarkierung erfolgt ausschließlich im Originaltext; ohne Wortereignisse gibt es keine Ersatzmarkierung. Die unten stehende UI-Entscheidung beschreibt den historischen Stand v5; technische Recherche bleibt relevant.
+
 Stand: 22. Oktober 2026. Nur Primärquellen; keine kostenpflichtigen Dienste oder Cloud-TTS aktiviert.
 
 | Lösung | Deutsch / Stimme | Aufwand und Grenzen | Entscheidung |
