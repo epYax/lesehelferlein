@@ -27,3 +27,13 @@ Eigene Kulisse und sechs Geschichtenillustrationen; 20 zusammengehörige SVG-Ico
 | Demo-Auswertung | [Bild](design-v3/reader-desktop.png) | [Bild](design-v3/reader-mobile.png) |
 
 [Icon-Galerie mit drei Größen](design-v3/icons-desktop.png). Screenshots aus Chromium gegen Produktionsserver auf Port 3100, Desktop 1440 px und Smartphone 390 px; Icon-Galerie 1200 px. Zwischenstand vor dem Vektor-Icon-Set: `design-v3-art-preview`, mit Lichtung/Karte unter dem gleichnamigen Ordner.
+
+## Design v4: Spielbare Lichtung
+
+Neue Kulisse im Stil der LeseFee, Spielmenü und Funkenmission auf einer zusammenhängenden Szene. Originalfigur im Vordergrund, Texte auf deckenden Flächen.
+
+| Desktop | Tablet | Smartphone | Kleines Smartphone |
+| --- | --- | --- | --- |
+| [1440 px](design-v4/home-desktop.png) | [820 px](design-v4/home-tablet.png) | [390 px](design-v4/home-mobile.png) | [320 px](design-v4/home-small-phone.png) |
+
+Chromium, Produktionsbuild auf Port 3100. Die Geschichtenbibliothek und Leseansicht behalten die Gestaltung von v3.

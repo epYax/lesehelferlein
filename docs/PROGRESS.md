@@ -1,5 +1,15 @@
 # Entwicklungsfortschritt
 
+## 2026-10-22 — Design v4: spielbare Startseite im Stil der LeseFee
+
+- Vor Änderungen stand der vollständige, geprüfte und privat gesicherte Stand als `design-v3` inklusive Vergleichsbildern fest. Neuer Branch: `feature/spielbare-lichtung`.
+- Eine neue Waldkulisse im einfachen, runden und fein gekörnten Illustrationsstil der Original-LeseFee erzeugt und eingebunden. Herkunft, finaler Assetpfad und vollständiger Prompt unter `docs/art-direction/v4/`.
+- Startseite als zusammenhängender Spielbildschirm aufgebaut: großes Startfeld, drei sammelbare Funken, Nebenmission mit Abschlusszustand, Überraschungsgeschichte und Reisealbum als Spielmenü.
+- Deckende helle Textflächen, größere Texte und Bedienelemente; Demo-Hinweis direkt am Abenteuerstart. Originalfigur unverändert auf eigener vorderster Szenenebene, Sprechblase getrennt oberhalb des Figurenbilds. Transparente Bildflächen fangen keine Klicks ab.
+- Bestehenden mobilen Versatz der Fee korrigiert. Lange Tipps und Sammelbuttons zusätzlich auf vier Bildschirmgrößen geprüft. Reduced Motion weiterhin berücksichtigt.
+- Prüfung: 13 Logiktests, 40 Browserprüfungen, Typecheck, ESLint und Produktionsbuild erfolgreich. Browserprüfungen auf Port 3100; Nutzervorschau auf 3000 nicht beendet. Kein vollständiger Accessibility-Audit oder Test auf echten Geräten.
+- Abschlussversion: `design-v4`; Vergleichsbilder in `docs/design-versions/design-v4/`. Keine produktiven Dienste oder Deployments. Private GitHub-Sicherung im bereits freigegebenen Rahmen; vorhandener Remote-main und alte Tags bleiben unverändert.
+
 ## 2026-10-22 — Design v3: eigene Bildwelt und Lesezeichen-Icons
 
 ### Umsetzung

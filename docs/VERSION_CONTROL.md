@@ -5,6 +5,7 @@
 - `feature/magisches-redesign`: neue Geschichtenwelt, Abenteuerkarte und Reisealbum.
 - `design-v2`: abgeschlossene und geprüfte zweite Designversion.
 - `feature/eigene-bildwelt` / `design-v3`: eigene Illustrationen und 20 Lesezeichen-SVG-Icons; `design-v3-art-preview` bewahrt den Zwischenstand vor dem Icon-Set.
+- `feature/spielbare-lichtung` / `design-v4`: neue spielbare Startseite im Stil der Original-LeseFee, mit lesbaren Flächen und geprüften Maskottchenebenen.
 - Tags sind feste Vergleichspunkte und werden nicht verschoben. Weitere abgeschlossene Designs erhalten neue Tags.
 
 Der Ausgangsordner hatte kein Git-Repository. Sämtliche vorhandenen Quell-, Konfigurations-, Dokumentations- und Original-Assetdateien wurden zusammen gesichert. Build-Ausgaben und installierte Abhängigkeiten werden aus dem Lockfile reproduziert; lokale Caches und Betriebssystemdateien bleiben ausgeschlossen.
@@ -25,6 +26,8 @@ npm ci --cache ../../.cache/npm
 npm run build
 npm start -- --port 3001
 ```
+
+Für Version 4 `.versions/design-v4`, `design-v4` und Port `3004` verwenden.
 
 Für Version 3 `.versions/design-v3`, `design-v3` und Port `3003` verwenden.
 
@@ -53,3 +56,5 @@ Vor künftigen Pushes Repository-Sichtbarkeit prüfen und Remote-Referenzen ansc
 
 ## Geheimnisse und reproduzierbare Builds
 `.env*`, private Schlüssel, Logs, Caches, Build-Verzeichnisse, `node_modules/`, Browser-Downloads und temporäre Prüfergebnisse sind ignoriert. Es wurden keine Secrets eingecheckt. Die finale getrackte Dateiliste wird zusätzlich auf typische Token-/Schlüsselmuster geprüft; das ist kein vollständiger Secret-Audit. Dependencies sind im `package-lock.json` festgehalten.
+
+Version 4 wird mit `git push --atomic origin feature/spielbare-lichtung refs/tags/design-v4` im bereits freigegebenen privaten Repository gesichert. Bestehende Tags und Remote-main werden nicht geändert.

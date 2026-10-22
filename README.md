@@ -11,7 +11,7 @@ npm run dev
 http://127.0.0.1:3000 öffnen.
 
 ## Was es zu entdecken gibt
-- **Lichtung:** eigens erzeugte Bilderbuch-Waldlandschaft, interaktive Lesefee, drei sammelbare Lichtfunken und eine Überraschungsgeschichte.
+- **Lichtung:** Spielbildschirm mit neuer Waldkulisse im Stil der LeseFee, interaktive Lesefee, drei sammelbare Lichtfunken und eine Überraschungsgeschichte.
 - **Abenteuerkarte:** sechs frei zugängliche Geschichtenorte, Suche, Schwierigkeitsfilter und alternative Bücheransicht.
 - **Lesetraining:** ruhiger Text, anpassbare Schriftgröße, transparenter Demo-Lesefluss und wortgenaues Alignment.
 - **Reisealbum:** einmalige Demo-Reisestempel und Lichtfunken-Abzeichen; lokal gespeichert, ohne Konto oder Leistungsbewertung.
@@ -32,7 +32,7 @@ PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright npm run test:e2e
 Browserprüfungen starten einen eigenen Produktionsserver auf **Port 3100**. Vorher `npm run build` ausführen. Port 3000 bleibt für die Entwicklung frei. Chromium läuft in vier Größen (320, 390, 820, 1440 px). Temporäre Screenshots landen in `test-results/`; archivierte Vergleichsbilder liegen in `docs/design-versions/`.
 
 ## Architektur
-- `app/`: Routen und Styling; `globals.css` enthält Basis/Lesetraining, `adventure.css` die Erlebniswelt, `illustrations.css` die Bilderbuchgestaltung.
+- `app/`: Routen und Styling; `globals.css` enthält Basis/Lesetraining, `adventure.css` die Erlebniswelt, `illustrations.css` die Bilderbuchgestaltung, `play-home.css` die spielbare Startseite.
 - `components/adventure-home.tsx`, `world-art.tsx`: interaktive Waldlichtung und Bilderbuch-Kulisse.
 - `components/library.tsx`, `journey-album.tsx`: Karte/Bücheransicht und Reisealbum.
 - `components/reader.tsx`: abbruchfähiger Demo-Lesefluss, Wortauswertung und einmaliger Reisestempel.
@@ -44,7 +44,7 @@ Browserprüfungen starten einen eigenen Produktionsserver auf **Port 3100**. Vor
 Alignment bewertet Transkript-Übereinstimmung, keine Lesefähigkeit. Dialekte, Selbstkorrekturen, Komposita und größere ausgeschriebene Zahlen benötigen künftig erweiterte Verarbeitung. Keine produktiven Integrationen oder Deployments.
 
 ## Designhistorie
-`design-v1` bewahrt die ursprüngliche App, `design-v2` den Geschichtenwald und `design-v3` die eigene Bildwelt mit 20 Lesezeichen-Icons. Entwicklung: `feature/eigene-bildwelt`.
+`design-v1` bewahrt die ursprüngliche App, `design-v2` den Geschichtenwald und `design-v3` die eigene Bildwelt mit 20 Lesezeichen-Icons. `design-v4` ergänzt die spielbare Lichtung im Stil der Original-LeseFee. Entwicklung: `feature/spielbare-lichtung`.
 
 **[Versionen parallel starten und GitHub-Sicherung](docs/VERSION_CONTROL.md)** · [Designkonzept](docs/REDESIGN.md) · [Fortschritt / Prüfungen](docs/PROGRESS.md)
 
