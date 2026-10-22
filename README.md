@@ -11,10 +11,10 @@ npm run dev
 http://127.0.0.1:3000 öffnen.
 
 ## Was es zu entdecken gibt
-- **Lichtung:** Spielbildschirm mit neuer Waldkulisse im Stil der LeseFee, interaktive Lesefee, drei sammelbare Lichtfunken und eine Überraschungsgeschichte.
+- **Lichtung:** Geschichtenportal mit sechs direkt wählbaren Bilderwelten, schwebender Original-LeseFee, naher Sprechblase und Überraschungskompass. Ohne Funkenmission oder Sammelabzeichen.
 - **Abenteuerkarte:** sechs frei zugängliche Geschichtenorte, Suche, Schwierigkeitsfilter und alternative Bücheransicht.
 - **Lesetraining:** ruhiger Text, anpassbare Schriftgröße, transparenter Demo-Lesefluss und wortgenaues Alignment.
-- **Reisealbum:** einmalige Demo-Reisestempel und Lichtfunken-Abzeichen; lokal gespeichert, ohne Konto oder Leistungsbewertung.
+- **Reisealbum:** einmalige Demo-Reisestempel; lokal gespeichert, ohne Konto oder Leistungsbewertung.
 - **Elternbereich:** transparente Hinweise zu Demo, Datenverarbeitung und künftiger Spracherkennung.
 
 **Kein Mikrofon, keine echte Spracherkennung.** Fortschritt und Transkript der Demo sind simuliert; der Textvergleich ist real. Transkripte werden nicht gespeichert. Das Album speichert nur bekannte Geschichten-IDs und Funken-IDs im lokalen Browser (`lesehelferlein.journey.v2`). Zurücksetzen ist im Album mit Bestätigung möglich. Blockierter Speicher fällt auf den laufenden Besuch zurück; Neuladen kann diese temporären Daten verlieren. Keine Konten, Telemetrie, Audioübertragung oder externen Fonts. Ein separates Bildlogo liegt lokal nicht vor; Originalfigur und typografischer Name bilden die Marke.

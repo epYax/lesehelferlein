@@ -1,5 +1,15 @@
 # Entwicklungsfortschritt
 
+## 2026-10-22 — Design v7: Das Geschichtenportal
+
+- Startseite vollständig als zusammenhängende Spielszene aufgebaut: großes illustriertes Geschichtenportal, sechs Bildziele mit ausgewähltem Zustand, direkter Einstieg ins Lesen und Überraschungskompass (wählt immer eine andere Geschichte).
+- Original-LeseFee unverändert, mit sanftem Schweben, warmem Lichtschein und dekorativen Glühwürmchen. Sprechblase unmittelbar darüber bzw. mobil neben ihr. Reduced Motion deaktiviert sämtliche Animationen.
+- Funkenmission, Sammelknöpfe und Abzeichenoberfläche entfernt. Bestehende gültige lokale Daten bleiben unangetastet; Demo-Reisestempel und explizites Zurücksetzen funktionieren weiterhin. Keine neue Speicherung und keine Leistungsbewertung.
+- Vorlesen bleibt ohne Popup/Rahmen mit Anna-Priorität. Bildknöpfe lassen sich ebenfalls erst vorlesen und dann aktivieren; doppelt eingefügte Leerzeichen zwischen formatierten Textteilen korrigiert.
+- Verifiziert: 16 Logiktests, Typecheck, ESLint, Produktionsbuild; 65 Browserprüfungen bestanden (3 redundante Viewport-Matrix-Läufe bewusst übersprungen). Nach letztem Mobil-Feinschliff Layout und Kernabläufe erneut geprüft. Chromium-Produktion auf Port 3100; Nutzervorschau auf 3000 unberührt. Bildschirmgrößen 320×568, 320×740, 390×844, 768×1024, 820×1180, 844×390, 1366×768 und 1440×1000 geprüft.
+- Grenze: Für extrem kurze schmale Fenster gibt es weiterhin Scrollen; tatsächliche Anna-Verfügbarkeit und Wortereignisse hängen vom Browser/Gerät ab. Sprachereignisse im Browsertest sind simuliert. Animationen in Vergleichsbildern angehalten.
+- Ausgangsstand `design-v6` samt Vergleichsbildern erhalten. Entwicklungsbranch `feature/abenteuer-szene`, Abschluss `design-v7`; Screenshots unter `docs/design-versions/design-v7/`.
+
 ## 2026-10-22 — Design v6: Direktes Vorlesen ohne Zusatzoberfläche
 
 - Vorleseleiste und zugehörige Stimmeneinstellungen entfernt. Keine zusätzliche Umrahmung oder Abschnittsmarkierung am angeklickten Text; die gelbe Markierung folgt ausschließlich echten Wortereignissen im Originaltext.

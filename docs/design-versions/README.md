@@ -50,3 +50,13 @@ Zusätzlich: [320×568](design-v5/home-320x568.png), [Querformat 844×390](desig
 ## Design v6: Direktes Vorlesen
 
 Keine Vorleseleiste und kein Rahmen, nur Wortmarkierung im angeklickten Text. Anna wird bevorzugt. Screenshots verwenden simulierte Wortereignisse im Browser-Test: [Desktop](design-v6/read-aloud-desktop.png), [Tablet](design-v6/read-aloud-tablet.png), [Smartphone](design-v6/read-aloud-mobile.png), [320 px](design-v6/read-aloud-small-phone.png).
+
+## Design v7: Geschichtenportal
+
+Die Abenteuer selbst stehen im Mittelpunkt: sechs Bildziele, ein großes Tor zum Loslesen und eine schwebende LeseFee mit naher Sprechblase. Funkenmission und Sammelabzeichen entfallen; Demo-Reisestempel bleiben.
+
+| Desktop | Tablet | Smartphone | Kleines Smartphone |
+| --- | --- | --- | --- |
+| [1440 px](design-v7/home-desktop.png) | [820 px](design-v7/home-tablet.png) | [390 px](design-v7/home-mobile.png) | [320 px](design-v7/home-small-phone.png) |
+
+Chromium-Produktionsbuild auf Port 3100; Animationen für Screenshots angehalten. Originalfigur und bestehende Bilderwelt wiederverwendet. Frühere Versionen einschließlich v6 bleiben unverändert.
