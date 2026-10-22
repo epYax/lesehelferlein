@@ -2,26 +2,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowRight, ArrowLeft, Sparkles, Compass, Map } from "./reading-icons";
+import {
+  ArrowRight,
+  Sparkles,
+  BookOpen,
+  BookHeart,
+  Map,
+} from "./reading-icons";
 import { WorldArt } from "./world-art";
-import { StoryArt } from "./brand-art";
-import { stories } from "@/lib/stories";
 const hints = [
-  "Hallo, ich bin deine LeseFee! Welches Abenteuer ruft nach dir?",
-  "Tippe auf ein kleines Bild. Schon öffnet sich ein Fenster in eine andere Welt!",
+  "Hallo! Schön, dass du da bist. Bereit für ein neues Leseabenteuer?",
+  "Mit Lesen starten finden wir eine Geschichte für dich. Du entscheidest, wohin es geht!",
   "Hier gibt es kein Wettrennen. Wir lesen in deinem Tempo.",
-  "Mit dem Kompass suche ich dir ein Abenteuer aus. Kommst du mit?",
+  "Du möchtest etwas noch einmal lesen? In deinem Reisealbum findest du deine Entdeckungen.",
 ];
 export function AdventureHome() {
   const [hint, setHint] = useState(0);
-  const [selected, setSelected] = useState(0);
-  const story = stories[selected];
-  function step(direction: number) {
-    setSelected((s) => (s + direction + stories.length) % stories.length);
-  }
   return (
     <main id="main" className="play-home">
-      <section className="play-stage" aria-label="Deine magische Waldlichtung">
+      <section className="play-stage" aria-label="Deine Leselobby">
         <WorldArt />
         <div className="forest-fireflies" aria-hidden="true">
           <i />
@@ -30,46 +29,34 @@ export function AdventureHome() {
           <i />
           <i />
         </div>
-        <header className="play-welcome">
-          <span>Wohin reisen wir heute?</span>
-          <h1>
-            Dein <em>Geschichtenwald</em>
-          </h1>
-        </header>
-        <div className="adventure-scene">
-          <section className="story-portal" aria-label="Wähle dein Abenteuer">
-            <div className="portal-window" key={story.id}>
-              <StoryArt
-                kind={story.scene}
-                sizes="(max-width:650px) 80vw, 560px"
-              />
-              <div className="portal-caption">
-                <span>Dein nächstes Abenteuer · {story.minutes} Min.</span>
-                <h2>{story.title}</h2>
-                <Link
-                  className="portal-enter"
-                  href={`/lesen/${story.id}`}
-                  aria-label={`Dieses Abenteuer öffnen: ${story.title}`}
-                >
-                  Loslesen <ArrowRight size={24} />
-                </Link>
-              </div>
-            </div>
-            <button
-              className="portal-arrow portal-prev"
-              aria-label="Vorherige Geschichte"
-              onClick={() => step(-1)}
+        <div className="lobby-topline">
+          <span>DEINE LESEWELT</span>
+          <span>Schön, dass du da bist.</span>
+        </div>
+        <div className="lobby-scene">
+          <div className="play-welcome">
+            <span className="lobby-eyebrow">Hier beginnt dein Abenteuer</span>
+            <h1>
+              Dein <em>Geschichtenwald</em>
+            </h1>
+            <p>
+              Ein gemütlicher Ort für große Abenteuer.
+              <br />
+              Und für deinen nächsten kleinen Leseschritt.
+            </p>
+            <Link
+              className="lobby-play"
+              href="/geschichten"
+              aria-label="Lesen starten"
             >
-              <ArrowLeft size={26} />
-            </button>
-            <button
-              className="portal-arrow portal-next"
-              aria-label="Nächste Geschichte"
-              onClick={() => step(1)}
-            >
-              <ArrowRight size={26} />
-            </button>
-          </section>
+              <BookOpen size={32} />
+              <span>Lesen starten</span>
+              <ArrowRight size={25} />
+            </Link>
+            <span className="lobby-play-hint">
+              Geschichte aussuchen. Gemeinsam loslesen.
+            </span>
+          </div>
           <div className="fairy-guide">
             <div className="fairy-speech" aria-live="polite">
               <span>DEINE LESEFEE</span>
@@ -88,38 +75,27 @@ export function AdventureHome() {
               height={480}
               priority
             />
+            <div className="fairy-pool" aria-hidden="true" />
           </div>
         </div>
-        <nav className="adventure-path" aria-label="Sechs Geschichtenwelten">
-          {stories.map((s, index) => (
-            <button
-              key={s.id}
-              aria-label={s.title}
-              aria-pressed={selected === index}
-              onClick={() => setSelected(index)}
-            >
-              <StoryArt kind={s.scene} />
-              <span>{index + 1}</span>
-            </button>
-          ))}
-        </nav>
-        <div className="forest-actions">
-          <Link href="/geschichten" aria-label="Ab in den Geschichtenwald">
-            <Map size={23} /> Alle Geschichten
+        <nav className="lobby-dock" aria-label="Deine Bereiche">
+          <Link href="/geschichten" aria-label="Geschichten entdecken">
+            <Map size={40} />
+            <span>
+              <strong>Geschichten entdecken</strong>
+              <small>Stöbern, suchen, Lieblingswelt finden</small>
+            </span>
+            <ArrowRight size={23} />
           </Link>
-          <button
-            aria-label="Überraschungsgeschichte ziehen"
-            onClick={() =>
-              setSelected(
-                (s) =>
-                  (s + 1 + Math.floor(Math.random() * (stories.length - 1))) %
-                  stories.length,
-              )
-            }
-          >
-            <Compass size={25} /> Überrasch mich!
-          </button>
-        </div>
+          <Link href="/album" aria-label="Mein Reisealbum">
+            <BookHeart size={40} />
+            <span>
+              <strong>Mein Reisealbum</strong>
+              <small>Deine Abenteuer wieder besuchen</small>
+            </span>
+            <ArrowRight size={23} />
+          </Link>
+        </nav>
         <p className="play-demo-note">
           Lese-Demo · Ohne Mikrofon · In deinem Tempo
         </p>

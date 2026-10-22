@@ -93,7 +93,7 @@ test("buttons act on the second click, ordinary text repeats, Escape and toggle 
   await tip.locator("svg").click();
   await expect(page.locator(".fairy-speech")).toContainText("Hallo");
   await tip.click();
-  await expect(page.locator(".fairy-speech")).toContainText("kleines Bild");
+  await expect(page.locator(".fairy-speech")).toContainText("Lesen starten");
   const heading = page.getByRole("heading", { name: "Dein Geschichtenwald" });
   await heading.click();
   const count = await page.evaluate(() => window.__speechTest.calls.length);
@@ -149,18 +149,21 @@ test("unsupported browsers retain ordinary actions without displaying a popup", 
   await expect(page).toHaveURL("/geschichten");
 });
 
-test("illustrated world buttons read first and select on the second activation", async ({
+test("lobby destinations read first and navigate on the second activation", async ({
   page,
 }) => {
   await mockSpeech(page);
   await page.goto("/");
   await page.getByRole("switch", { name: "Vorlesen", exact: true }).click();
-  const choice = page.locator(".adventure-path button").nth(1);
-  await choice.locator("img").click();
+  const choice = page.getByRole("link", {
+    name: "Mein Reisealbum",
+    exact: true,
+  });
+  await choice.locator("svg").first().click();
   expect(
     (await page.evaluate(() => window.__speechTest.calls)).at(-1)?.text,
-  ).toBe(await choice.getAttribute("aria-label"));
-  await expect(choice).toHaveAttribute("aria-pressed", "false");
-  await choice.locator("img").click();
-  await expect(choice).toHaveAttribute("aria-pressed", "true");
+  ).toBe("Mein Reisealbum");
+  await expect(page).toHaveURL("/");
+  await choice.click();
+  await expect(page).toHaveURL("/album");
 });

@@ -1,4 +1,4 @@
-/* A single playable clearing, with a story gate and its fairy companion. */
+/* The lobby is independent of catalog size: entry, companion, app destinations. */
 body:has(.play-home) footer {
   display: none;
 }
@@ -15,9 +15,8 @@ body:has(.play-home) footer {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 18px 24px 10px;
-  gap: 12px;
+  padding: 24px max(28px, calc((100vw - 1240px) / 2)) 12px;
+  gap: 18px;
 }
 .play-stage .world-art {
   z-index: -3;
@@ -35,128 +34,97 @@ body:has(.play-home) footer {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: radial-gradient(ellipse at 50% 35%, #fffbe9d9, transparent 75%);
+  background:
+    linear-gradient(90deg, #f7f5dded 0%, #f7f5ddb3 32%, transparent 75%),
+    linear-gradient(0deg, #204b3866, transparent 30%);
+}
+.lobby-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 800;
+  color: #3c5f43;
+  border-bottom: 1px solid #45673e40;
+  padding-bottom: 12px;
+}
+.lobby-topline span:first-child {
+  letter-spacing: 0.16em;
+}
+.lobby-scene {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  gap: 35px;
 }
 .play-welcome {
-  text-align: center;
-  flex: none;
-  z-index: 1;
+  position: relative;
+  z-index: 2;
 }
-.play-welcome > span {
-  font-size: 13px;
+.lobby-eyebrow {
+  font-size: 14px;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  color: #53693f;
 }
 .play-welcome h1 {
-  font-size: clamp(28px, 4.1vw, 58px);
-  line-height: 1.1;
-  margin: 5px 0 0;
+  font-size: clamp(35px, 4.7vw, 68px);
+  line-height: 1.06;
+  margin: 15px 0 20px;
   letter-spacing: -0.045em;
   text-shadow: 0 2px #fff9e5;
 }
 .play-welcome h1 em {
+  display: block;
   color: #285c3c;
   font-style: normal;
 }
-.adventure-scene {
-  flex: 1;
-  min-height: 0;
-  width: min(100%, 1000px);
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  align-items: center;
-  gap: 34px;
-  position: relative;
+.play-welcome p {
+  font-size: clamp(14px, 1.4vw, 19px);
+  line-height: 1.65;
+  margin: 0 0 30px;
+  color: #36543b;
 }
-.story-portal {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  max-height: 530px;
-  min-height: 0;
-  padding: 6px;
-  border: 7px solid #6d593a;
-  border-radius: 46% 46% 20% 20% / 35% 35% 10% 10%;
-  background: #cfb577;
-  box-shadow:
-    0 7px 0 #3f553c,
-    0 0 0 3px #e9ddab,
-    0 15px 40px #32563440;
-}
-.portal-window {
-  height: 100%;
-  overflow: hidden;
-  border-radius: inherit;
-  position: relative;
-  background: #375743;
-  animation: portal-arrive 0.35s ease-out;
-}
-.portal-window > .story-art {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-}
-.portal-caption {
-  position: absolute;
-  bottom: 0;
-  inset-inline: 0;
-  padding: 44px 22px 22px;
-  text-align: center;
-  color: #fffbed;
-  background: linear-gradient(transparent, #193c2ff5 28%);
-}
-.portal-caption > span {
-  font-size: 13px;
-  font-weight: 700;
-}
-.portal-caption h2 {
-  font-size: clamp(22px, 2.5vw, 34px);
-  line-height: 1.15;
-  margin: 6px 0 15px;
-  color: inherit;
-}
-.portal-enter {
+.lobby-play {
   display: inline-flex;
+  gap: 18px;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  padding: 12px 30px;
-  background: #ffdf75;
-  color: #303c27;
-  font-weight: 900;
-  font-size: 20px;
-  border: 2px solid #fff0aa;
-  border-radius: 40px;
-  box-shadow: 0 4px 0 #a77835;
+  min-height: 74px;
+  padding: 14px 28px;
+  border: 3px solid #fff1b6;
+  outline: 2px solid #8c6a30;
+  background: linear-gradient(#ffe799, #f7ce58);
+  color: #31452c;
+  border-radius: 12px 30px 12px 30px;
+  box-shadow:
+    0 6px 0 #99743a,
+    0 12px 30px #8b783a33;
   text-decoration: none;
+  font-size: 25px;
+  font-weight: 900;
+  transition:
+    filter 0.2s,
+    transform 0.2s;
 }
-.portal-arrow {
-  position: absolute;
-  top: 45%;
-  width: 48px;
-  height: 48px;
-  display: grid;
-  place-items: center;
-  background: #fff3cc;
-  border: 3px solid #6d593a;
-  border-radius: 50%;
-  color: #314b33;
-  box-shadow: 0 3px #614c2f;
+.lobby-play:hover {
+  filter: brightness(1.05);
+  transform: translateY(-2px);
 }
-.portal-prev {
-  left: -25px;
-}
-.portal-next {
-  right: -25px;
+.lobby-play-hint {
+  display: block;
+  margin-top: 19px;
+  font-size: 12px;
+  color: #47613d;
 }
 .play-stage .fairy-guide {
-  transform: none;
   position: relative;
+  transform: none;
   inset: auto;
   width: 100%;
   height: 100%;
-  max-height: 530px;
+  max-height: 610px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -167,7 +135,7 @@ body:has(.play-home) footer {
 .play-stage .fairy-guide > img {
   position: relative;
   inset: auto;
-  width: min(100%, 340px);
+  width: min(100%, 390px);
   height: auto;
   max-height: 65%;
   object-fit: contain;
@@ -181,7 +149,7 @@ body:has(.play-home) footer {
   position: relative;
   inset: auto;
   transform: none;
-  width: min(100%, 300px);
+  width: min(100%, 310px);
   max-width: none;
   margin: 0;
   padding: 16px 20px;
@@ -227,90 +195,62 @@ body:has(.play-home) footer {
   min-height: 36px;
   padding: 0;
 }
-.adventure-path {
-  display: flex;
-  gap: 16px;
+.fairy-pool {
+  width: 55%;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffed8999;
+  box-shadow: 0 0 30px 12px #fff3a455;
   flex: none;
-  align-items: center;
-  padding: 4px 16px;
-  position: relative;
+  margin-top: -10px;
 }
-.adventure-path:before {
-  content: "";
-  position: absolute;
-  left: 35px;
-  right: 35px;
-  border-top: 3px dashed #60794c;
-  top: 50%;
-  z-index: -1;
-}
-.adventure-path button {
-  width: 66px;
-  height: 66px;
-  position: relative;
-  padding: 3px;
-  background: #fcf0c6;
-  border: 3px solid #72825c;
-  border-radius: 50%;
-  transition:
-    transform 0.18s,
-    box-shadow 0.18s;
-}
-.adventure-path button[aria-pressed="true"] {
-  border-color: #715021;
-  box-shadow:
-    0 0 0 4px #ffdc6b,
-    0 5px 0 #936f3b;
-  transform: translateY(-4px);
-}
-.adventure-path .story-art {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-.adventure-path button span {
-  position: absolute;
-  right: -4px;
-  bottom: -4px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #fff7df;
-  color: #2c4f39;
-  font-size: 12px;
-  font-weight: 900;
+.lobby-dock {
   display: grid;
-  place-items: center;
-  border: 1px solid #63744d;
-}
-.forest-actions {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  border: 2px solid #90a077;
+  padding: 5px;
+  background: #f6f4dd;
+  border-radius: 18px;
+  box-shadow: 0 6px 0 #4262445e;
   flex: none;
 }
-.forest-actions a,
-.forest-actions button {
+.lobby-dock a {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: #294a35;
-  font-size: 15px;
-  font-weight: 850;
-  background: #fff6dc;
-  border: 2px solid #819169;
-  border-radius: 30px;
-  padding: 8px 18px;
+  gap: 16px;
+  padding: 17px 24px;
+  color: #2d4c36;
   text-decoration: none;
-  box-shadow: 0 3px #71865a;
-  min-height: 44px;
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+.lobby-dock a + a {
+  border-left: 1px solid #b7c1a0;
+}
+.lobby-dock a:hover {
+  background: #e5ead4;
+}
+.lobby-dock a > span {
+  flex: 1;
+}
+.lobby-dock strong {
+  display: block;
+  font-size: 18px;
+}
+.lobby-dock small {
+  display: block;
+  font-size: 12px;
+  margin-top: 4px;
+  color: #4c6347;
 }
 .play-demo-note {
   margin: 0;
+  text-align: center;
   font-size: 11px;
   font-weight: 700;
-  color: #36533b;
+  color: #fffce9;
+  text-shadow: 0 1px 3px #24412b;
   flex: none;
 }
 .forest-fireflies {
@@ -365,155 +305,199 @@ body:has(.play-home) footer {
     opacity: 0.3;
   }
 }
-@keyframes portal-arrive {
-  from {
-    opacity: 0.5;
+@media (max-width: 900px) {
+  .play-stage {
+    padding-inline: 24px;
   }
-  to {
-    opacity: 1;
+  .lobby-scene {
+    gap: 20px;
+  }
+  .lobby-dock a {
+    padding: 14px;
+    gap: 10px;
+  }
+  .lobby-dock strong {
+    font-size: 15px;
+  }
+  .lobby-dock small {
+    font-size: 11px;
   }
 }
 @media (max-width: 650px) {
   .play-stage {
-    padding: 10px 18px 8px;
-    gap: 10px;
+    padding: 12px 18px 9px;
+    gap: 12px;
   }
-  .play-welcome > span {
-    font-size: 10px;
-    letter-spacing: 0.04em;
+  .lobby-topline {
+    font-size: 9px;
+    padding-bottom: 7px;
   }
-  .play-welcome h1 {
-    font-size: clamp(25px, 6.8vw, 40px);
-  }
-  .adventure-scene {
-    display: block;
-    padding: 85px 10px 0;
-  }
-  .story-portal {
-    width: 83%;
-    height: 100%;
-    max-height: none;
-    border-width: 5px;
-  }
-  .portal-caption {
-    padding: 32px 12px 14px;
-  }
-  .portal-caption h2 {
-    font-size: 23px;
-    margin: 5px 0 10px;
-  }
-  .portal-caption > span {
-    font-size: 11px;
-  }
-  .portal-enter {
-    font-size: 17px;
-    padding: 9px 24px;
-    min-height: 44px;
-  }
-  .portal-arrow {
+  .lobby-topline span:last-child {
     display: none;
   }
-  .portal-prev {
-    left: -21px;
+  .lobby-scene {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 12px;
+    justify-content: center;
   }
-  .portal-next {
-    right: -21px;
+  .play-welcome {
+    text-align: center;
+    width: 100%;
+    flex: none;
+  }
+  .lobby-eyebrow {
+    display: none;
+  }
+  .play-welcome h1 {
+    font-size: clamp(26px, 7vw, 38px);
+    margin: 0 0 8px;
+  }
+  .play-welcome h1 em {
+    display: inline;
+  }
+  .play-welcome p {
+    font-size: 12px;
+    line-height: 1.45;
+    margin: 0 0 16px;
+  }
+  .play-welcome p br {
+    display: none;
+  }
+  .lobby-play {
+    min-height: 55px;
+    padding: 8px 22px;
+    font-size: 21px;
+    gap: 12px;
+  }
+  .lobby-play svg {
+    width: 25px;
+  }
+  .lobby-play-hint {
+    font-size: 10px;
+    margin-top: 13px;
   }
   .play-stage .fairy-guide {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 190px;
+    flex: 1;
+    min-height: 140px;
+    max-height: 300px;
     width: 100%;
-    max-height: none;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-end;
-    pointer-events: none;
+    align-items: center;
   }
   .play-stage .fairy-speech {
-    width: calc(100% - 119px);
-    max-width: 230px;
-    padding: 10px 12px;
-    pointer-events: auto;
+    width: 55%;
+    padding: 12px;
+    flex: none;
   }
   .play-stage .fairy-speech p {
     font-size: 12px;
-    margin: 3px 0;
-    line-height: 1.35;
+    line-height: 1.4;
+    margin: 0 0 5px;
   }
   .play-stage .fairy-speech > span {
     display: none;
   }
   .play-stage .fairy-speech button {
     font-size: 11px;
-    min-height: 30px;
+    min-height: 32px;
   }
   .play-stage .fairy-speech:after {
     left: 100%;
-    top: 25px;
+    top: 40%;
     transform: translateX(-8px) rotate(-45deg);
   }
   .play-stage .fairy-guide > img {
-    width: 130px;
-    height: 160px;
-    max-height: none;
-    margin: 18px 0 0;
+    width: 45%;
+    height: auto;
+    max-height: 100%;
+    margin: 0;
   }
-  .adventure-path {
-    gap: 9px;
-    padding: 3px 0;
+  .fairy-pool {
+    display: none;
   }
-  .adventure-path button {
-    width: 43px;
-    height: 43px;
-    padding: 2px;
-    border-width: 2px;
+  .lobby-dock {
+    gap: 0;
+    grid-template-columns: 1fr;
+    padding: 3px;
+    border-radius: 13px;
   }
-  .adventure-path button span {
-    width: 17px;
-    height: 17px;
+  .lobby-dock a {
+    padding: 10px 12px;
+    gap: 12px;
+  }
+  .lobby-dock a + a {
+    border-left: 0;
+    border-top: 1px solid #b7c1a0;
+  }
+  .lobby-dock a > svg:first-child {
+    width: 30px;
+    height: 30px;
+  }
+  .lobby-dock strong {
+    font-size: 14px;
+  }
+  .lobby-dock small {
     font-size: 10px;
-  }
-  .forest-actions {
-    gap: 8px;
-    width: 100%;
-  }
-  .forest-actions a,
-  .forest-actions button {
-    font-size: 11px;
-    gap: 5px;
-    padding: 5px 10px;
-  }
-  .forest-actions svg {
-    width: 20px;
+    margin-top: 2px;
   }
   .play-demo-note {
     font-size: 9px;
   }
 }
+@media (max-height: 700px) and (max-width: 650px) {
+  .play-stage {
+    gap: 8px;
+  }
+  .lobby-topline {
+    display: none;
+  }
+  .lobby-scene {
+    gap: 7px;
+  }
+  .play-welcome p {
+    display: none;
+  }
+  .lobby-play-hint {
+    margin-top: 12px;
+  }
+  .lobby-dock a {
+    padding: 8px 10px;
+  }
+  .lobby-dock small {
+    display: none;
+  }
+  .play-stage .fairy-guide {
+    min-height: 130px;
+  }
+  .play-stage .fairy-speech {
+    padding: 10px;
+  }
+}
 @media (max-height: 650px) and (min-width: 651px) {
   .play-stage {
-    gap: 6px;
-    padding: 8px 36px;
+    padding: 10px 28px;
+    gap: 8px;
   }
-  .play-welcome > span {
+  .lobby-topline {
     display: none;
   }
   .play-welcome h1 {
-    font-size: 28px;
+    font-size: 34px;
+    margin: 0 0 12px;
   }
-  .adventure-scene {
-    max-width: 700px;
-  }
-  .play-stage .fairy-speech {
-    padding: 8px 14px;
-  }
-  .play-stage .fairy-speech p {
-    font-size: 13px;
-  }
-  .play-stage .fairy-speech > span {
+  .lobby-eyebrow,
+  .play-welcome p {
     display: none;
+  }
+  .lobby-play {
+    min-height: 52px;
+    font-size: 20px;
+    padding: 8px 20px;
+  }
+  .lobby-play-hint {
+    font-size: 10px;
+    margin-top: 14px;
   }
   .play-stage .fairy-guide {
     flex-direction: row;
@@ -524,52 +508,33 @@ body:has(.play-home) footer {
   }
   .play-stage .fairy-speech {
     width: 55%;
+    padding: 10px;
+  }
+  .play-stage .fairy-speech p {
+    font-size: 12px;
+  }
+  .play-stage .fairy-speech > span {
+    display: none;
   }
   .play-stage .fairy-speech:after {
     left: 100%;
     top: 40%;
     transform: translateX(-8px) rotate(-45deg);
   }
-  .portal-caption {
-    padding: 30px 12px 12px;
-  }
-  .portal-caption h2 {
-    font-size: 21px;
-    margin: 2px 0 6px;
-  }
-  .portal-enter {
-    padding: 5px 18px;
-    font-size: 16px;
-  }
-  .portal-caption > span {
-    font-size: 10px;
-  }
-  .adventure-path button {
-    width: 44px;
-    height: 44px;
-  }
-  .forest-actions a,
-  .forest-actions button {
-    padding: 3px 16px;
-    min-height: 36px;
-    font-size: 12px;
-  }
-}
-@media (max-height: 650px) and (max-width: 650px) {
-  .play-stage {
-    gap: 7px;
-  }
-  .adventure-scene {
-    padding-top: 78px;
-  }
-  .portal-caption h2 {
-    font-size: 19px;
-  }
-  .portal-caption {
-    padding-bottom: 10px;
-  }
-  .play-welcome > span {
+  .fairy-pool {
     display: none;
+  }
+  .lobby-dock a {
+    padding: 8px 12px;
+  }
+  .lobby-dock small {
+    display: none;
+  }
+  .lobby-dock a > svg:first-child {
+    height: 28px;
+  }
+  .lobby-dock strong {
+    font-size: 14px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -580,13 +545,13 @@ body:has(.play-home) footer {
     transition: none !important;
   }
 }
-@media (max-height: 460px) and (max-width: 650px) {
+@media (max-height: 500px) and (max-width: 650px) {
   .play-home {
     height: auto;
     min-height: calc(100dvh - var(--header-height, 88px));
   }
-  .adventure-scene {
-    height: 330px;
+  .lobby-scene {
+    min-height: 280px;
     flex: none;
   }
 }

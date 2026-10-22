@@ -12,7 +12,7 @@ test("existing discoveries survive redesign and reset requires confirmation", as
   );
   await page.reload();
   await page.getByRole("button", { name: "Nächster Tipp der Lesefee" }).click();
-  await expect(page.locator(".fairy-speech")).toContainText("kleines Bild");
+  await expect(page.locator(".fairy-speech")).toContainText("Lesen starten");
   await expect(page.locator(".collect-spark")).toHaveCount(0);
   await page.getByRole("link", { name: "Reisealbum", exact: true }).click();
   await expect(page.locator(".album-stamp.earned")).toHaveCount(1);
@@ -68,7 +68,7 @@ test("demo stamp survives reload, repeat earns no duplicate, manual transcript e
   await page.goto("/album");
   await expect(page.locator(".album-stamp.earned")).toHaveCount(1);
 });
-test("surprise opens a real story and reduced motion disables fairy movement", async ({
+test("lobby opens the catalog and reduced motion disables fairy movement", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -77,13 +77,9 @@ test("surprise opens a real story and reduced motion disables fairy movement", a
     "animation-name",
     "none",
   );
-  await page
-    .getByRole("button", { name: "Überraschungsgeschichte ziehen" })
-    .click();
-  await page.getByRole("link", { name: "Dieses Abenteuer öffnen" }).click();
-  await expect(
-    page.getByRole("button", { name: "Demo starten", exact: true }),
-  ).toBeVisible();
+  await page.getByRole("link", { name: "Lesen starten", exact: true }).click();
+  await expect(page).toHaveURL("/geschichten");
+  await expect(page.locator(".location-island")).toHaveCount(6);
 });
 test("blocked browser storage still allows collecting and navigating", async ({
   page,

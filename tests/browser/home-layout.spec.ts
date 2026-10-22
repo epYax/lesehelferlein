@@ -27,16 +27,11 @@ test("fairy and every tip stay in view without covering their text", async ({
       .getByRole("button", { name: "Nächster Tipp der Lesefee" })
       .click();
   }
-  const choices = page.locator(".adventure-path button");
-  await expect(choices).toHaveCount(6);
-  for (let i = 0; i < 6; i++) {
-    await choices.nth(i).click();
-    await expect(choices.nth(i)).toHaveAttribute("aria-pressed", "true");
-    await expect(page.locator(".portal-caption h2")).toHaveText(
-      (await choices.nth(i).getAttribute("aria-label"))!,
-    );
-  }
-  await expect(page.locator(".collect-spark, .play-mission")).toHaveCount(0);
+  await expect(page.locator(".lobby-dock a")).toHaveCount(2);
+  await expect(page.locator('a[href^="/lesen/"]')).toHaveCount(0);
+  await expect(
+    page.locator(".story-portal,.adventure-path,.collect-spark,.play-mission"),
+  ).toHaveCount(0);
 });
 
 test("entire front screen fits the viewport with every game action visible", async ({
@@ -53,9 +48,8 @@ test("entire front screen fits the viewport with every game action visible", asy
   for (const selector of [
     ".play-welcome",
     ".fairy-guide",
-    ".story-portal",
-    ".forest-actions",
-    ".adventure-path",
+    ".lobby-play",
+    ".lobby-dock",
   ]) {
     const rect = (await page.locator(selector).boundingBox())!;
     expect(rect.y).toBeGreaterThanOrEqual(0);
@@ -65,7 +59,7 @@ test("entire front screen fits the viewport with every game action visible", asy
   }
 });
 
-test("compact viewports keep the portal action and fairy inside the screen", async ({
+test("compact viewports keep the lobby action and fairy inside the screen", async ({
   page,
 }, info) => {
   test.skip(info.project.name !== "desktop", "Explicit viewport matrix");
@@ -86,10 +80,10 @@ test("compact viewports keep the portal action and fairy inside the screen", asy
       )
       .toBeLessThanOrEqual(1);
     for (const selector of [
-      ".portal-enter",
+      ".lobby-play",
       ".fairy-speech",
       ".fairy-guide > img",
-      ".adventure-path",
+      ".lobby-dock",
     ]) {
       const r = (await page.locator(selector).boundingBox())!;
       expect(r.x).toBeGreaterThanOrEqual(0);

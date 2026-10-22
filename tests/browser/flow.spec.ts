@@ -23,7 +23,7 @@ test("home is responsive and original mascot loads", async ({ page }, info) => {
     ),
   ).toBe(true);
   await artworkScreenshot(page, `test-results/home-${info.project.name}.png`);
-  await page.getByRole("link", { name: "Ab in den Geschichtenwald" }).click();
+  await page.getByRole("link", { name: "Lesen starten" }).click();
   await expect(
     page.getByRole("heading", { name: /Hier wohnen/ }),
   ).toBeVisible();
