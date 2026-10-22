@@ -14,3 +14,16 @@
 Version 2: Chromium-Produktionsbuild, Desktop 1440 px und Smartphone 390 px (Device-Pixel-Ratio 3). Album mit gesammeltem Lichtfunken-Abzeichen. Das Rendering von Systemschriften kann auf anderen Geräten abweichen.
 
 [Versionen separat starten und wiederherstellen](../VERSION_CONTROL.md)
+
+## Design v3: Bilderbuchwelt und Lesezeichen
+
+Eigene Kulisse und sechs Geschichtenillustrationen; 20 zusammengehörige SVG-Icons für Navigation, Sammeln und Lesen. Original-LeseFee unverändert.
+
+| Ansicht | Desktop | Smartphone |
+| --- | --- | --- |
+| Lichtung | [Bild](design-v3/home-desktop.png) | [Bild](design-v3/home-mobile.png) |
+| Abenteuerkarte | [Bild](design-v3/library-desktop.png) | [Bild](design-v3/library-mobile.png) |
+| Reisealbum | [Bild](design-v3/album-desktop.png) | [Bild](design-v3/album-mobile.png) |
+| Demo-Auswertung | [Bild](design-v3/reader-desktop.png) | [Bild](design-v3/reader-mobile.png) |
+
+[Icon-Galerie mit drei Größen](design-v3/icons-desktop.png). Screenshots aus Chromium gegen Produktionsserver auf Port 3100, Desktop 1440 px und Smartphone 390 px; Icon-Galerie 1200 px. Zwischenstand vor dem Vektor-Icon-Set: `design-v3-art-preview`, mit Lichtung/Karte unter dem gleichnamigen Ordner.

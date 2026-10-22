@@ -1,5 +1,27 @@
 # Entwicklungsfortschritt
 
+## 2026-10-22 — Design v3: eigene Bildwelt und Lesezeichen-Icons
+
+### Umsetzung
+- Eigene Bilderbuch-Waldlichtung und sechs zusammengehörige Abenteuerillustrationen integriert. Insgesamt elf zuvor erzeugte WebP-Assets; Promptserie und Herkunft unter `docs/art-direction/`.
+- Auf Nutzerwunsch anschließend keine weiteren Rasterbilder erzeugt: 20 eigene SVG-Icons mit Buchseiten, Blättern und Feensternen direkt als Vektorpfade gestaltet. Karte, Album, Kompass, Sammelstern und Lesebedienung verwenden dieselbe Familie.
+- Externe Icon-Bibliothek entfernt. Alle Icons einzeln exportierbar, reproduzierbar mit `npm run icons:export`; Größengalerie unter `/icons/lesezeichen/index.html`.
+- Originalmaskottchen unverändert. Die bestehenden Demo-, Filter-, Speicher- und Leseabläufe bleiben erhalten. Sammelanimation bewegt nur das Symbol, nicht die Klickfläche.
+
+### Verifiziert
+- 13 Logiktests und 36 Browserprüfungen erfolgreich. Chromium auf 320, 390, 820 und 1440 px gegen Produktionsserver auf Port 3100.
+- Typecheck, ESLint und Produktionsbuild erfolgreich. Screenshots von Lichtung, Karte, Album und Auswertung sowie Icon-Galerie archiviert; Lichtung Desktop/Mobil, Karte, mobile Auswertung und Icon-Größen visuell geprüft.
+- Keine echten Kinderaufnahmen, Audioübertragung, produktiven Dienste oder Deployments. Port 3000 nicht beendet. Kein vollständiger Accessibility-Audit oder Test auf echten Geräten.
+- Screenshots: `docs/design-versions/design-v3/`. Vorheriger Illustrationsstand bleibt als `design-v3-art-preview` erhalten.
+
+### Versionen und Sicherung
+- Branch: `feature/eigene-bildwelt`. Abschluss-Tag: `design-v3`. Bestehende Tags unverändert.
+- Die zuvor freigegebenen Versionen v1/v2 wurden bereits nach GitHub übertragen. Nutzerfreigabe zum Push liegt vor; Ziel `epYax/lesehelferlein` erneut als privat geprüft. Version 3 wird mit eigenem Branch und eigenen Tags gesichert, ohne Remote-main zu ändern.
+- Wiederherstellung in `docs/VERSION_CONTROL.md` dokumentiert.
+
+### Grenzen
+Die Anwendung bleibt eine ausdrücklich gekennzeichnete Lese-Demo. Reisestempel stehen für Demo-Teilnahme und Entdeckung, nicht für gemessene Leseleistung. Größere Illustrationen sind KI-generiert; SVG-Icons sind direkt im Projekt gestaltete Vektoren.
+
 ## 2026-10-21 — Design v2: Geschichtenwald
 
 ### Umsetzung
