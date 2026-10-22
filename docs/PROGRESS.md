@@ -1,5 +1,11 @@
 # Entwicklungsfortschritt
 
+## 2026-10-22 — Öffentlicher main-Push freigegeben
+
+- Nutzer bestätigt die bewusst öffentliche Repository-Sichtbarkeit und gibt den öffentlichen Push auf main ausdrücklich frei. Diese Freigabe ersetzt die frühere Privat-Vorgabe; AGENTS.md aktualisiert.
+- Vorbereiteten und geprüften main erneut gegen origin geprüft: bestehender Remote-main ist Vorfahr des lokalen Stands. Normaler Fast-forward-Push, keine Historie oder Design-Tags überschrieben.
+- App unverändert gegenüber der bereits geprüften Integration; anschließend ausschließlich Dokumentation und Freigaberegel aktualisiert.
+
 ## 2026-10-22 — main-Integration vorbereitet
 
 - Auf ausdrücklichen Nutzerwunsch lokalen `main` auf Design v5 gebracht und die getrennte bestehende GitHub-main-Historie per normalem Merge eingebunden. Mergecommit: `2709035`. Die ursprüngliche `fee.png` bleibt unverändert erhalten; beide bisherigen Historien sind Vorfahren des neuen main.

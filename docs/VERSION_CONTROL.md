@@ -1,5 +1,7 @@
 # Designversionen sicher vergleichen und wiederherstellen
 
+**Aktueller Freigabestand (2026-10-22):** Der Nutzer hat das Repository bewusst öffentlich gestellt und öffentliche Pushes auf `main` ausdrücklich freigegeben. Die unten beschriebenen privaten Sicherungen dokumentieren frühere Versionen. `main` vereint jetzt Design v5 mit der ursprünglichen GitHub-Historie einschließlich `fee.png`; bestehende Tags bleiben unverändert.
+
 ## Lokale Historie
 - `main` / `design-v1`: unveränderte ursprüngliche Anwendung, gesichert **vor** dem Redesign. Zusätzliche `.gitignore`-Regeln und archivierte Original-Screenshots gehören zu diesem Sicherungscommit.
 - `feature/magisches-redesign`: neue Geschichtenwelt, Abenteuerkarte und Reisealbum.
