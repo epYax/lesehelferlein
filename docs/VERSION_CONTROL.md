@@ -1,6 +1,6 @@
 # Designversionen sicher vergleichen und wiederherstellen
 
-**Aktueller Freigabestand (2026-10-22):** Der Nutzer hat das Repository bewusst öffentlich gestellt und öffentliche Pushes auf `main` ausdrücklich freigegeben. Die unten beschriebenen privaten Sicherungen dokumentieren frühere Versionen. `main` vereint jetzt Design v7 mit der ursprünglichen GitHub-Historie einschließlich `fee.png`; bestehende Tags bleiben unverändert.
+**Aktueller Freigabestand (2026-10-22):** Der Nutzer hat das Repository bewusst öffentlich gestellt und öffentliche Pushes auf `main` ausdrücklich freigegeben. Die unten beschriebenen privaten Sicherungen dokumentieren frühere Versionen. `main` vereint jetzt Design v8 mit der ursprünglichen GitHub-Historie einschließlich `fee.png`; bestehende Tags bleiben unverändert.
 
 ## Lokale Historie
 - `main` / `design-v1`: unveränderte ursprüngliche Anwendung, gesichert **vor** dem Redesign. Zusätzliche `.gitignore`-Regeln und archivierte Original-Screenshots gehören zu diesem Sicherungscommit.
@@ -11,6 +11,7 @@
 - `feature/vorlesen-und-bildschirm` / `design-v5`: Bildschirmfüllende Lichtung und lokale deutsche Vorlesehilfe mit Wortmarkierung.
 - `design-v6`: direktes Vorlesen ohne Leiste/Textrahmen, Anna bevorzugt; Implementierung auf `feature/direktes-vorlesen`, anschließend main.
 - `feature/abenteuer-szene` / `design-v7`: Geschichtenportal, direkt wählbare Abenteuer, schwebende LeseFee mit naher Sprechblase; keine Funkenmission.
+- `feature/leselobby` / `design-v8`: allgemeine Leselobby ohne Bindung an einzelne Geschichten, mit festem Lese-Einstieg und Bereichsnavigation.
 - Tags sind feste Vergleichspunkte und werden nicht verschoben. Weitere abgeschlossene Designs erhalten neue Tags.
 
 Der Ausgangsordner hatte kein Git-Repository. Sämtliche vorhandenen Quell-, Konfigurations-, Dokumentations- und Original-Assetdateien wurden zusammen gesichert. Build-Ausgaben und installierte Abhängigkeiten werden aus dem Lockfile reproduziert; lokale Caches und Betriebssystemdateien bleiben ausgeschlossen.
@@ -31,6 +32,8 @@ npm ci --cache ../../.cache/npm
 npm run build
 npm start -- --port 3001
 ```
+
+Für Version 8 `.versions/design-v8`, `design-v8` und Port `3008` verwenden.
 
 Für Version 7 `.versions/design-v7`, `design-v7` und Port `3007` verwenden.
 

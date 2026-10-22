@@ -1,5 +1,13 @@
 # Entwicklungsfortschritt
 
+## 2026-10-22 — Design v8: Allgemeine Leselobby
+
+- Startseite als dauerhafter App-Einstieg statt einzelner Geschichtenauswahl: zentraler „Lesen starten“-Knopf, feste Bereichsnavigation für Bibliothek und Reisealbum, Originalfee als Begleiterin mit naher Sprechblase, Schweben und Glow.
+- Kein Story-Import, keine Story-IDs, Story-Anzahl, Vorschau oder Zufallsauswahl mehr auf der Startseite. Neue Geschichten erfordern dort keine Layoutänderung. Die Bibliothek übernimmt weiterhin Auswahl, Suche und Filter.
+- Verifiziert: 16 Logiktests, 65 Browserprüfungen bestanden; 3 doppelte Viewport-Matrix-Läufe bewusst ausgelassen. Build, Typecheck und Lint erfolgreich. Produktionsserver auf 3100, Vorschau auf 3000 unberührt. Desktop und Mobil visuell kontrolliert, zusätzliche kompakte/Querformat-Viewports geprüft.
+- Vorlesen und vorhandene Albumdaten unverändert. Sprachereignisse im Test simuliert; Gerätestimmen weiterhin browserabhängig. Extrem kleine Fenster dürfen zur Zugänglichkeit scrollen; Reduced Motion schaltet Animationen ab.
+- Vorgänger `design-v7` samt Screenshots erhalten. Entwicklung auf `feature/leselobby`; Abschluss `design-v8`, Vergleichsbilder in `docs/design-versions/design-v8/`.
+
 ## 2026-10-22 — Design v7: Das Geschichtenportal
 
 - Startseite vollständig als zusammenhängende Spielszene aufgebaut: großes illustriertes Geschichtenportal, sechs Bildziele mit ausgewähltem Zustand, direkter Einstieg ins Lesen und Überraschungskompass (wählt immer eine andere Geschichte).

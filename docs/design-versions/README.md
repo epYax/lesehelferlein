@@ -60,3 +60,13 @@ Die Abenteuer selbst stehen im Mittelpunkt: sechs Bildziele, ein großes Tor zum
 | [1440 px](design-v7/home-desktop.png) | [820 px](design-v7/home-tablet.png) | [390 px](design-v7/home-mobile.png) | [320 px](design-v7/home-small-phone.png) |
 
 Chromium-Produktionsbuild auf Port 3100; Animationen für Screenshots angehalten. Originalfigur und bestehende Bilderwelt wiederverwendet. Frühere Versionen einschließlich v6 bleiben unverändert.
+
+## Design v8: Leselobby
+
+Allgemeiner Spieleclient-Einstieg mit Originalfee, zentralem „Lesen starten“ und festen App-Bereichen. Geschichten werden ausschließlich in der Bibliothek ausgewählt; die Lobby bleibt unabhängig vom Katalogumfang.
+
+| Desktop | Tablet | Smartphone | Kleines Smartphone |
+| --- | --- | --- | --- |
+| [1440 px](design-v8/home-desktop.png) | [820 px](design-v8/home-tablet.png) | [390 px](design-v8/home-mobile.png) | [320 px](design-v8/home-small-phone.png) |
+
+Chromium, Produktionsbuild auf Port 3100; Animationen für den Vergleich angehalten.

@@ -11,7 +11,7 @@ npm run dev
 http://127.0.0.1:3000 öffnen.
 
 ## Was es zu entdecken gibt
-- **Lichtung:** Geschichtenportal mit sechs direkt wählbaren Bilderwelten, schwebender Original-LeseFee, naher Sprechblase und Überraschungskompass. Ohne Funkenmission oder Sammelabzeichen.
+- **Lichtung:** Allgemeine Leselobby mit zentralem „Lesen starten“, schwebender Original-LeseFee, naher Sprechblase und festen Zugängen zu Geschichten und Reisealbum. Unabhängig von der Größe des Geschichtenkatalogs.
 - **Abenteuerkarte:** sechs frei zugängliche Geschichtenorte, Suche, Schwierigkeitsfilter und alternative Bücheransicht.
 - **Lesetraining:** ruhiger Text, anpassbare Schriftgröße, transparenter Demo-Lesefluss und wortgenaues Alignment.
 - **Reisealbum:** einmalige Demo-Reisestempel; lokal gespeichert, ohne Konto oder Leistungsbewertung.
